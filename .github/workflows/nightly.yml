@@ -10,6 +10,7 @@ on:
 env:
   HEADLESS: true
   BASE_URL: ${{ secrets.BASE_URL || 'https://vanlog-express.com' }}
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   smoke-tests:
@@ -23,11 +24,10 @@ jobs:
       - name: 🔧 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: '24'
 
       - name: 📦 Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: 🌐 Wait for app to be ready (optional)
         run: |
@@ -47,6 +47,7 @@ jobs:
       - name: 📊 Generate Allure Report
         if: always()
         run: npx allure generate allure-results --clean -o allure-report
+        continue-on-error: true
 
       - name: 📊 Upload Allure Report
         if: always()
@@ -77,15 +78,7 @@ jobs:
 
       - name: 📧 Send notification on failure
         if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '❌ Nightly smoke tests failed! Check the workflow run for details.'
-            })
+        run: echo "❌ Nightly smoke tests failed! See ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
 
       - name: 💬 Post test summary
         if: always()
