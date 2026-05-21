@@ -1,0 +1,242 @@
+const { chromium } = require('@playwright/test');
+
+(async () => {
+  const browser = await chromium.launch({ headless: false, slowMo: 150 });
+  const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
+  const page = await context.newPage();
+
+  console.log('=== LOGIN AS ADMIN ===');
+  await page.goto('http://localhost:3000/login');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+
+  await page.fill('#loginEmail', 'support@vanlog-express.com');
+  await page.fill('#password', 'y8JzyLZ5Utcw7Q+n(CnQ');
+  await page.click('button[type="submit"]');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(3000);
+
+  console.log('=== NAVIGATE TO ORDERS PAGE ===');
+  const ordersMenu = page.locator('.ant-menu-item').filter({ hasText: 'Liste des commandes' }).first();
+  await ordersMenu.click();
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+
+  console.log('\n=== CLICKING "AJOUTER UNE COMMANDE" ===');
+  const addOrderBtn = page.locator('button').filter({ hasText: 'Ajouter une commande' }).first();
+  await addOrderBtn.click();
+  await page.waitForTimeout(2000);
+
+  console.log('\n=== CLICKING "LIVRER UNE COMMANDE" ===');
+  const livrerBtn = page.locator('button').filter({ hasText: 'Livrer une commande' }).first();
+  await livrerBtn.click();
+  await page.waitForTimeout(3000);
+
+  console.log('\n=== INSPECTING DELIVER ORDER FORM ===');
+  const deliverFormDetails = await page.evaluate(() => {
+    const modal = document.querySelector('.ant-modal, .ant-drawer');
+    if (!modal) return { formFound: false };
+
+    const result = { formFound: true };
+
+    // Modal title
+    result.modalTitle = modal.querySelector('.ant-modal-title, .ant-drawer-title')?.textContent?.trim();
+
+    // All form items
+    const formItems = Array.from(modal.querySelectorAll('.ant-form-item'));
+    result.formItemsCount = formItems.length;
+
+    result.formFields = formItems.map((item, index) => {
+      const label = item.querySelector('label, .ant-form-item-label')?.textContent?.trim();
+      const input = item.querySelector('input, select, textarea');
+      const antSelect = item.querySelector('.ant-select');
+      
+      let fieldInfo = {
+        index,
+        label,
+        hasInput: input !== null,
+        hasSelect: antSelect !== null
+      };
+
+      if (input) {
+        fieldInfo.input = {
+          type: input.type,
+          id: input.id,
+          name: input.name,
+          placeholder: input.placeholder,
+          required: input.required || input.getAttribute('aria-required') === 'true',
+          className: input.className
+        };
+      }
+
+      if (antSelect) {
+        fieldInfo.select = {
+          className: antSelect.className,
+          placeholder: antSelect.querySelector('.ant-select-selection-placeholder')?.textContent?.trim()
+        };
+      }
+
+      return fieldInfo;
+    });
+
+    // All labels
+    result.allLabels = Array.from(modal.querySelectorAll('label, .ant-form-item-label'))
+      .map(lbl => lbl.textContent?.trim())
+      .filter(t => t && t.length > 0);
+
+    // All inputs
+    result.allInputs = Array.from(modal.querySelectorAll('input'))
+      .map(inp => ({
+        type: inp.type,
+        id: inp.id,
+        name: inp.name,
+        placeholder: inp.placeholder,
+        required: inp.required || inp.getAttribute('aria-required') === 'true'
+      }));
+
+    // All selects
+    result.allSelects = Array.from(modal.querySelectorAll('.ant-select'))
+      .map(sel => ({
+        className: sel.className,
+        placeholder: sel.querySelector('.ant-select-selection-placeholder')?.textContent?.trim()
+      }));
+
+    // Submit buttons
+    result.buttons = Array.from(modal.querySelectorAll('button[type="submit"], button.ant-btn-primary'))
+      .map(btn => ({
+        text: btn.textContent?.trim(),
+        type: btn.type,
+        className: btn.className
+      }));
+
+    return result;
+  });
+
+  console.log(JSON.stringify(deliverFormDetails, null, 2));
+
+  // Try to fill one field to see dropdown options
+  console.log('\n=== TESTING FIELD INTERACTIONS ===');
+  
+  // Test first select field
+  try {
+    const firstSelect = page.locator('.ant-select').first();
+    await firstSelect.click();
+    await page.waitForTimeout(1500);
+
+    const dropdownOptions = await page.evaluate(() => {
+      const dropdown = document.querySelector('.ant-select-dropdown');
+      if (dropdown) {
+        return {
+          found: true,
+          options: Array.from(dropdown.querySelectorAll('.ant-select-item')).map(item => ({
+            text: item.textContent?.trim(),
+            value: item.getAttribute('title') || item.getAttribute('data-value')
+          }))
+        };
+      }
+      return { found: false };
+    });
+
+    console.log('\nFirst Select Options:', JSON.stringify(dropdownOptions, null, 2));
+    
+    // Close dropdown
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(500);
+  } catch (error) {
+    console.log('Error testing select:', error.message);
+  }
+
+  // Close modal
+  const closeBtn = page.locator('.ant-modal-close, .ant-drawer-close').first();
+  await closeBtn.click();
+  await page.waitForTimeout(1000);
+
+  // Now test "Apportez une commande"
+  console.log('\n\n=== CLICKING "AJOUTER UNE COMMANDE" AGAIN ===');
+  await addOrderBtn.click();
+  await page.waitForTimeout(2000);
+
+  console.log('\n=== CLICKING "APPORTEZ UNE COMMANDE" ===');
+  const apportezBtn = page.locator('button').filter({ hasText: 'Apportez une commande' }).first();
+  await apportezBtn.click();
+  await page.waitForTimeout(3000);
+
+  console.log('\n=== INSPECTING BRING ORDER FORM ===');
+  const bringFormDetails = await page.evaluate(() => {
+    const modal = document.querySelector('.ant-modal, .ant-drawer');
+    if (!modal) return { formFound: false };
+
+    const result = { formFound: true };
+
+    result.modalTitle = modal.querySelector('.ant-modal-title, .ant-drawer-title')?.textContent?.trim();
+
+    const formItems = Array.from(modal.querySelectorAll('.ant-form-item'));
+    result.formItemsCount = formItems.length;
+
+    result.formFields = formItems.map((item, index) => {
+      const label = item.querySelector('label, .ant-form-item-label')?.textContent?.trim();
+      const input = item.querySelector('input, select, textarea');
+      const antSelect = item.querySelector('.ant-select');
+      
+      let fieldInfo = {
+        index,
+        label,
+        hasInput: input !== null,
+        hasSelect: antSelect !== null
+      };
+
+      if (input) {
+        fieldInfo.input = {
+          type: input.type,
+          id: input.id,
+          name: input.name,
+          placeholder: input.placeholder,
+          required: input.required || input.getAttribute('aria-required') === 'true',
+          className: input.className
+        };
+      }
+
+      if (antSelect) {
+        fieldInfo.select = {
+          className: antSelect.className,
+          placeholder: antSelect.querySelector('.ant-select-selection-placeholder')?.textContent?.trim()
+        };
+      }
+
+      return fieldInfo;
+    });
+
+    result.allLabels = Array.from(modal.querySelectorAll('label, .ant-form-item-label'))
+      .map(lbl => lbl.textContent?.trim())
+      .filter(t => t && t.length > 0);
+
+    result.allInputs = Array.from(modal.querySelectorAll('input'))
+      .map(inp => ({
+        type: inp.type,
+        id: inp.id,
+        name: inp.name,
+        placeholder: inp.placeholder,
+        required: inp.required || inp.getAttribute('aria-required') === 'true'
+      }));
+
+    result.allSelects = Array.from(modal.querySelectorAll('.ant-select'))
+      .map(sel => ({
+        className: sel.className,
+        placeholder: sel.querySelector('.ant-select-selection-placeholder')?.textContent?.trim()
+      }));
+
+    result.buttons = Array.from(modal.querySelectorAll('button[type="submit"], button.ant-btn-primary'))
+      .map(btn => ({
+        text: btn.textContent?.trim(),
+        type: btn.type,
+        className: btn.className
+      }));
+
+    return result;
+  });
+
+  console.log(JSON.stringify(bringFormDetails, null, 2));
+
+  await browser.close();
+  console.log('\n=== FORM INSPECTION COMPLETE ===');
+})();

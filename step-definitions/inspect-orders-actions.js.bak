@@ -1,0 +1,211 @@
+const { chromium } = require('@playwright/test');
+
+(async () => {
+  const browser = await chromium.launch({ headless: false, slowMo: 100 });
+  const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
+  const page = await context.newPage();
+
+  console.log('=== LOGIN AS ADMIN ===');
+  await page.goto('http://localhost:3000/login');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+
+  await page.fill('#loginEmail', 'support@vanlog-express.com');
+  await page.fill('#password', 'y8JzyLZ5Utcw7Q+n(CnQ');
+  await page.click('button[type="submit"]');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(3000);
+
+  console.log('=== NAVIGATE TO ORDERS PAGE ===');
+  const ordersMenu = page.locator('.ant-menu-item').filter({ hasText: 'Liste des commandes' }).first();
+  await ordersMenu.click();
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+
+  console.log('\n=== ORDERS PAGE INSPECTION ===');
+  const ordersPageInfo = await page.evaluate(() => {
+    const result = {
+      url: window.location.href,
+      pageTitle: document.querySelector('h4.header--page-label--title')?.textContent?.trim()
+    };
+
+    // "Ajouter une commande" button
+    const addButton = Array.from(document.querySelectorAll('button')).find(btn => 
+      btn.textContent?.includes('Ajouter une commande')
+    );
+    result.addOrderButton = {
+      exists: addButton !== null,
+      text: addButton?.textContent?.trim(),
+      className: addButton?.className
+    };
+
+    // Search input
+    const searchInput = document.querySelector('input[placeholder*="Chercher"]');
+    result.searchInput = {
+      exists: searchInput !== null,
+      placeholder: searchInput?.placeholder,
+      id: searchInput?.id,
+      name: searchInput?.name
+    };
+
+    // Table rows - orders
+    const rows = Array.from(document.querySelectorAll('.ant-table-tbody tr'));
+    result.ordersCount = rows.length;
+    result.orders = rows.slice(0, 3).map(row => {
+      const cells = Array.from(row.querySelectorAll('td'));
+      return {
+        trackingNumber: cells[0]?.textContent?.trim(),
+        date: cells[1]?.textContent?.trim(),
+        recipient: cells[2]?.textContent?.trim(),
+        status: cells[3]?.textContent?.trim(),
+        clientPrice: cells[4]?.textContent?.trim(),
+        carrierPrice: cells[5]?.textContent?.trim(),
+        carrier: cells[6]?.textContent?.trim()
+      };
+    });
+
+    // Status dropdown elements
+    const statusDropdown = document.querySelector('.ant-select');
+    result.statusDropdown = {
+      exists: statusDropdown !== null,
+      className: statusDropdown?.className
+    };
+
+    // "Assigner un livreur" buttons
+    const assignButtons = Array.from(document.querySelectorAll('button, a, span')).filter(el => 
+      el.textContent?.includes('Assigner un livreur')
+    );
+    result.assignCarrierButtons = {
+      count: assignButtons.length,
+      elements: assignButtons.slice(0, 3).map(btn => ({
+        text: btn.textContent?.trim(),
+        tag: btn.tagName,
+        className: btn.className
+      }))
+    };
+
+    // Action buttons (eye, edit, delete icons)
+    result.actionButtons = {
+      viewButtons: document.querySelectorAll('[aria-label*="eye"], button:has(svg)').length,
+      editButtons: document.querySelectorAll('[aria-label*="edit"]').length,
+      deleteButtons: document.querySelectorAll('[aria-label*="delete"]').length
+    };
+
+    // All buttons on the page
+    result.allButtons = Array.from(document.querySelectorAll('button')).map(btn => ({
+      text: btn.textContent?.trim(),
+      className: btn.className,
+      type: btn.type
+    })).filter(b => b.text && b.text.length > 0 && b.text.length < 100);
+
+    // Pagination
+    const pagination = document.querySelector('.ant-pagination');
+    result.pagination = {
+      exists: pagination !== null,
+      text: pagination?.textContent?.trim()
+    };
+
+    return result;
+  });
+
+  console.log(JSON.stringify(ordersPageInfo, null, 2));
+
+  // Click on "Ajouter une commande" button
+  console.log('\n=== CLICKING "AJOUTER UNE COMMANDE" ===');
+  try {
+    const addOrderBtn = page.locator('button').filter({ hasText: 'Ajouter une commande' }).first();
+    await addOrderBtn.click({ timeout: 5000 });
+    await page.waitForTimeout(3000);
+
+    const modalInfo = await page.evaluate(() => {
+      const result = { modalFound: false };
+
+      // Check for modal/drawer
+      const modal = document.querySelector('.ant-modal, .ant-drawer');
+      if (modal) {
+        result.modalFound = true;
+        result.modalTitle = modal.querySelector('.ant-modal-title, .ant-drawer-title')?.textContent?.trim();
+
+        // Form inputs
+        result.formInputs = Array.from(modal.querySelectorAll('input, select, textarea')).map(inp => ({
+          type: inp.type || inp.tagName,
+          placeholder: inp.placeholder,
+          id: inp.id,
+          name: inp.name,
+          label: inp.closest('.ant-form-item')?.querySelector('label')?.textContent?.trim()
+        }));
+
+        // Form buttons
+        result.formButtons = Array.from(modal.querySelectorAll('button')).map(btn => ({
+          text: btn.textContent?.trim(),
+          className: btn.className,
+          type: btn.type
+        }));
+
+        // All labels
+        result.formLabels = Array.from(modal.querySelectorAll('label')).map(lbl => lbl.textContent?.trim());
+      }
+
+      return result;
+    });
+
+    console.log('\n=== ADD ORDER MODAL/FORM ===');
+    console.log(JSON.stringify(modalInfo, null, 2));
+
+    // Close modal if open
+    const closeBtn = page.locator('.ant-modal-close, .ant-drawer-close, button:has-text("Annuler")').first();
+    const closeCount = await closeBtn.count();
+    if (closeCount > 0) {
+      await closeBtn.click();
+      await page.waitForTimeout(1000);
+    }
+  } catch (error) {
+    console.log('Error clicking add order button:', error.message);
+  }
+
+  // Click on "Assigner un livreur" button
+  console.log('\n=== CLICKING "ASSIGNER UN LIVREUR" ===');
+  try {
+    const assignBtn = page.locator('button, a, span').filter({ hasText: 'Assigner un livreur' }).first();
+    const assignCount = await assignBtn.count();
+    console.log('Assign buttons found:', assignCount);
+    
+    if (assignCount > 0) {
+      await assignBtn.click({ timeout: 5000 });
+      await page.waitForTimeout(3000);
+
+      const assignModalInfo = await page.evaluate(() => {
+        const result = { modalFound: false };
+
+        const modal = document.querySelector('.ant-modal, .ant-drawer');
+        if (modal) {
+          result.modalFound = true;
+          result.modalTitle = modal.querySelector('.ant-modal-title, .ant-drawer-title')?.textContent?.trim();
+          result.modalContent = modal.textContent?.substring(0, 500);
+
+          // Form elements
+          result.formElements = {
+            selects: Array.from(modal.querySelectorAll('.ant-select, select')).length,
+            inputs: Array.from(modal.querySelectorAll('input')).length,
+            buttons: Array.from(modal.querySelectorAll('button')).map(btn => btn.textContent?.trim())
+          };
+
+          // List of carriers
+          result.carriersList = Array.from(modal.querySelectorAll('.ant-list-item, .carrier-item, li')).map(item => 
+            item.textContent?.trim()
+          ).filter(t => t && t.length > 0 && t.length < 200).slice(0, 10);
+        }
+
+        return result;
+      });
+
+      console.log('\n=== ASSIGN CARRIER MODAL ===');
+      console.log(JSON.stringify(assignModalInfo, null, 2));
+    }
+  } catch (error) {
+    console.log('Error with assign carrier:', error.message);
+  }
+
+  await browser.close();
+  console.log('\n=== INSPECTION COMPLETE ===');
+})();

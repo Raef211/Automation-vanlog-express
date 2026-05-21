@@ -1,0 +1,68 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Node
+node_modules
+npm-debug.log
+npm-error.log
+yarn-error.log
+.npm
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp
+temp
+*.tmp
+
+# Test artifacts (générés localement, recréés dans le conteneur)
+reports
+screenshots
+videos
+playwright-report
+
+# Docker
+docker/Dockerfile
+docker/Dockerfile.prod
+docker/docker-compose.yml
+docker/docker-compose.prod.yml
+docker/nginx.conf
+.dockerignore
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.circleci
+Jenkinsfile
+
+# Environment files (doit être copié à la main si nécessaire)
+.env
+.env.local
+.env.*.local
+
+# Package manager lock files (optionnel si vous les commitez)
+# package-lock.json
+# yarn.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+README.md
+LICENSE
+CONTRIBUTING.md
+*.md
+.editorconfig

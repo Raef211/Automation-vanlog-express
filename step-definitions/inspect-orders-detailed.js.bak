@@ -1,0 +1,215 @@
+const { chromium } = require('@playwright/test');
+
+(async () => {
+  const browser = await chromium.launch({ headless: false, slowMo: 100 });
+  const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
+  const page = await context.newPage();
+
+  console.log('=== LOGIN AS ADMIN ===');
+  await page.goto('http://localhost:3000/login');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+
+  await page.fill('#loginEmail', 'support@vanlog-express.com');
+  await page.fill('#password', 'y8JzyLZ5Utcw7Q+n(CnQ');
+  await page.click('button[type="submit"]');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(3000);
+
+  console.log('=== NAVIGATE TO ORDERS PAGE ===');
+  const ordersMenu = page.locator('.ant-menu-item').filter({ hasText: 'Liste des commandes' }).first();
+  await ordersMenu.click();
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+
+  // Test 1: Click "Ajouter une commande" and then "Livrer une commande"
+  console.log('\n=== TEST 1: AJOUTER -> LIVRER UNE COMMANDE ===');
+  try {
+    const addOrderBtn = page.locator('button').filter({ hasText: 'Ajouter une commande' }).first();
+    await addOrderBtn.click();
+    await page.waitForTimeout(2000);
+
+    const livrerBtn = page.locator('button').filter({ hasText: 'Livrer une commande' }).first();
+    await livrerBtn.click();
+    await page.waitForTimeout(3000);
+
+    const deliverFormInfo = await page.evaluate(() => {
+      const result = { formFound: false };
+
+      const modal = document.querySelector('.ant-modal, .ant-drawer');
+      if (modal) {
+        result.formFound = true;
+        result.modalTitle = modal.querySelector('.ant-modal-title, .ant-drawer-title')?.textContent?.trim();
+
+        // All form inputs
+        result.inputs = Array.from(modal.querySelectorAll('input, select, textarea')).map(inp => ({
+          type: inp.type || inp.tagName,
+          placeholder: inp.placeholder,
+          id: inp.id,
+          name: inp.name,
+          className: inp.className,
+          label: inp.closest('.ant-form-item')?.querySelector('label, .ant-form-item-label')?.textContent?.trim()
+        }));
+
+        // All select dropdowns
+        result.selects = Array.from(modal.querySelectorAll('.ant-select')).map(sel => ({
+          className: sel.className,
+          placeholder: sel.querySelector('.ant-select-selection-placeholder')?.textContent?.trim(),
+          label: sel.closest('.ant-form-item')?.querySelector('label, .ant-form-item-label')?.textContent?.trim()
+        }));
+
+        // All labels
+        result.labels = Array.from(modal.querySelectorAll('label, .ant-form-item-label')).map(lbl => 
+          lbl.textContent?.trim()
+        ).filter(t => t && t.length > 0);
+
+        // All buttons
+        result.buttons = Array.from(modal.querySelectorAll('button')).map(btn => ({
+          text: btn.textContent?.trim(),
+          type: btn.type,
+          className: btn.className
+        })).filter(b => b.text);
+
+        // Form structure
+        result.formItems = Array.from(modal.querySelectorAll('.ant-form-item')).length;
+      }
+
+      return result;
+    });
+
+    console.log(JSON.stringify(deliverFormInfo, null, 2));
+
+    // Close modal
+    const closeBtn = page.locator('.ant-modal-close, .ant-drawer-close').first();
+    await closeBtn.click();
+    await page.waitForTimeout(1000);
+  } catch (error) {
+    console.log('Error in test 1:', error.message);
+  }
+
+  // Test 2: Click "Ajouter une commande" and then "Apportez une commande"
+  console.log('\n=== TEST 2: AJOUTER -> APPORTEZ UNE COMMANDE ===');
+  try {
+    const addOrderBtn = page.locator('button').filter({ hasText: 'Ajouter une commande' }).first();
+    await addOrderBtn.click();
+    await page.waitForTimeout(2000);
+
+    const apportezBtn = page.locator('button').filter({ hasText: 'Apportez une commande' }).first();
+    await apportezBtn.click();
+    await page.waitForTimeout(3000);
+
+    const bringFormInfo = await page.evaluate(() => {
+      const result = { formFound: false };
+
+      const modal = document.querySelector('.ant-modal, .ant-drawer');
+      if (modal) {
+        result.formFound = true;
+        result.modalTitle = modal.querySelector('.ant-modal-title, .ant-drawer-title')?.textContent?.trim();
+
+        result.inputs = Array.from(modal.querySelectorAll('input, select, textarea')).map(inp => ({
+          type: inp.type || inp.tagName,
+          placeholder: inp.placeholder,
+          id: inp.id,
+          name: inp.name,
+          label: inp.closest('.ant-form-item')?.querySelector('label, .ant-form-item-label')?.textContent?.trim()
+        }));
+
+        result.selects = Array.from(modal.querySelectorAll('.ant-select')).map(sel => ({
+          className: sel.className,
+          placeholder: sel.querySelector('.ant-select-selection-placeholder')?.textContent?.trim(),
+          label: sel.closest('.ant-form-item')?.querySelector('label, .ant-form-item-label')?.textContent?.trim()
+        }));
+
+        result.labels = Array.from(modal.querySelectorAll('label, .ant-form-item-label')).map(lbl => 
+          lbl.textContent?.trim()
+        ).filter(t => t && t.length > 0);
+
+        result.buttons = Array.from(modal.querySelectorAll('button')).map(btn => ({
+          text: btn.textContent?.trim(),
+          type: btn.type
+        })).filter(b => b.text);
+
+        result.formItems = Array.from(modal.querySelectorAll('.ant-form-item')).length;
+      }
+
+      return result;
+    });
+
+    console.log(JSON.stringify(bringFormInfo, null, 2));
+
+    const closeBtn = page.locator('.ant-modal-close, .ant-drawer-close').first();
+    await closeBtn.click();
+    await page.waitForTimeout(1000);
+  } catch (error) {
+    console.log('Error in test 2:', error.message);
+  }
+
+  // Test 3: Test status dropdown
+  console.log('\n=== TEST 3: STATUS DROPDOWN ===');
+  try {
+    // Click on first status dropdown
+    const statusDropdown = page.locator('.ant-select').first();
+    await statusDropdown.click();
+    await page.waitForTimeout(2000);
+
+    const statusOptions = await page.evaluate(() => {
+      const dropdown = document.querySelector('.ant-select-dropdown');
+      if (dropdown) {
+        return {
+          found: true,
+          options: Array.from(dropdown.querySelectorAll('.ant-select-item')).map(item => ({
+            text: item.textContent?.trim(),
+            className: item.className,
+            value: item.getAttribute('title')
+          }))
+        };
+      }
+      return { found: false };
+    });
+
+    console.log(JSON.stringify(statusOptions, null, 2));
+
+    // Close dropdown by clicking elsewhere
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(500);
+  } catch (error) {
+    console.log('Error in test 3:', error.message);
+  }
+
+  // Test 4: Test action buttons (view, edit, delete)
+  console.log('\n=== TEST 4: ACTION ICONS ===');
+  try {
+    const actionIconsInfo = await page.evaluate(() => {
+      // Find all table rows
+      const rows = Array.from(document.querySelectorAll('.ant-table-tbody tr'));
+      const firstRow = rows[0];
+      
+      if (firstRow) {
+        // Find all buttons/icons in the action column
+        const actionCell = firstRow.querySelectorAll('td')[7]; // Action column
+        if (actionCell) {
+          const icons = Array.from(actionCell.querySelectorAll('svg, button, a, span[role="img"]'));
+          return {
+            found: true,
+            iconsCount: icons.length,
+            icons: icons.map(icon => ({
+              tag: icon.tagName,
+              className: icon.className?.toString?.(),
+              ariaLabel: icon.getAttribute('aria-label'),
+              parentTag: icon.parentElement?.tagName,
+              parentClass: icon.parentElement?.className?.toString?.()
+            }))
+          };
+        }
+      }
+      return { found: false };
+    });
+
+    console.log(JSON.stringify(actionIconsInfo, null, 2));
+  } catch (error) {
+    console.log('Error in test 4:', error.message);
+  }
+
+  await browser.close();
+  console.log('\n=== DETAILED INSPECTION COMPLETE ===');
+})();

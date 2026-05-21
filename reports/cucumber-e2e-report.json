@@ -1,0 +1,628 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "gestion-des-commandes-vanlog;création-et-gestion-complète-d'une-commande",
+        "keyword": "Scenario",
+        "line": 5,
+        "name": "Création et gestion complète d'une commande",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 771634599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "utilisateur ouvre l'application VANLOG",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1259633600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 7,
+            "name": "utilisateur saisit email et mot de passe",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 573192600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "clique sur le bouton \"Se connecter\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 703872800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "tableau de bord s'affiche",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:37"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1236787000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "utilisateur clique sur menu \"Commande\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:30"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 778282500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "clique sur bouton \"Ajouter commande\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:23"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 2135480000,
+              "error_message": "page.waitForTimeout: Target page, context or browser has been closed\n    at World.<anonymous> (C:\\Automatisation-POM\\e2e\\step-definitions\\e2e-steps-fr.js:26:19)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "formulaire de création commande s'affiche",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:42"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "utilisateur sélectionne client",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:47"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "saisit lieu de chargement",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:56"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "saisit lieu de livraison",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:62"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "sélectionne type de véhicule",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:68"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "saisit date de chargement",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:77"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "saisit date de livraison",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:86"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "saisit poids et volume",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:95"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "clique sur bouton \"Enregistrer\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:23"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 23,
+            "name": "commande est créée avec succès",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:102"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "utilisateur ouvre liste des commandes",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:107"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "nouvelle commande apparaît dans tableau",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:114"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 28,
+            "name": "utilisateur clique sur détail commande",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:119"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 29,
+            "name": "informations complètes de la commande s'affichent",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:125"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 31,
+            "name": "utilisateur modifie statut commande",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:130"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "clique sur bouton \"Mettre à jour\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:23"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "statut commande est mis à jour",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:139"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 35,
+            "name": "utilisateur clique sur bouton \"Supprimer\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:30"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 36,
+            "name": "confirme suppression",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:144"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 37,
+            "name": "commande est supprimée de la liste",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:151"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 17867599
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@e2e",
+            "line": 1
+          },
+          {
+            "name": "@e2e",
+            "line": 4
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "gestion-des-commandes-vanlog",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Gestion des commandes VANLOG",
+    "tags": [
+      {
+        "name": "@e2e",
+        "line": 1
+      }
+    ],
+    "uri": "e2e\\features\\gestion-commandes.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "inscription-client-vanlog;création-d'un-compte-utilisateur",
+        "keyword": "Scenario",
+        "line": 5,
+        "name": "Création d'un compte utilisateur",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 284415300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "utilisateur ouvre la plateforme VANLOG",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:158"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1344576100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 7,
+            "name": "utilisateur clique sur \"S'inscrire\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:162"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1646066500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "saisit le prénom \"Raef\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:168"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3119230500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "saisit le nom \"Fatnasi\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:173"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3121807300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "saisit le nom de l'entreprise \"TEST\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:178"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 151460200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "saisit l'email \"raeffatnasi@gmail.com\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:183"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1749561600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "saisit le mot de passe",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:188"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1033699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "confirme le mot de passe",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:193"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2210900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "sélectionne le code région \"Tunisia (+216)\"",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:198"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 3784899,
+              "error_message": "page.waitForTimeout: Target page, context or browser has been closed\n    at World.<anonymous> (C:\\Automatisation-POM\\e2e\\step-definitions\\e2e-steps-fr.js:201:19)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "saisit le numéro de téléphone",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:206"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "clique sur le bouton d'inscription",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:211"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 17,
+            "name": "message \"Approbation du compte en attente\" s'affiche",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:217"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "utilisateur voit le message de validation du compte",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:226"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "bouton \"Quitter / Login\" est affiché",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-steps-fr.js:234"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 6258300
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@e2e",
+            "line": 1
+          },
+          {
+            "name": "@e2e",
+            "line": 4
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "inscription-client-vanlog",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Inscription client VANLOG",
+    "tags": [
+      {
+        "name": "@e2e",
+        "line": 1
+      }
+    ],
+    "uri": "e2e\\features\\inscription.feature"
+  }
+]

@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postman API Test Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-card.pass {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .stat-card.fail {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .progress-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .progress-bar {
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .progress-fill-pass {
+            background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+            height: 100%;
+            width: 15.52%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .progress-fill-fail {
+            background: linear-gradient(90deg, #eb3349 0%, #f45c43 100%);
+            height: 100%;
+            width: 84.48%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        
+        .tests-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tests-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .test-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s ease;
+        }
+        
+        .test-item:hover {
+            background: #f9f9f9;
+        }
+        
+        .test-item:last-child {
+            border-bottom: none;
+        }
+        
+        .test-status {
+            min-width: 80px;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-align: center;
+            margin-right: 15px;
+        }
+        
+        .test-status.pass {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .test-status.fail {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .test-method {
+            min-width: 70px;
+            font-weight: 600;
+            color: #667eea;
+            margin-right: 15px;
+            padding: 4px 8px;
+            background: #f0f0ff;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .test-name {
+            flex: 1;
+            color: #333;
+            margin-right: 15px;
+        }
+        
+        .test-code {
+            min-width: 60px;
+            text-align: center;
+            font-weight: bold;
+            color: #666;
+        }
+        
+        .test-error {
+            min-width: 120px;
+            color: #d32f2f;
+            font-size: 12px;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .timestamp {
+            color: #999;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .test-item {
+                flex-wrap: wrap;
+            }
+            
+            .test-name {
+                flex: 1 0 100%;
+                margin-bottom: 10px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Postman API Test Dashboard</h1>
+            <p>Real-time API Test Results Report</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card pass">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">PASSED</div>
+                </div>
+                <div class="stat-card fail">
+                    <div class="stat-number">49</div>
+                    <div class="stat-label">FAILED</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">58</div>
+                    <div class="stat-label">TOTAL TESTS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15.52%</div>
+                    <div class="stat-label">SUCCESS RATE</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="progress-section">
+            <h2>Test Results Distribution</h2>
+            <div class="progress-bar">
+                <div class="progress-fill-pass">15.52% PASS</div>
+                <div class="progress-fill-fail">84.48% FAIL</div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 14px;">
+                <div>
+                    <strong>✅ Passed:</strong> 9 / 58 tests
+                </div>
+                <div>
+                    <strong>❌ Failed:</strong> 49 / 58 tests
+                </div>
+            </div>
+        </div>
+        
+        <div class="tests-section">
+            <h2>Test Results</h2>
+            
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterTests('all')">All (58)</button>
+                <button class="filter-btn" onclick="filterTests('pass')">✅ Passed (9)</button>
+                <button class="filter-btn" onclick="filterTests('fail')">❌ Failed (49)</button>
+            </div>
+            
+            <div id="tests-container">
+
+                <div class="test-item" data-status="pass">
+                    <div class="test-status pass">
+                        ✅ PASS
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">App Controller get Hello</div>
+                    <div class="test-code">200</div>
+                    
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Upload an image</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Visualize uploaded file</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="pass">
+                    <div class="test-status pass">
+                        ✅ PASS
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">App Controller get All Company Types</div>
+                    <div class="test-code">200</div>
+                    
+                </div>
+
+                <div class="test-item" data-status="pass">
+                    <div class="test-status pass">
+                        ✅ PASS
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">App Controller get All Company Activities</div>
+                    <div class="test-code">200</div>
+                    
+                </div>
+
+                <div class="test-item" data-status="pass">
+                    <div class="test-status pass">
+                        ✅ PASS
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">App Controller get All Car Types</div>
+                    <div class="test-code">200</div>
+                    
+                </div>
+
+                <div class="test-item" data-status="pass">
+                    <div class="test-status pass">
+                        ✅ PASS
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">App Controller get Order Statuses</div>
+                    <div class="test-code">200</div>
+                    
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">App Controller get Statistics</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="pass">
+                    <div class="test-status pass">
+                        ✅ PASS
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Article Controller create</div>
+                    <div class="test-code">200</div>
+                    
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Mail Controller create</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">User Controller create</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">User Controller find All</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">User Controller find All Providers</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">User Controller find One</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">PATCH</div>
+                    <div class="test-name">User Controller update</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">DELETE</div>
+                    <div class="test-name">User Controller remove</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">User Controller find Provider Orders</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">User Controller find User Orders Invoices</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">PATCH</div>
+                    <div class="test-name">User Controller verifie User</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">PATCH</div>
+                    <div class="test-name">User Controller update User Disponibility</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">User Controller get Providers Invoice</div>
+                    <div class="test-code">500</div>
+                    <div class="test-error">HTTP 500</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Auth Controller login</div>
+                    <div class="test-code">404</div>
+                    <div class="test-error">HTTP 404</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Auth Controller register</div>
+                    <div class="test-code">500</div>
+                    <div class="test-error">HTTP 500</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Auth Controller refresh Token</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="pass">
+                    <div class="test-status pass">
+                        ✅ PASS
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Auth Controller request Password Reset</div>
+                    <div class="test-code">201</div>
+                    
+                </div>
+
+                <div class="test-item" data-status="pass">
+                    <div class="test-status pass">
+                        ✅ PASS
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Auth Controller reset Password</div>
+                    <div class="test-code">201</div>
+                    
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Auth Controller get Authenticated User</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Orders Controller create</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Orders Controller find All</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Orders Controller find One</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="pass">
+                    <div class="test-status pass">
+                        ✅ PASS
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Orders Controller find Order Status</div>
+                    <div class="test-code">200</div>
+                    
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">PATCH</div>
+                    <div class="test-name">Orders Controller update</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">PATCH</div>
+                    <div class="test-name">Orders Controller update Order Transporter</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">PATCH</div>
+                    <div class="test-name">Orders Controller update Status</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">DELETE</div>
+                    <div class="test-name">Orders Controller remove</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Packages Controller create</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Packages Controller find All</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Packages Controller find One</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">PATCH</div>
+                    <div class="test-name">Packages Controller update</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">DELETE</div>
+                    <div class="test-name">Packages Controller remove</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Transporters Controller create</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Transporters Controller find All</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Transporters Controller find One</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">PATCH</div>
+                    <div class="test-name">Transporters Controller update</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">DELETE</div>
+                    <div class="test-name">Transporters Controller remove</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Transporters Controller find Transporter Orders</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Transporters Controller find Transporter Accepted Orders</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Transporters Controller find Transporter Delivered Orders</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Generate Pdf Controller get Pdf</div>
+                    <div class="test-code">404</div>
+                    <div class="test-error">HTTP 404</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Generate Pdf Controller generate Etiquette</div>
+                    <div class="test-code">N/A</div>
+                    <div class="test-error">Request error</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Claims Controller create</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Claims Controller find All</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Claims Controller add Message</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Claims Controller find One</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">PATCH</div>
+                    <div class="test-name">Claims Controller update</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">DELETE</div>
+                    <div class="test-name">Claims Controller remove</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">POST</div>
+                    <div class="test-name">Upload POD</div>
+                    <div class="test-code">401</div>
+                    <div class="test-error">HTTP 401</div>
+                </div>
+
+                <div class="test-item" data-status="fail">
+                    <div class="test-status fail">
+                        ❌ FAIL
+                    </div>
+                    <div class="test-method">GET</div>
+                    <div class="test-name">Visualize uploaded file</div>
+                    <div class="test-code">404</div>
+                    <div class="test-error">HTTP 404</div>
+                </div>
+
+            </div>
+            
+            <div class="timestamp">
+                Generated: 19/05/2026 12:12:53 AM
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function filterTests(status) {
+            const tests = document.querySelectorAll('.test-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            tests.forEach(test => {
+                if (status === 'all') {
+                    test.style.display = 'flex';
+                } else {
+                    test.style.display = test.getAttribute('data-status') === status ? 'flex' : 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

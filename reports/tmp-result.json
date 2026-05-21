@@ -1,0 +1,766 @@
+[
+  {
+    "description": "  En tant que nouveau client\n  Je veux créer un compte, passer une commande de livraison et suivre mon colis\n  Afin d'avoir une expérience complète et fluide",
+    "elements": [
+      {
+        "description": "",
+        "id": "parcours-complet-d'un-nouveau-client---vanlog-express;parcours-complet-du-client-de-l'inscription-à-la-livraison",
+        "keyword": "Scénario",
+        "line": 12,
+        "name": "Parcours complet du client de l'inscription à la livraison",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 914805500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Étant donné que ",
+            "line": 8,
+            "name": "le site Vanlog Express est opérationnel",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:18"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7886180600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 9,
+            "name": "aucun compte n'existe pour le nouvel utilisateur",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 315599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Étant donné que ",
+            "line": 15,
+            "name": "j'accède à la page d'accueil de Vanlog Express",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:30"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2129167899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 16,
+            "name": "la page d'accueil s'affiche correctement",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:35"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 50765099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 17,
+            "name": "je vois le bouton « S'inscrire »",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:39"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 16360599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 20,
+            "name": "je clique sur « S'inscrire »",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:44"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 371583500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 21,
+            "name": "le formulaire d'inscription s'affiche",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:48"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 28766799
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "Champ",
+                      "Valeur"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Nom",
+                      "Fatnasi"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Prénom",
+                      "Raef"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Email",
+                      "raeffatnasi@gmail.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Téléphone",
+                      "+216 99 123 456"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Mot de passe",
+                      "raef1234"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Quand ",
+            "line": 23,
+            "name": "je remplis les informations suivantes:",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:52"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 486678899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 30,
+            "name": "je clique sur « Créer un compte »",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:106"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 58217599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 31,
+            "name": "un message de confirmation s'affiche",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 19100999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 32,
+            "name": "le compte est créé avec succès",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:133"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 185900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 33,
+            "name": "l'utilisateur est connecté automatiquement",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:137"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2471799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 36,
+            "name": "je me déconnecte",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:150"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3105599
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "Email",
+                      "raeffatnasi@gmail.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Password",
+                      "raef1234"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Et ",
+            "line": 37,
+            "name": "je me reconnecte avec:",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:158"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 31215948299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 40,
+            "name": "la connexion réussit",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:191"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 2200199,
+              "error_message": "Error: Connexion échouée\n    at PlaywrightWorld.<anonymous> (C:\\Automatisation-POM\\e2e\\step-definitions\\e2e-client-steps-fr.js:193:42)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 41,
+            "name": "le tableau de bord s'affiche correctement",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:196"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 42,
+            "name": "je vois mon profil avec le prénom « Raef »",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:200"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 45,
+            "name": "je clique sur « Nouvelle livraison »",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:205"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 46,
+            "name": "le formulaire de création de livraison s'ouvre",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:209"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "Champ",
+                      "Valeur"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Adresse expéditeur",
+                      "123 Rue de Paris, 75001 Paris"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Adresse destinataire",
+                      "456 Avenue des Champs, 92100 Boulogne"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Poids du colis",
+                      "2.5 kg"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Type du colis",
+                      "Colis volumineux"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Date d'expédition",
+                      "2026-05-25"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Quand ",
+            "line": 48,
+            "name": "je remplis les détails de livraison:",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:213"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 55,
+            "name": "je clique sur « Valider la commande »",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:223"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 56,
+            "name": "la livraison est enregistrée avec succès",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:227"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 57,
+            "name": "un numéro de suivi unique est généré",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:232"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 58,
+            "name": "je vois le numéro de suivi à l'écran",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:237"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 61,
+            "name": "je clique sur « Procéder au paiement »",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:242"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 62,
+            "name": "la page de paiement s'affiche",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:246"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 64,
+            "name": "je sélectionne le mode de paiement « Carte bancaire »",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:250"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "Champ",
+                      "Valeur"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Numéro de carte",
+                      "4111111111111111"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Date d'expiration",
+                      "12/28"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "CVV",
+                      "123"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Nom du titulaire",
+                      "Raef Fatnasi"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Et ",
+            "line": 65,
+            "name": "je saisis les informations de paiement:",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:254"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 71,
+            "name": "je clique sur « Confirmer le paiement »",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:262"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 72,
+            "name": "le paiement est accepté avec succès",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:266"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 73,
+            "name": "une facture est générée",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:271"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 74,
+            "name": "je reçois une confirmation par email",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:276"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 77,
+            "name": "je vais à la section « Suivi de colis »",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:280"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 78,
+            "name": "la page de suivi s'affiche",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:284"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 80,
+            "name": "j'entre le numéro de suivi",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:288"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "Champ",
+                      "Résultat attendu"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Statut",
+                      "En préparation"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Expéditeur",
+                      "123 Rue de Paris, 75001 Paris"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Destinataire",
+                      "456 Avenue des Champs, 92100 Boulogne"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Poids",
+                      "2.5 kg"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Date d'expédition",
+                      "2026-05-25"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Alors ",
+            "line": 81,
+            "name": "les informations du colis apparaissent:",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:293"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 88,
+            "name": "je vois la timeline du colis",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:302"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 91,
+            "name": "je clique sur « Déconnexion »",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:307"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 92,
+            "name": "je suis déconnecté avec succès",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:311"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 93,
+            "name": "je retourne à la page d'accueil",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:316"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 94,
+            "name": "le bouton « Se connecter » est visible",
+            "match": {
+              "location": "e2e\\step-definitions\\e2e-client-steps-fr.js:321"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1294200100
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@e2e",
+            "line": 11
+          },
+          {
+            "name": "@client",
+            "line": 11
+          },
+          {
+            "name": "@complete-journey",
+            "line": 11
+          },
+          {
+            "name": "@smoke",
+            "line": 11
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "parcours-complet-d'un-nouveau-client---vanlog-express",
+    "line": 2,
+    "keyword": "Fonctionnalité",
+    "name": "Parcours complet d'un nouveau client - Vanlog Express",
+    "tags": [],
+    "uri": "e2e\\features\\e2e-complete-client-journey.feature"
+  }
+]

@@ -1,0 +1,126 @@
+const { chromium } = require('@playwright/test');
+
+(async () => {
+  const browser = await chromium.launch({ headless: false, slowMo: 100 });
+  const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
+  const page = await context.newPage();
+
+  console.log('=== LOGIN AS ADMIN ===');
+  await page.goto('http://localhost:3000/login');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+
+  await page.fill('#loginEmail', 'support@vanlog-express.com');
+  await page.fill('#password', 'y8JzyLZ5Utcw7Q+n(CnQ');
+  await page.click('button[type="submit"]');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(3000);
+
+  console.log('Current URL:', page.url());
+
+  // Define the menu sections to test
+  const sections = [
+    'Tableau de bord',
+    'Liste des commandes',
+    'Liste des transporteurs',
+    'Liste des clients',
+    'Factures',
+    'Réclamations',
+    'Suivi des commandes'
+  ];
+
+  for (const sectionName of sections) {
+    console.log(`\n${'='.repeat(80)}`);
+    console.log(`SECTION: ${sectionName}`);
+    console.log('='.repeat(80));
+
+    try {
+      // Click on menu item by finding it within .ant-menu-item
+      const menuItem = page.locator('.ant-menu-item').filter({ hasText: sectionName }).first();
+      await menuItem.click({ timeout: 5000 });
+      await page.waitForTimeout(2000);
+      await page.waitForLoadState('networkidle');
+
+      const pageInfo = await page.evaluate(() => {
+        const result = {
+          url: window.location.href,
+          pathname: window.location.pathname,
+          title: document.title
+        };
+
+        // Page header
+        const pageHeader = document.querySelector('h4.header--page-label--title');
+        result.pageHeader = pageHeader ? pageHeader.textContent.trim() : null;
+
+        // All headings
+        result.headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5')).map(h => ({
+          tag: h.tagName,
+          text: h.textContent?.trim().substring(0, 100),
+          className: h.className
+        })).slice(0, 20);
+
+        // Tables
+        result.tableCount = document.querySelectorAll('table').length;
+        result.tableHeaders = Array.from(document.querySelectorAll('th')).map(th => 
+          th.textContent?.trim()
+        ).filter(t => t);
+
+        // Buttons
+        result.buttons = Array.from(document.querySelectorAll('button')).map(b => ({
+          text: b.textContent?.trim(),
+          className: b.className
+        })).filter(b => b.text && b.text.length > 0 && b.text.length < 50).slice(0, 15);
+
+        // Input fields
+        result.inputs = Array.from(document.querySelectorAll('input')).map(inp => ({
+          type: inp.type,
+          placeholder: inp.placeholder,
+          id: inp.id,
+          name: inp.name
+        })).slice(0, 10);
+
+        // Search fields
+        result.searchFields = Array.from(document.querySelectorAll('input[type="search"], input[placeholder*="search"], input[placeholder*="recherch"], input[placeholder*="Search"], input[placeholder*="Recherch"]')).map(s => ({
+          placeholder: s.placeholder,
+          className: s.className
+        }));
+
+        // Pagination
+        const pagination = document.querySelector('.ant-pagination, [class*="pagination"]');
+        result.hasPagination = pagination !== null;
+
+        // Cards
+        result.cardCount = document.querySelectorAll('.ant-card').length;
+        result.cardTitles = Array.from(document.querySelectorAll('.ant-card-head-title')).map(c => 
+          c.textContent?.trim()
+        );
+
+        // Check for data table with specific selectors
+        result.hasAntTable = document.querySelector('.ant-table') !== null;
+        result.hasDataGrid = document.querySelector('[class*="table"], [class*="grid"]') !== null;
+
+        // Forms
+        result.formCount = document.querySelectorAll('form').length;
+
+        // Get all visible text elements (limited to key ones)
+        result.visibleTexts = Array.from(document.querySelectorAll('.ant-card-meta-title, .ant-statistic-title, .user-stat-card-title, .order-stat-card-title'))
+          .map(el => el.textContent?.trim())
+          .filter(t => t);
+
+        // Menu selected state
+        const selectedMenu = document.querySelector('.ant-menu-item-selected span.ant-menu-title-content');
+        result.selectedMenu = selectedMenu ? selectedMenu.textContent.trim() : null;
+
+        return result;
+      });
+
+      console.log(JSON.stringify(pageInfo, null, 2));
+
+    } catch (error) {
+      console.log(`ERROR: ${error.message}`);
+    }
+  }
+
+  await browser.close();
+  console.log('\n=== INSPECTION COMPLETE ===');
+})();

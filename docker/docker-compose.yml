@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # Service pour exécuter les tests Cucumber/Playwright
+  playwright:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: playwright-tests
+    environment:
+      HEADLESS: "true"
+      BASE_URL: http://app:3000
+      NODEJS_CUSTOM_LOG_DIR: /app/reports
+    volumes:
+      # Monter le répertoire courant pour les mises à jour de code
+      - ..:/app
+      # Préserver les rapports
+      - ./reports:/app/reports
+      - ./screenshots:/app/screenshots
+      - ./videos:/app/videos
+    working_dir: /app
+    command: npm run test:headless
+    # Dépendre de l'application si elle est dans Docker
+    depends_on:
+      - app
+    networks:
+      - test-network
+
+  # Service application (à adapter selon votre application)
+  app:
+    image: node:20-slim
+    container_name: app-server
+    working_dir: /app
+    # À adapter selon votre setup réel
+    # ports:
+    #   - "3000:3000"
+    environment:
+      NODE_ENV: test
+    networks:
+      - test-network
+    # À adapter : remplacer par votre vrai commande de démarrage
+    command: npm run start:test
+
+  # Service Newman pour les tests Postman
+  newman:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: newman-tests
+    environment:
+      NEWMAN_BASE_URL: http://app:3000
+    volumes:
+      - ..:/app
+      - ./reports:/app/reports
+    working_dir: /app
+    command: npm run test:newman:e2e
+    depends_on:
+      - app
+    networks:
+      - test-network
+    profiles:
+      - postman
+
+networks:
+  test-network:
+    driver: bridge

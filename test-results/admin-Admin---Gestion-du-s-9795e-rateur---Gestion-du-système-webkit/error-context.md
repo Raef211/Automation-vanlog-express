@@ -1,0 +1,46 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - img "login Image" [ref=e4]
+  - generic [ref=e5]:
+    - banner [ref=e6]:
+      - menu [ref=e7]:
+        - menuitem "Suivi des commandes" [ref=e8] [cursor=pointer]:
+          - link "Suivi des commandes" [ref=e10]:
+            - /url: /tracking-orders
+        - menuitem "Se Connecter" [ref=e11] [cursor=pointer]:
+          - link "Se Connecter" [ref=e13]:
+            - /url: /login
+        - menuitem "S'inscrire" [ref=e14] [cursor=pointer]:
+          - link "S'inscrire" [ref=e16]:
+            - /url: /signup
+        - menuitem [disabled]:
+          - img:
+            - img
+      - button "Français flag" [ref=e17] [cursor=pointer]:
+        - img "Français flag" [ref=e18]
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - img "vanlog Logo" [ref=e22]
+        - heading "Se connecter" [level=3] [ref=e23]
+        - generic [ref=e24]:
+          - generic [ref=e26]:
+            - generic "Email" [ref=e28]: "* Email"
+            - textbox "example@company.com" [ref=e33]
+          - generic [ref=e35]:
+            - generic "Mot de passe" [ref=e37]: "* Mot de passe"
+            - generic [ref=e41]:
+              - textbox "* Mot de passe" [ref=e42]:
+                - /placeholder: Enter your password
+              - img "eye-invisible" [ref=e44] [cursor=pointer]:
+                - img [ref=e45]
+          - generic [ref=e49] [cursor=pointer]: Mot de passe oublié ?
+          - button "Se connecter" [ref=e50] [cursor=pointer]:
+            - generic [ref=e51]: Se connecter
+        - generic [ref=e52]: Vous n'avez pas un compte? S'inscrire
+      - generic [ref=e53]:
+        - img "VanLog APK" [ref=e54]
+        - button "Download APK" [ref=e55] [cursor=pointer]:
+          - generic [ref=e56]: Download APK
+```

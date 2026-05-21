@@ -1,0 +1,88 @@
+const { chromium } = require('@playwright/test');
+const fs = require('fs');
+
+(async () => {
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage();
+  
+  try {
+    // Login
+    await page.goto('http://localhost:3000');
+    await page.waitForTimeout(2000);
+    await page.fill('#loginEmail', 'client@gmail.com');
+    await page.fill('#password', '123456789');
+    await page.click('button[type="submit"]');
+    await page.waitForNavigation({ timeout: 10000 }).catch(() => {});
+    await page.waitForTimeout(2000);
+    
+    // Go to orders
+    const ordersMenu = page.locator('.ant-menu-item').filter({ hasText: /liste.*commandes/i });
+    await ordersMenu.first().click().catch(() => {});
+    await page.waitForTimeout(3000);
+    
+    // Get button details
+    const buttonInfo = await page.evaluate(() => {
+      const result = [];
+      result.push('=== ACTION BUTTONS INVESTIGATION ===\n');
+      
+      // Find all action button cells
+      const lastCell = document.querySelector('.ant-table-tbody tr:not(.ant-table-measure-row) td:last-child');
+      if (lastCell) {
+        const buttons = lastCell.querySelectorAll('button');
+        result.push(`Found ${buttons.length} action buttons\n`);
+        
+        buttons.forEach((btn, idx) => {
+          result.push(`\n--- Button ${idx} ---`);
+          
+          // Check SVG
+          const svg = btn.querySelector('svg');
+          if (svg) {
+            result.push(`SVG found: true`);
+            result.push(`SVG aria-label: ${svg.getAttribute('aria-label')}`);
+            result.push(`SVG viewBox: ${svg.getAttribute('viewBox')}`);
+            
+            // Check for use element
+            const useElem = svg.querySelector('use');
+            if (useElem) {
+              result.push(`use xlink:href: ${useElem.getAttribute('xlink:href')}`);
+            }
+            
+            // Check for title
+            const title = svg.querySelector('title');
+            if (title) {
+              result.push(`SVG title: ${title.textContent}`);
+            }
+            
+            // Try to get icon name from viewBox or other attributes
+            const parent = btn.parentElement;
+            result.push(`Button parent className: ${parent?.className}`);
+            
+            // Check button title attribute
+            result.push(`Button title: ${btn.getAttribute('title')}`);
+            
+            // Hover or check aria attributes
+            result.push(`Button aria-label: ${btn.getAttribute('aria-label')}`);
+          }
+        });
+        
+        // Also try to get them by position
+        result.push('\n--- Button Positions & Content ---');
+        buttons.forEach((btn, idx) => {
+          const innerHTML = btn.innerHTML.substring(0, 200);
+          result.push(`Button ${idx} innerHTML: ${innerHTML}`);
+        });
+      }
+      
+      return result.join('\n');
+    });
+    
+    console.log(buttonInfo);
+    fs.writeFileSync('button-investigation.txt', buttonInfo, 'utf-8');
+    console.log('\n✅ Results saved to button-investigation.txt');
+    
+  } catch (error) {
+    console.error('Error:', error.message);
+  } finally {
+    await browser.close();
+  }
+})();

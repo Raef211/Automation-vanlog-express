@@ -1,0 +1,84 @@
+# Dockerfile optimisé pour production
+# Utilisation: docker build -f docker/Dockerfile.prod -t playwright-tests:prod .
+
+ARG NODE_VERSION=20-slim
+
+# Stage 1: Builder
+FROM node:${NODE_VERSION} as builder
+
+WORKDIR /build
+
+# Copier les fichiers de configuration
+COPY package*.json ./
+
+# Installer les dépendances de production uniquement
+RUN npm ci --only=production && \
+    npm cache clean --force
+
+# Stage 2: Installer les dépendances système et Playwright
+FROM node:${NODE_VERSION} as playwright-deps
+
+WORKDIR /install
+
+# Installer les dépendances système
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libnss3 libnspr4 libdbus-1-3 libatk1.0-0 libatk-bridge2.0-0 \
+    libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 \
+    libxext6 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copier package.json et installer Playwright
+COPY package*.json ./
+
+RUN npm ci && \
+    npx playwright install && \
+    npm cache clean --force
+
+# Stage 3: Production image
+FROM node:${NODE_VERSION}
+
+LABEL maintainer="Automation Team"
+LABEL description="Playwright & Cucumber test automation container"
+
+WORKDIR /app
+
+# Installer uniquement les dépendances système
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libnss3 libnspr4 libdbus-1-3 libatk1.0-0 libatk-bridge2.0-0 \
+    libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 \
+    libxext6 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copier node_modules du builder
+COPY --from=builder /build/node_modules ./node_modules
+
+# Copier le cache Playwright
+COPY --from=playwright-deps /install/node_modules/.cache /root/.cache
+
+# Copier le code source (exclure via .dockerignore)
+COPY . .
+
+# Créer les répertoires de rapports
+RUN mkdir -p reports/cucumber reports/newman screenshots videos && \
+    chmod -R 755 reports screenshots videos
+
+# Variable d'environnement par défaut
+ENV HEADLESS=true \
+    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=false \
+    NODE_ENV=production \
+    CI=false
+
+# User non-root pour la sécurité
+RUN useradd -m -u 1000 playwright && \
+    chown -R playwright:playwright /app
+
+USER playwright
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD node -e "console.log('OK')" || exit 1
+
+# Commande par défaut
+CMD ["npm", "run", "test:headless"]

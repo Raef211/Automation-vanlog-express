@@ -1,0 +1,169 @@
+const { chromium } = require('@playwright/test');
+
+(async () => {
+  const browser = await chromium.launch({ headless: false, slowMo: 200 });
+  const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
+  const page = await context.newPage();
+
+  console.log('=== LOGIN AS ADMIN ===');
+  await page.goto('http://localhost:3000/login');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+
+  await page.fill('#loginEmail', 'support@vanlog-express.com');
+  await page.fill('#password', 'y8JzyLZ5Utcw7Q+n(CnQ');
+  await page.click('button[type="submit"]');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(3000);
+
+  console.log('=== NAVIGATE TO ORDERS PAGE ===');
+  const ordersMenu = page.locator('.ant-menu-item').filter({ hasText: 'Liste des commandes' }).first();
+  await ordersMenu.click();
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+
+  console.log('\n=== STEP 1: CLICK "AJOUTER UNE COMMANDE" ===');
+  const addOrderBtn = page.locator('button').filter({ hasText: 'Ajouter une commande' }).first();
+  await addOrderBtn.click();
+  await page.waitForTimeout(2000);
+
+  // Take screenshot
+  await page.screenshot({ path: 'screenshots/step1-modal.png', fullPage: true });
+  console.log('Screenshot saved: step1-modal.png');
+
+  console.log('\n=== STEP 2: CLICK "LIVRER UNE COMMANDE" ===');
+  const livrerBtn = page.locator('button').filter({ hasText: 'Livrer une commande' }).first();
+  await livrerBtn.click();
+  await page.waitForTimeout(4000); // Wait longer for form to load
+
+  // Take screenshot
+  await page.screenshot({ path: 'screenshots/step2-deliver-form.png', fullPage: true });
+  console.log('Screenshot saved: step2-deliver-form.png');
+
+  // Check what's on the page now
+  console.log('\n=== INSPECTING PAGE AFTER CLICKING LIVRER ===');
+  const pageState = await page.evaluate(() => {
+    return {
+      url: window.location.href,
+      pathname: window.location.pathname,
+      modals: document.querySelectorAll('.ant-modal, .ant-drawer').length,
+      modalTitles: Array.from(document.querySelectorAll('.ant-modal-title, .ant-drawer-title')).map(t => t.textContent?.trim()),
+      formItems: document.querySelectorAll('.ant-form-item').length,
+      inputs: document.querySelectorAll('input').length,
+      selects: document.querySelectorAll('.ant-select').length,
+      pageTitle: document.querySelector('h1, h2, h3, h4')?.textContent?.trim(),
+      visibleText: document.body.textContent?.substring(0, 500)
+    };
+  });
+
+  console.log(JSON.stringify(pageState, null, 2));
+
+  // If we navigated to a new page, inspect it
+  if (pageState.pathname !== '/admin/orders') {
+    console.log('\n=== NAVIGATED TO NEW PAGE - INSPECTING FORM ===');
+    
+    const formDetails = await page.evaluate(() => {
+      const result = {};
+
+      // All form items
+      const formItems = Array.from(document.querySelectorAll('.ant-form-item'));
+      result.formItemsCount = formItems.length;
+
+      result.formFields = formItems.map((item, index) => {
+        const label = item.querySelector('label, .ant-form-item-label, .ant-col label')?.textContent?.trim();
+        const input = item.querySelector('input, select, textarea');
+        const antSelect = item.querySelector('.ant-select');
+        const datePicker = item.querySelector('.ant-picker');
+        
+        let fieldInfo = {
+          index,
+          label,
+          hasInput: input !== null,
+          hasSelect: antSelect !== null,
+          hasDatePicker: datePicker !== null
+        };
+
+        if (input) {
+          fieldInfo.input = {
+            type: input.type,
+            id: input.id,
+            name: input.name,
+            placeholder: input.placeholder,
+            required: input.required || input.getAttribute('aria-required') === 'true',
+            value: input.value
+          };
+        }
+
+        if (antSelect) {
+          fieldInfo.select = {
+            className: antSelect.className,
+            placeholder: antSelect.querySelector('.ant-select-selection-placeholder')?.textContent?.trim(),
+            value: antSelect.querySelector('.ant-select-selection-item')?.textContent?.trim()
+          };
+        }
+
+        if (datePicker) {
+          fieldInfo.datePicker = {
+            placeholder: datePicker.querySelector('input')?.placeholder
+          };
+        }
+
+        return fieldInfo;
+      }).filter(f => f.label); // Only fields with labels
+
+      // All labels
+      result.allLabels = Array.from(document.querySelectorAll('label, .ant-form-item-label'))
+        .map(lbl => lbl.textContent?.trim())
+        .filter(t => t && t.length > 0 && t.length < 100);
+
+      // Submit button
+      result.submitButtons = Array.from(document.querySelectorAll('button[type="submit"], button.ant-btn-primary'))
+        .map(btn => ({
+          text: btn.textContent?.trim(),
+          type: btn.type
+        }));
+
+      return result;
+    });
+
+    console.log(JSON.stringify(formDetails, null, 2));
+
+    // Try to get dropdown options for first select
+    const selects = page.locator('.ant-select');
+    const selectCount = await selects.count();
+    
+    if (selectCount > 0) {
+      console.log(`\n=== FOUND ${selectCount} SELECT DROPDOWNS - TESTING FIRST ONE ===`);
+      try {
+        const firstSelect = selects.first();
+        await firstSelect.click();
+        await page.waitForTimeout(2000);
+
+        const dropdownOptions = await page.evaluate(() => {
+          const dropdown = document.querySelector('.ant-select-dropdown:not(.ant-select-dropdown-hidden)');
+          if (dropdown) {
+            return {
+              found: true,
+              options: Array.from(dropdown.querySelectorAll('.ant-select-item')).map(item => ({
+                text: item.textContent?.trim(),
+                title: item.getAttribute('title')
+              })).slice(0, 20)
+            };
+          }
+          return { found: false };
+        });
+
+        console.log('First dropdown options:', JSON.stringify(dropdownOptions, null, 2));
+
+        await page.keyboard.press('Escape');
+        await page.waitForTimeout(500);
+      } catch (error) {
+        console.log('Error testing dropdown:', error.message);
+      }
+    }
+  }
+
+  await page.waitForTimeout(2000);
+  await browser.close();
+  console.log('\n=== INSPECTION COMPLETE ===');
+})();

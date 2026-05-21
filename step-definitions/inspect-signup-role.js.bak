@@ -1,0 +1,82 @@
+const { chromium } = require('@playwright/test');
+
+(async () => {
+  const browser = await chromium.launch({ headless: false, slowMo: 60 });
+  const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
+  const page = await context.newPage();
+
+  await page.goto('http://localhost:3000/signup');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(1500);
+
+  const result = await page.evaluate(() => {
+    const visible = (el) => {
+      if (!el) return false;
+      const s = getComputedStyle(el);
+      const r = el.getBoundingClientRect();
+      return s.display !== 'none' && s.visibility !== 'hidden' && r.width > 0 && r.height > 0;
+    };
+
+    const inputs = Array.from(document.querySelectorAll('input, textarea, select'))
+      .filter(visible)
+      .map(el => ({
+        id: el.id || '',
+        name: el.getAttribute('name') || '',
+        type: el.getAttribute('type') || el.tagName.toLowerCase(),
+        placeholder: el.getAttribute('placeholder') || '',
+        className: el.className || ''
+      }));
+
+    const labels = Array.from(document.querySelectorAll('label, .ant-form-item-label, span, p, h1, h2, h3, h4'))
+      .filter(visible)
+      .map(el => (el.textContent || '').trim())
+      .filter(Boolean)
+      .filter((text, idx, arr) => arr.indexOf(text) === idx)
+      .slice(0, 300);
+
+    const selects = Array.from(document.querySelectorAll('.ant-select, [role="combobox"], select'))
+      .filter(visible)
+      .map(el => ({
+        className: el.className || '',
+        id: el.id || '',
+        ariaLabel: el.getAttribute('aria-label') || '',
+        text: (el.textContent || '').trim()
+      }));
+
+    const buttons = Array.from(document.querySelectorAll('button'))
+      .filter(visible)
+      .map(b => (b.textContent || '').trim())
+      .filter(Boolean);
+
+    return { url: location.href, inputs, labels, selects, buttons };
+  });
+
+  console.log(JSON.stringify(result, null, 2));
+
+  const roleSelectors = ['#companyTypeId', '#companyActivityId', '#country', '#city'];
+  const optionsByField = {};
+
+  for (const selector of roleSelectors) {
+    try {
+      const field = page.locator(selector).first();
+      if (await field.isVisible({ timeout: 1000 }).catch(() => false)) {
+        await field.click({ force: true });
+        await page.waitForTimeout(500);
+
+        const options = await page.locator('.ant-select-item-option-content').allTextContents();
+        optionsByField[selector] = options.map(t => t.trim()).filter(Boolean);
+
+        await page.keyboard.press('Escape');
+        await page.waitForTimeout(200);
+      }
+    } catch (error) {
+      optionsByField[selector] = [`ERROR: ${error.message}`];
+    }
+  }
+
+  console.log('\nOPTIONS_BY_FIELD');
+  console.log(JSON.stringify(optionsByField, null, 2));
+
+  await page.screenshot({ path: 'screenshots/signup-role-inspection.png', fullPage: true });
+  await browser.close();
+})();

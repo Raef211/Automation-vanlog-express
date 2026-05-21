@@ -1,0 +1,86 @@
+const { chromium } = require('@playwright/test');
+const fs = require('fs');
+
+(async () => {
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage();
+  
+  try {
+    // Login
+    await page.goto('http://localhost:3000');
+    await page.waitForTimeout(2000);
+    await page.fill('#loginEmail', 'client@gmail.com');
+    await page.fill('#password', '123456789');
+    await page.click('button[type="submit"]');
+    await page.waitForNavigation({ timeout: 10000 }).catch(() => {});
+    await page.waitForTimeout(2000);
+    
+    // Go to orders
+    const ordersMenu = page.locator('.ant-menu-item').filter({ hasText: /liste.*commandes/i });
+    await ordersMenu.first().click().catch(() => {});
+    await page.waitForTimeout(3000);
+    
+    // Get all action buttons
+    console.log('Looking for action buttons in order rows...');
+    
+    const allRows = await page.locator('.ant-table-tbody tr:not(.ant-table-measure-row)').count();
+    console.log(`Found ${allRows} actual order rows`);
+    
+    if (allRows > 0) {
+      // Get first real row
+      const firstDataRow = page.locator('.ant-table-tbody tr:not(.ant-table-measure-row)').first();
+      
+      // Take screenshot before clicking
+      await page.screenshot({ path: 'order-list-before.png' });
+      console.log('Screenshot saved: order-list-before.png');
+      
+      // Get all actionable elements in first row
+      const actions = await firstDataRow.evaluate(row => {
+        const result = [];
+        result.push('=== FIRST DATA ROW ANALYSIS ===');
+        result.push(`Row HTML length: ${row.outerHTML.length}`);
+        result.push(`Row text content: ${row.textContent?.substring(0, 200)}`);
+        
+        // Find all cells
+        const cells = row.querySelectorAll('td');
+        result.push(`\nFound ${cells.length} cells`);
+        
+        cells.forEach((cell, idx) => {
+          result.push(`\nCell ${idx}:`);
+          result.push(`  Content: ${cell.textContent?.substring(0, 100)}`);
+          
+          // Check for buttons
+          const buttons = cell.querySelectorAll('button, a');
+          if (buttons.length > 0) {
+            result.push(`  Buttons: ${buttons.length}`);
+            buttons.forEach((btn, bidx) => {
+              result.push(`    ${bidx}: ${btn.className} - ${btn.textContent?.substring(0, 50)}`);
+            });
+          }
+          
+          // Check for icons
+            // Check for button SVG icons
+            const btnSvgs = cell.querySelectorAll('button svg');
+            if (btnSvgs.length > 0) {
+              result.push(`  Button SVG Icons: ${btnSvgs.length}`);
+              btnSvgs.forEach((svg, idx) => {
+                const dataIcon = svg.getAttribute('data-icon') || 'N/A';
+                result.push(`    Button Icon ${idx}: data-icon="${dataIcon}"`);
+              });
+            }
+        });
+        
+        return result.join('\n');
+      });
+      
+      console.log(actions);
+      fs.writeFileSync('order-row-details.txt', actions, 'utf-8');
+      console.log('Details saved to: order-row-details.txt');
+    }
+    
+  } catch (error) {
+    console.error('Error:', error.message);
+  } finally {
+    await browser.close();
+  }
+})();

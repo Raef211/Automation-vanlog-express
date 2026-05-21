@@ -1,0 +1,218 @@
+const { chromium } = require('@playwright/test');
+
+(async () => {
+  const browser = await chromium.launch({ headless: false, slowMo: 100 });
+  const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
+  const page = await context.newPage();
+
+  console.log('=== LOGIN AS ADMIN ===');
+  await page.goto('http://localhost:3000/login');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(2000);
+
+  // Login with admin credentials
+  await page.fill('#loginEmail', 'support@vanlog-express.com');
+  await page.fill('#password', 'y8JzyLZ5Utcw7Q+n(CnQ');
+  await page.click('button[type="submit"]');
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(3000);
+
+  console.log('Current URL after login:', page.url());
+
+  // Inspect the dashboard/main page
+  const dashboardInfo = await page.evaluate(() => {
+    const result = { url: window.location.href };
+
+    // All visible headings
+    result.headings = Array.from(document.querySelectorAll('h1, h2, h3, h4')).map(h => ({
+      tag: h.tagName,
+      text: h.textContent?.trim(),
+      className: h.className
+    }));
+
+    // Sidebar/navigation menu
+    result.sidebarItems = [];
+    const sidebarSelectors = [
+      'aside a', '.sidebar a', '.menu a', 'nav a', '[class*="sidebar"] a',
+      '[class*="menu"] a', '[class*="nav"] a', '.ant-menu-item', '.ant-menu-submenu'
+    ];
+    
+    sidebarSelectors.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => {
+        const text = el.textContent?.trim();
+        if (text && text.length > 0 && text.length < 100) {
+          result.sidebarItems.push({
+            text,
+            href: el.href || '',
+            className: el.className?.toString?.() || '',
+            tag: el.tagName,
+            ariaLabel: el.getAttribute('aria-label') || ''
+          });
+        }
+      });
+    });
+
+    // Main content area
+    result.mainContent = [];
+    const main = document.querySelector('main, [role="main"], .content, [class*="content"]');
+    if (main) {
+      result.mainContent.push({
+        tag: main.tagName,
+        className: main.className,
+        text: main.textContent?.substring(0, 500)
+      });
+    }
+
+    // All links on the page
+    result.allLinks = Array.from(document.querySelectorAll('a')).map(a => ({
+      text: a.textContent?.trim().substring(0, 100),
+      href: a.href,
+      className: a.className?.toString?.() || ''
+    })).filter(l => l.text && l.text.length > 0);
+
+    // Check for specific keywords
+    const keywords = ['tableau', 'dashboard', 'commande', 'order', 'transporteur', 'carrier', 
+                      'client', 'facture', 'invoice', 'réclamation', 'claim', 'suivi', 'tracking'];
+    result.keywordMatches = [];
+    document.querySelectorAll('*').forEach(el => {
+      if (el.children.length === 0) {
+        const text = el.textContent?.trim().toLowerCase();
+        if (text) {
+          keywords.forEach(kw => {
+            if (text.includes(kw.toLowerCase())) {
+              result.keywordMatches.push({
+                keyword: kw,
+                text: el.textContent?.trim().substring(0, 200),
+                tag: el.tagName,
+                className: el.className?.toString?.() || ''
+              });
+            }
+          });
+        }
+      }
+    });
+
+    // All buttons
+    result.buttons = Array.from(document.querySelectorAll('button')).map(btn => ({
+      text: btn.textContent?.trim(),
+      className: btn.className,
+      type: btn.type
+    }));
+
+    // Check for icons (likely in menu items)
+    result.icons = Array.from(document.querySelectorAll('svg, i[class*="icon"], span[class*="icon"]'))
+      .map(icon => ({
+        tag: icon.tagName,
+        className: icon.className?.toString?.() || '',
+        parentText: icon.parentElement?.textContent?.trim().substring(0, 100)
+      }));
+
+    return result;
+  });
+
+  console.log('\n=== DASHBOARD INFO ===');
+  console.log('URL:', dashboardInfo.url);
+  console.log('\n=== HEADINGS ===');
+  console.log(JSON.stringify(dashboardInfo.headings, null, 2));
+  console.log('\n=== SIDEBAR/MENU ITEMS ===');
+  console.log(JSON.stringify(dashboardInfo.sidebarItems, null, 2));
+  console.log('\n=== ALL LINKS ===');
+  console.log(JSON.stringify(dashboardInfo.allLinks, null, 2));
+  console.log('\n=== KEYWORD MATCHES ===');
+  console.log(JSON.stringify(dashboardInfo.keywordMatches, null, 2));
+
+  // Try clicking on each menu item and inspect
+  const menuLinks = await page.locator('.ant-menu-item, aside a, [class*="sidebar"] a').all();
+  console.log(`\n=== FOUND ${menuLinks.length} MENU LINKS ===`);
+
+  for (let i = 0; i < Math.min(menuLinks.length, 10); i++) {
+    try {
+      const text = await menuLinks[i].textContent();
+      console.log(`\n=== CLICKING MENU ITEM ${i + 1}: "${text?.trim()}" ===`);
+      
+      await menuLinks[i].click({ timeout: 5000 });
+      await page.waitForTimeout(2000);
+      await page.waitForLoadState('networkidle');
+
+      const pageInfo = await page.evaluate(() => {
+        return {
+          url: window.location.href,
+          title: document.title,
+          h1: document.querySelector('h1, h2')?.textContent?.trim(),
+          tables: document.querySelectorAll('table').length,
+          buttons: Array.from(document.querySelectorAll('button')).map(b => b.textContent?.trim()).filter(t => t),
+          inputs: document.querySelectorAll('input').length,
+          forms: document.querySelectorAll('form').length
+        };
+      });
+
+      console.log('Page URL:', pageInfo.url);
+      console.log('Page title:', pageInfo.title);
+      console.log('Page H1:', pageInfo.h1);
+      console.log('Tables count:', pageInfo.tables);
+      console.log('Inputs count:', pageInfo.inputs);
+      console.log('Forms count:', pageInfo.forms);
+      console.log('Buttons:', JSON.stringify(pageInfo.buttons));
+    } catch (error) {
+      console.log(`Error clicking menu ${i + 1}:`, error.message);
+    }
+  }
+
+  // Specifically try to find and click key sections
+  const sectionsToTest = [
+    { name: 'Tableau de bord', selectors: ['a:has-text("Tableau de bord")', 'a[href*="dashboard"]', '.ant-menu-item:has-text("Dashboard")'] },
+    { name: 'Commandes', selectors: ['a:has-text("Commandes")', 'a[href*="orders"]', 'a[href*="commande"]'] },
+    { name: 'Transporteurs', selectors: ['a:has-text("Transporteurs")', 'a[href*="carriers"]', 'a[href*="transporteur"]'] },
+    { name: 'Clients', selectors: ['a:has-text("Clients")', 'a[href*="clients"]', 'a[href*="customer"]'] },
+    { name: 'Factures', selectors: ['a:has-text("Factures")', 'a[href*="invoice"]', 'a[href*="facture"]'] },
+    { name: 'Réclamations', selectors: ['a:has-text("Réclamations")', 'a[href*="claim"]', 'a[href*="reclamation"]'] },
+    { name: 'Suivi', selectors: ['a:has-text("Suivi")', 'a[href*="tracking"]', 'a[href*="suivi"]'] }
+  ];
+
+  for (const section of sectionsToTest) {
+    console.log(`\n=== TESTING SECTION: ${section.name} ===`);
+    let found = false;
+    
+    for (const selector of section.selectors) {
+      try {
+        const element = page.locator(selector).first();
+        const count = await element.count();
+        if (count > 0) {
+          console.log(`Found with selector: ${selector}`);
+          await element.click({ timeout: 5000 });
+          await page.waitForTimeout(2000);
+          await page.waitForLoadState('networkidle');
+
+          const sectionInfo = await page.evaluate(() => {
+            return {
+              url: window.location.href,
+              title: document.title,
+              heading: document.querySelector('h1, h2, h3')?.textContent?.trim(),
+              tables: Array.from(document.querySelectorAll('table')).length,
+              tableHeaders: Array.from(document.querySelectorAll('th')).map(th => th.textContent?.trim()),
+              buttons: Array.from(document.querySelectorAll('button')).map(b => b.textContent?.trim()).filter(t => t).slice(0, 10),
+              hasSearch: document.querySelector('input[type="search"], input[placeholder*="search"], input[placeholder*="recherch"]') !== null,
+              hasPagination: document.querySelector('.ant-pagination, [class*="pagination"]') !== null,
+              visibleText: Array.from(document.querySelectorAll('*')).filter(el => {
+                return el.children.length === 0 && el.textContent?.trim() && el.offsetWidth > 0;
+              }).map(el => el.textContent?.trim()).slice(0, 30)
+            };
+          });
+
+          console.log(JSON.stringify(sectionInfo, null, 2));
+          found = true;
+          break;
+        }
+      } catch (error) {
+        console.log(`Error with selector ${selector}:`, error.message);
+      }
+    }
+
+    if (!found) {
+      console.log(`Section "${section.name}" not found`);
+    }
+  }
+
+  await browser.close();
+  console.log('\n=== INSPECTION COMPLETE ===');
+})();

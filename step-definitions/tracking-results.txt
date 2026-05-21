@@ -1,0 +1,14 @@
+
+=== TRACKING ORDER WORKFLOW ===
+
+1️⃣  Navigating to login page...
+
+❌ Error: page.goto: Page crashed
+Call log:
+[2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+page.goto: Page crashed
+Call log:
+[2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+    at C:\Automatisation-POM\step-definitions\view-order-and-track-results.js:22:16
