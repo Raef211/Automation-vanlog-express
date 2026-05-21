@@ -16,6 +16,8 @@ jobs:
   smoke-tests:
     name: Run Smoke Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: ✅ Checkout code
@@ -59,6 +61,16 @@ jobs:
           name: allure-report
           path: allure-report/
           retention-days: 7
+
+      - name: 🌐 Deploy Allure Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          publish_branch: gh-pages
+          destination_dir: nightly
+        continue-on-error: true
 
       - name: 📊 Upload test reports
         if: always()
