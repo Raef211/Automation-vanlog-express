@@ -15,6 +15,7 @@ module.exports = {
       'json:reports/cucumber-report.json',
       'html:reports/cucumber-report.html',
       'usage:reports/cucumber-usage.txt',
+      'allure-cucumberjs/reporter',
     ],
     formatOptions: {
       snippetInterface: 'async-await'

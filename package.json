@@ -32,7 +32,10 @@
     "test:postman:windows": "powershell -ExecutionPolicy Bypass -File scripts/test-postman.ps1",
     "test:all": "node scripts/run-all-tests-with-newman.js",
     "test:all:verbose": "cross-env VERBOSE=true node scripts/run-all-tests-with-newman.js",
-    "test:reports:open": "node scripts/open-reports.js"
+    "test:reports:open": "node scripts/open-reports.js",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "allure:serve": "allure serve allure-results"
   },
   "keywords": [],
   "author": "",
