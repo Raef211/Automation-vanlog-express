@@ -9,7 +9,7 @@ on:
 
 env:
   HEADLESS: true
-  BASE_URL: ${{ secrets.BASE_URL || 'http://localhost:3000' }}
+  BASE_URL: ${{ secrets.BASE_URL || 'https://vanlog-express.com' }}
 
 jobs:
   full-test-suite:
@@ -27,13 +27,6 @@ jobs:
           - 'client'     # @client-related tests
           - 'all'        # All remaining tests
 
-    services:
-      # Optional: Add your app service here if needed
-      # app:
-      #   image: your-app:latest
-      #   ports:
-      #     - 3000:3000
-
     steps:
       - name: ✅ Checkout code
         uses: actions/checkout@v4
@@ -50,7 +43,7 @@ jobs:
       - name: 🌐 Wait for app to be ready
         run: |
           for i in {1..30}; do
-            if curl -f http://localhost:3000 2>/dev/null; then
+            if curl -f https://vanlog-express.com 2>/dev/null; then
               echo "✅ App is ready"
               break
             fi
