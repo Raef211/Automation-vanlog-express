@@ -16,13 +16,6 @@ jobs:
     name: Run Smoke Tests
     runs-on: ubuntu-latest
     
-    services:
-      # Optional: Add your app service here if needed
-      # app:
-      #   image: your-app:latest
-      #   ports:
-      #     - 3000:3000
-
     steps:
       - name: ✅ Checkout code
         uses: actions/checkout@v4
