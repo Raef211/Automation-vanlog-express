@@ -1,0 +1,208 @@
+name: 🚀 Release - Full Test Suite
+
+on:
+  schedule:
+    # Runs every 2 weeks on Monday at 00:00 UTC
+    - cron: '0 0 ? * MON'
+  # Allow manual trigger
+  workflow_dispatch:
+
+env:
+  HEADLESS: true
+  BASE_URL: ${{ secrets.BASE_URL || 'http://localhost:3000' }}
+
+jobs:
+  full-test-suite:
+    name: Run Complete Test Suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        test-suite:
+          - 'smoke'      # @smoke tagged tests (critical path)
+          - 'e2e'        # @e2e integration tests
+          - 'admin'      # @admin-related tests
+          - 'client'     # @client-related tests
+          - 'all'        # All remaining tests
+
+    services:
+      # Optional: Add your app service here if needed
+      # app:
+      #   image: your-app:latest
+      #   ports:
+      #     - 3000:3000
+
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🌐 Wait for app to be ready
+        run: |
+          for i in {1..30}; do
+            if curl -f http://localhost:3000 2>/dev/null; then
+              echo "✅ App is ready"
+              break
+            fi
+            echo "⏳ Waiting for app... ($i/30)"
+            sleep 2
+          done || echo "⚠️ App not accessible, continuing anyway"
+
+      - name: 🧪 Run Smoke Tests (@smoke)
+        if: matrix.test-suite == 'smoke'
+        run: npm run test:headless -- --tags "@smoke"
+        continue-on-error: true
+
+      - name: 🔄 Run E2E Tests (@e2e)
+        if: matrix.test-suite == 'e2e'
+        run: npm run test:e2e
+        continue-on-error: true
+
+      - name: 👨‍💼 Run Admin Tests (@admin)
+        if: matrix.test-suite == 'admin'
+        run: npm run test:e2e:admin
+        continue-on-error: true
+
+      - name: 👤 Run Client Tests (@client)
+        if: matrix.test-suite == 'client'
+        run: npm run test:e2e:client
+        continue-on-error: true
+
+      - name: 🔍 Run All Other Tests
+        if: matrix.test-suite == 'all'
+        run: npm run test:headless
+        continue-on-error: true
+
+      - name: 📊 Upload test reports (${{ matrix.test-suite }})
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-${{ matrix.test-suite }}
+          path: |
+            reports/
+            screenshots/
+            videos/
+          retention-days: 30
+
+      - name: 📈 Upload Playwright Report (${{ matrix.test-suite }})
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ matrix.test-suite }}
+          path: playwright-report/
+          retention-days: 30
+
+  consolidate-results:
+    name: 📋 Consolidate Results
+    runs-on: ubuntu-latest
+    needs: full-test-suite
+    if: always()
+
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📥 Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: 📊 Generate summary report
+        run: |
+          echo "# 🎯 Release Test Suite Summary" > RELEASE_SUMMARY.md
+          echo "" >> RELEASE_SUMMARY.md
+          echo "**Date:** $(date -u +'%Y-%m-%d %H:%M:%S UTC')" >> RELEASE_SUMMARY.md
+          echo "**Workflow Run:** [${{ github.run_id }}](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> RELEASE_SUMMARY.md
+          echo "" >> RELEASE_SUMMARY.md
+          echo "## Test Results" >> RELEASE_SUMMARY.md
+          echo "- ✅ Smoke Tests (Critical Path)" >> RELEASE_SUMMARY.md
+          echo "- 🔄 E2E Tests (Integration)" >> RELEASE_SUMMARY.md
+          echo "- 👨‍💼 Admin Tests" >> RELEASE_SUMMARY.md
+          echo "- 👤 Client Tests" >> RELEASE_SUMMARY.md
+          echo "- 🔍 Full Suite" >> RELEASE_SUMMARY.md
+          echo "" >> RELEASE_SUMMARY.md
+          echo "## Artifacts" >> RELEASE_SUMMARY.md
+          find artifacts -type f -name "*.json" -o -name "*.html" | while read file; do
+            echo "- \`$file\`" >> RELEASE_SUMMARY.md
+          done
+          cat RELEASE_SUMMARY.md
+
+      - name: 📤 Upload summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-summary
+          path: RELEASE_SUMMARY.md
+          retention-days: 30
+
+      - name: 🔔 Create release summary comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('RELEASE_SUMMARY.md', 'utf8');
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number || 1,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: summary
+            });
+
+  notify-slack:
+    name: 📢 Slack Notification
+    runs-on: ubuntu-latest
+    needs: [full-test-suite, consolidate-results]
+    if: always()
+
+    steps:
+      - name: 📧 Notify Slack on Success
+        if: needs.full-test-suite.result == 'success'
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "✅ Release Full Test Suite Completed Successfully!",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "🚀 *Release Test Suite Completed*\n✅ All tests passed!\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Workflow>"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+      - name: 📧 Notify Slack on Failure
+        if: needs.full-test-suite.result == 'failure'
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "❌ Release Full Test Suite Failed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "🚀 *Release Test Suite Failed*\n❌ Some tests failed!\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Workflow>"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

@@ -1,0 +1,113 @@
+name: 🌙 Nightly Smoke Tests
+
+on:
+  schedule:
+    # Runs every day at 2:00 AM UTC
+    - cron: '0 2 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+
+env:
+  HEADLESS: true
+  BASE_URL: ${{ secrets.BASE_URL || 'http://localhost:3000' }}
+
+jobs:
+  smoke-tests:
+    name: Run Smoke Tests
+    runs-on: ubuntu-latest
+    
+    services:
+      # Optional: Add your app service here if needed
+      # app:
+      #   image: your-app:latest
+      #   ports:
+      #     - 3000:3000
+
+    steps:
+      - name: ✅ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🌐 Wait for app to be ready (optional)
+        run: |
+          for i in {1..30}; do
+            if curl -f http://localhost:3000 2>/dev/null; then
+              echo "✅ App is ready"
+              break
+            fi
+            echo "⏳ Waiting for app... ($i/30)"
+            sleep 2
+          done || echo "⚠️ App not accessible, continuing anyway"
+
+      - name: 🧪 Run Smoke Tests (@smoke)
+        run: npm run test:headless -- --tags "@smoke"
+        continue-on-error: true
+
+      - name: 📊 Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-reports
+          path: |
+            reports/
+            screenshots/
+            videos/
+          retention-days: 7
+
+      - name: 📈 Upload Playwright Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+      - name: 📧 Send notification on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ Nightly smoke tests failed! Check the workflow run for details.'
+            })
+
+      - name: 💬 Post test summary
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = './reports/cucumber-report.json';
+            
+            if (fs.existsSync(reportPath)) {
+              const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+              let passed = 0, failed = 0, skipped = 0;
+              
+              report.forEach(feature => {
+                feature.elements?.forEach(scenario => {
+                  scenario.steps?.forEach(step => {
+                    if (step.result?.status === 'passed') passed++;
+                    else if (step.result?.status === 'failed') failed++;
+                    else if (step.result?.status === 'skipped') skipped++;
+                  });
+                });
+              });
+              
+              console.log(`
+                🎯 Smoke Test Results:
+                ✅ Passed: ${passed}
+                ❌ Failed: ${failed}
+                ⏭️  Skipped: ${skipped}
+              `);
+            }

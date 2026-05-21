@@ -14,8 +14,14 @@ module.exports = {
       'progress',
       'json:reports/cucumber-report.json',
       'html:reports/cucumber-report.html',
+      'usage:reports/cucumber-usage.txt',
     ],
+    formatOptions: {
+      snippetInterface: 'async-await'
+    },
     timeout: 120000,
     publishQuiet: true,
+    dryRun: false,
+    failFast: false,
   }
 };

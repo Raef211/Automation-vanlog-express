@@ -1,4 +1,4 @@
-const { Before, After, BeforeAll, AfterAll, Status } = require('@cucumber/cucumber');
+const { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout, AttachmentRegistry } = require('@cucumber/cucumber');
 const { chromium } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
@@ -118,12 +118,34 @@ After(async function (scenario) {
     console.log(`❌ Scénario échoué: ${scenarioName}`);
     const errorMessage = scenario.result.message || '';
     const isTechnicalFailure = isTechnicalClosedError(errorMessage);
+    
     if (this.page && !isTechnicalFailure) {
       try {
         const isPageOpen = !this.page.isClosed();
         if (isPageOpen) {
-          // simple screenshot logic omitted for brevity
-          // await takeScreenshot(this.page, this.scenarioName, 'failed', errorMessage);
+          // Créer le dossier screenshots s'il n'existe pas
+          const screenshotsDir = path.join(__dirname, '../screenshots');
+          if (!fs.existsSync(screenshotsDir)) {
+            fs.mkdirSync(screenshotsDir, { recursive: true });
+          }
+          
+          // Générer le nom du fichier avec timestamp
+          const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+          const safeScenarioName = this.scenarioName.substring(0, 100);
+          const screenshotPath = path.join(screenshotsDir, `${safeScenarioName}_failed_${timestamp}.png`);
+          
+          // Prendre la capture d'écran
+          const screenshotBuffer = await this.page.screenshot({ fullPage: true });
+          fs.writeFileSync(screenshotPath, screenshotBuffer);
+          console.log(`📸 Screenshot capturé: ${screenshotPath}`);
+          
+          // Attacher la capture d'écran au rapport Cucumber
+          try {
+            await this.attach(screenshotBuffer, 'image/png');
+            console.log('✅ Screenshot ajouté au rapport');
+          } catch (attachError) {
+            console.log(`⚠️  Impossible d'ajouter le screenshot au rapport: ${attachError.message}`);
+          }
         }
       } catch (error) {
         if (!error.message.includes('closed')) {

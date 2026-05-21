@@ -16,6 +16,8 @@
     "test:e2e:complete": "cross-env HEADLESS=false SLOWMO_MS=100 cucumber-js --config cucumber-e2e.js --tags \"@complete-workflow\"",
     "test:ui": "cucumber-js --config cucumber.js --tags \"not @api\"",
     "test:pw:admin": "npx playwright test e2e/tests/admin.spec.js --project=chromium",
+    "test:postman:newman": "cross-env NEWMAN_BASE_URL=http://localhost:3000 newman run postman/TUNLOG_full_postman_collection.json -e postman/local.postman_environment.json -r cli,json,htmlextra --reporter-json-export reports/postman/newman-results.json --reporter-htmlextra-export reports/postman/newman-report.html",
+    "test:postman:newman:verbose": "cross-env NEWMAN_BASE_URL=http://localhost:3000 newman run postman/TUNLOG_full_postman_collection.json -e postman/local.postman_environment.json -r cli,json,htmlextra --reporter-json-export reports/postman/newman-results.json --reporter-htmlextra-export reports/postman/newman-report.html --verbose",
     "test:newman:e2e": "cross-env NEWMAN_BASE_URL=http://localhost:3000 newman run newman/collections/e2e-processus-livraison.postman_collection.json -e newman/environments/local.postman_environment.json -r cli,json,htmlextra --reporter-json-export reports/newman/e2e-processus-livraison.json --reporter-htmlextra-export reports/newman/e2e-processus-livraison.html",
     "test:newman:e2e:detailed": "npm run test:newman:e2e && node scripts/newman-detailed-report.js reports/newman/e2e-processus-livraison.json reports/newman/e2e-processus-livraison-detailed.md",
     "generate:postman": "node scripts/generate_postman_from_openapi.js",
@@ -27,7 +29,10 @@
     "test:postman:complete": "npm run test:postman:auth && npm run test:dashboard",
     "test:postman:complete:token": "npm run test:postman:token && npm run test:dashboard",
     "test:summary": "node scripts/generate-test-summary.js",
-    "test:postman:windows": "powershell -ExecutionPolicy Bypass -File scripts/test-postman.ps1"
+    "test:postman:windows": "powershell -ExecutionPolicy Bypass -File scripts/test-postman.ps1",
+    "test:all": "node scripts/run-all-tests-with-newman.js",
+    "test:all:verbose": "cross-env VERBOSE=true node scripts/run-all-tests-with-newman.js",
+    "test:reports:open": "node scripts/open-reports.js"
   },
   "keywords": [],
   "author": "",
