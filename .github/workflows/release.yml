@@ -3,7 +3,7 @@ name: 🚀 Release - Full Test Suite
 on:
   schedule:
     # Runs every 2 weeks on Monday at 00:00 UTC
-    - cron: '0 0 ? * MON'
+    - cron: '0 0 * * 1'
   # Allow manual trigger
   workflow_dispatch:
 
