@@ -32,6 +32,9 @@ reports
 screenshots
 videos
 playwright-report
+allure-results
+allure-report
+test-results
 
 # Docker
 docker/Dockerfile

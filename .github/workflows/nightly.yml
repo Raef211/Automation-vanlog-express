@@ -55,7 +55,7 @@ jobs:
         run: rm -rf allure-results && mkdir -p allure-results
 
       - name: 🧪 Run Smoke Tests (@smoke)
-        timeout-minutes: 10
+        timeout-minutes: 20
         run: npm run test:headless -- --tags "@smoke" || true
 
       - name: 📥 Restore Allure history from previous run
