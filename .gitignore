@@ -1,6 +1,22 @@
 # Node modules
 node_modules/
 
-# Ignore Playwright/Cucumber test outputs
+# Generated test reports and results (produced at runtime, not source)
+allure-results/
+allure-report/
+reports/
+playwright-report/
+
+# Playwright/Cucumber test outputs
 videos/
 screenshots/
+
+# Logs and temporary files
+*.log
+e2e-test-results.txt
+
+# Environment files (keep .env.example as template)
+.env
+.env.local
+.env.prod
+.env.staging
