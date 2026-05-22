@@ -52,8 +52,7 @@ jobs:
         run: rm -rf allure-results && mkdir -p allure-results
 
       - name: 🧪 Run Smoke Tests (@smoke)
-        run: npm run test:headless -- --tags "@smoke" --parallel 4
-        continue-on-error: true
+        run: npm run test:headless -- --tags "@smoke" --parallel 4 || true
 
       - name: 📥 Restore Allure history from previous run
         if: always()

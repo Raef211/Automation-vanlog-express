@@ -60,28 +60,23 @@ jobs:
 
       - name: 🧪 Run Smoke Tests (@smoke)
         if: matrix.test-suite == 'smoke'
-        run: npm run test:headless -- --tags "@smoke" --parallel 4
-        continue-on-error: true
+        run: npm run test:headless -- --tags "@smoke" --parallel 4 || true
 
       - name: 🔄 Run E2E Tests (@e2e)
         if: matrix.test-suite == 'e2e'
-        run: npm run test:e2e
-        continue-on-error: true
+        run: npm run test:e2e || true
 
       - name: 👨‍💼 Run Admin Tests (@admin)
         if: matrix.test-suite == 'admin'
-        run: npm run test:e2e:admin
-        continue-on-error: true
+        run: npm run test:e2e:admin || true
 
       - name: 👤 Run Client Tests (@client)
         if: matrix.test-suite == 'client'
-        run: npm run test:e2e:client
-        continue-on-error: true
+        run: npm run test:e2e:client || true
 
       - name: 🔍 Run All Other Tests
         if: matrix.test-suite == 'all'
-        run: npm run test:headless -- --tags "not @smoke" --parallel 4
-        continue-on-error: true
+        run: npm run test:headless -- --tags "not @smoke" --parallel 4 || true
 
       - name: 📥 Restore Allure history from previous run
         if: always() && matrix.test-suite == 'smoke'

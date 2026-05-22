@@ -51,11 +51,14 @@ async function ensureBrowser() {
 
 BeforeAll(async function () {
   console.log('🚀 Lancement du navigateur Chromium...');
-  
-  // Créer les dossiers nécessaires
-  // createDirectories();
-
   console.log('✅ Préparation des dossiers terminée');
+});
+
+AfterAll(async function () {
+  if (browser && browser.isConnected()) {
+    await browser.close();
+    console.log('🛑 Navigateur principal fermé.');
+  }
 });
 
 Before(async function (scenario) {
