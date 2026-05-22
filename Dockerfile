@@ -1,5 +1,7 @@
 FROM node:24-slim
 
+LABEL maintainer="raeffatnasi@gmail.com"
+
 WORKDIR /app
 
 # Copy package files first to leverage layer caching
