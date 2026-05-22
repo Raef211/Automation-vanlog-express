@@ -5,10 +5,14 @@ const path = require('path');
 
 setDefaultTimeout(90000);
 
+const isCI = process.env.HEADLESS === 'true';
 const browserConfig = {
-  headless: process.env.HEADLESS === 'true',
+  headless: isCI,
   slowMo: process.env.SLOWMO_MS ? Number(process.env.SLOWMO_MS) : 80,
-  args: ['--start-maximized'],
+  args: [
+    '--start-maximized',
+    ...(isCI ? ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'] : []),
+  ],
 };
 
 const contextConfig = {

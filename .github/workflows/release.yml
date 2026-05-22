@@ -55,6 +55,9 @@ jobs:
             sleep 2
           done || echo "⚠️ App not accessible, continuing anyway"
 
+      - name: 🧹 Clean allure-results
+        run: rm -rf allure-results && mkdir -p allure-results
+
       - name: 🧪 Run Smoke Tests (@smoke)
         if: matrix.test-suite == 'smoke'
         run: npm run test:headless -- --tags "@smoke" --parallel 4

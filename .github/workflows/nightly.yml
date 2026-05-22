@@ -47,6 +47,10 @@ jobs:
             sleep 2
           done || echo "⚠️ App not accessible, continuing anyway"
 
+      - name: 🧹 Clean allure-results
+        if: always()
+        run: rm -rf allure-results && mkdir -p allure-results
+
       - name: 🧪 Run Smoke Tests (@smoke)
         run: npm run test:headless -- --tags "@smoke" --parallel 4
         continue-on-error: true
@@ -64,11 +68,18 @@ jobs:
           done
         continue-on-error: true
 
+      - name: 🔍 Debug allure-results
+        if: always()
+        run: |
+          echo "📂 allure-results contents:"
+          ls -la allure-results/ 2>/dev/null || echo "(directory empty or missing)"
+          echo "Result files: $(find allure-results -maxdepth 1 -name '*-result.json' 2>/dev/null | wc -l)"
+          echo "Container files: $(find allure-results -maxdepth 1 -name '*-container.json' 2>/dev/null | wc -l)"
+
       - name: 📊 Generate Allure Report
         id: allure_generate
         if: always()
         run: |
-          echo "📂 Checking allure-results..."
           COUNT=$(find allure-results -maxdepth 1 -name '*-result.json' 2>/dev/null | wc -l)
           echo "Found ${COUNT} result file(s)"
           if [ "$COUNT" -gt "0" ]; then
@@ -76,7 +87,7 @@ jobs:
             echo "✅ Allure report generated with ${COUNT} results"
             echo "has_results=true" >> $GITHUB_OUTPUT
           else
-            echo "⚠️ No test result files found — skipping report generation"
+            echo "⚠️ No allure result files — tests may have crashed before producing results"
             echo "has_results=false" >> $GITHUB_OUTPUT
           fi
 
