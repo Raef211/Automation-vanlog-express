@@ -66,7 +66,7 @@ AfterAll(async function () {
     execSync('npx allure generate allure-results --clean -o allure-report', { stdio: 'inherit' });
     console.log('✅ Rapport Allure généré dans allure-report/');
     console.log('🌐 Ouverture du rapport Allure dans le navigateur...');
-    spawn('npx', ['allure', 'open', 'allure-report'], {
+    spawn('npx allure open allure-report', {
       detached: true,
       stdio: 'ignore',
       shell: true,
