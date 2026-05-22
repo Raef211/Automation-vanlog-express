@@ -31,8 +31,7 @@ Then('the login button should display {string}', async function (expectedText) {
 
 Then('the navigation bar should display {string}', async function (expectedText) {
   const navItem = this.page.locator(`a.auth-page--menu-item:has-text("${expectedText}")`);
-  const isVisible = await navItem.isVisible();
-  expect(isVisible).toBe(true);
+  await expect(navItem).toBeVisible({ timeout: 10000 });
 });
 
 Then('the form should have a label {string}', async function (expectedLabel) {

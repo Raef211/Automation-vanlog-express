@@ -165,7 +165,12 @@ class TrackingPage extends BasePage {
    */
   async isNavItemVisible(text) {
     const locator = this.page.locator(`a.auth-page--menu-item:has-text("${text}")`);
-    return await locator.isVisible();
+    try {
+      await locator.waitFor({ state: 'visible', timeout: 10000 });
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   /**
