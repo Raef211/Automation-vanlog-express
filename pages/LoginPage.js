@@ -44,7 +44,6 @@ class LoginPage extends BasePage {
    */
   async navigate() {
     await this.navigateTo(this.url);
-    await this.page.waitForLoadState('networkidle');
   }
 
   // ============ MÉTHODES DE CONNEXION ============

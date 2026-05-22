@@ -80,12 +80,18 @@ class BasePage {
   }
 
   /**
-   * Vérifier si un élément est visible
-   * @param {string} selector 
+   * Vérifier si un élément est visible (attend jusqu'à timeout ms)
+   * @param {string} selector
+   * @param {number} timeout
    * @returns {Promise<boolean>}
    */
-  async isVisible(selector) {
-    return await this.page.isVisible(selector);
+  async isVisible(selector, timeout = 10000) {
+    try {
+      await this.page.waitForSelector(selector, { state: 'visible', timeout });
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   /**
