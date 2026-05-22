@@ -181,6 +181,7 @@ jobs:
           name: allure-report-nightly
           path: allure-report/
           retention-days: 7
+          if-no-files-found: warn
 
       - name: 🌐 Deploy Allure Report to GitHub Pages
         id: pages_deploy
@@ -221,6 +222,7 @@ jobs:
             reports/
             screenshots/
           retention-days: 7
+          if-no-files-found: warn
 
       - name: 📧 Send notification on failure
         if: failure()

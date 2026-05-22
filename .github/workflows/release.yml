@@ -114,6 +114,7 @@ jobs:
           name: allure-report-${{ matrix.test-suite }}
           path: allure-report/
           retention-days: 30
+          if-no-files-found: warn
 
       - name: 📊 Upload test reports (${{ matrix.test-suite }})
         if: always()
@@ -125,14 +126,7 @@ jobs:
             screenshots/
             videos/
           retention-days: 30
-
-      - name: 📈 Upload Playwright Report (${{ matrix.test-suite }})
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report-${{ matrix.test-suite }}
-          path: playwright-report/
-          retention-days: 30
+          if-no-files-found: warn
 
   consolidate-results:
     name: 📋 Consolidate Results
