@@ -9,6 +9,7 @@ on:
 
 env:
   HEADLESS: true
+  SLOWMO_MS: '0'
   BASE_URL: ${{ secrets.BASE_URL || 'https://vanlog-express.com' }}
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -16,6 +17,7 @@ jobs:
   smoke-tests:
     name: Run Smoke Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     permissions:
       contents: write
     
@@ -46,7 +48,7 @@ jobs:
           done || echo "⚠️ App not accessible, continuing anyway"
 
       - name: 🧪 Run Smoke Tests (@smoke)
-        run: npm run test:headless -- --tags "@smoke"
+        run: npm run test:headless -- --tags "@smoke" --parallel 4
         continue-on-error: true
 
       - name: 📊 Generate Allure Report
