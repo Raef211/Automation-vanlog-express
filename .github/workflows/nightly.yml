@@ -18,7 +18,7 @@ jobs:
   smoke-tests:
     name: Run Smoke Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 30
     permissions:
       contents: write
 
@@ -32,12 +32,15 @@ jobs:
           node-version: '24'
 
       - name: 📦 Install dependencies
+        timeout-minutes: 5
         run: npm install --legacy-peer-deps
 
       - name: 🎭 Install Playwright browsers
+        timeout-minutes: 10
         run: npx playwright install --with-deps chromium
 
       - name: 🌐 Wait for app to be ready (optional)
+        timeout-minutes: 2
         run: |
           for i in {1..30}; do
             if curl -f https://vanlog-express.com 2>/dev/null; then
@@ -49,14 +52,15 @@ jobs:
           done || echo "⚠️ App not accessible, continuing anyway"
 
       - name: 🧹 Clean allure-results
-        if: always()
         run: rm -rf allure-results && mkdir -p allure-results
 
       - name: 🧪 Run Smoke Tests (@smoke)
+        timeout-minutes: 10
         run: npm run test:headless -- --tags "@smoke" || true
 
       - name: 📥 Restore Allure history from previous run
         if: always()
+        timeout-minutes: 2
         run: |
           OWNER=$(echo "${{ github.repository }}" | cut -d'/' -f1 | tr '[:upper:]' '[:lower:]')
           REPO=$(echo "${{ github.repository }}" | cut -d'/' -f2)
@@ -89,6 +93,7 @@ jobs:
       - name: 📊 Generate Allure Report
         id: allure_generate
         if: always()
+        timeout-minutes: 3
         run: |
           COUNT=$(find allure-results -maxdepth 1 -name '*-result.json' 2>/dev/null | wc -l)
           echo "Found ${COUNT} result file(s)"
@@ -170,6 +175,7 @@ jobs:
 
       - name: 📊 Upload Allure Report
         if: always() && steps.allure_generate.outputs.has_results == 'true'
+        timeout-minutes: 5
         uses: actions/upload-artifact@v4
         with:
           name: allure-report-nightly
@@ -179,6 +185,7 @@ jobs:
       - name: 🌐 Deploy Allure Report to GitHub Pages
         id: pages_deploy
         if: always() && steps.allure_generate.outputs.has_results == 'true'
+        timeout-minutes: 5
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -206,21 +213,13 @@ jobs:
 
       - name: 📊 Upload test reports
         if: always()
+        timeout-minutes: 3
         uses: actions/upload-artifact@v4
         with:
           name: smoke-test-reports
           path: |
             reports/
             screenshots/
-            videos/
-          retention-days: 7
-
-      - name: 📈 Upload Playwright Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report-nightly
-          path: playwright-report/
           retention-days: 7
 
       - name: 📧 Send notification on failure
