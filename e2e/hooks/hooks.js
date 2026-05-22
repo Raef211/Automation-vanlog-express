@@ -5,13 +5,13 @@ const path = require('path');
 
 setDefaultTimeout(90000);
 
-const isCI = process.env.HEADLESS === 'true';
 const browserConfig = {
-  headless: isCI,
+  headless: process.env.HEADLESS === 'true',
   slowMo: process.env.SLOWMO_MS ? Number(process.env.SLOWMO_MS) : 80,
   args: [
     '--start-maximized',
-    ...(isCI ? ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'] : []),
+    // Linux/CI only: GitHub Actions sets CI=true, local Windows does not need these
+    ...(process.env.CI === 'true' ? ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'] : []),
   ],
 };
 
