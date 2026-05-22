@@ -1,0 +1,4 @@
+Rapport Allure - NE PAS ouvrir index.html directement (erreur 500).
+En ligne : https://raef211.github.io/Automation-vanlog-express/release/
+Windows  : double-cliquez view-report.bat puis http://localhost:8080
+Linux/Mac: ./view-report.sh puis http://localhost:8080
