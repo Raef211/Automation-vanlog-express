@@ -198,6 +198,38 @@ jobs:
             echo "has_smoke_report=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: 📝 Add local viewing scripts to release report
+        if: steps.check_smoke.outputs.has_smoke_report == 'true'
+        run: |
+          OWNER=$(echo "${{ github.repository }}" | cut -d'/' -f1 | tr '[:upper:]' '[:lower:]')
+          REPO=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          PAGES_URL="https://${OWNER}.github.io/${REPO}/release/"
+          REPORT_DIR="artifacts/allure-report-smoke"
+
+          cat > ${REPORT_DIR}/view-report.bat << 'BATCH'
+          @echo off
+          echo =============================================
+          echo  Allure Report - Visualisation locale
+          echo =============================================
+          echo Ouvrez : http://localhost:8080
+          echo Ctrl+C pour arreter.
+          where python >nul 2>&1 && (python -m http.server 8080) || (npx http-server -p 8080 --cors)
+          BATCH
+
+          cat > ${REPORT_DIR}/view-report.sh << SHELL
+          #!/bin/bash
+          echo "Ouvrez : http://localhost:8080  |  Ctrl+C pour arreter"
+          python3 -m http.server 8080 2>/dev/null || python -m http.server 8080 2>/dev/null || npx http-server -p 8080 --cors
+          SHELL
+          chmod +x ${REPORT_DIR}/view-report.sh
+
+          cat > ${REPORT_DIR}/LISEZ-MOI.txt << README
+          Rapport Allure - NE PAS ouvrir index.html directement (erreur 500).
+          En ligne : ${PAGES_URL}
+          Windows  : double-cliquez view-report.bat puis http://localhost:8080
+          Linux/Mac: ./view-report.sh puis http://localhost:8080
+          README
+
       - name: 🌐 Deploy Allure Report to GitHub Pages
         if: steps.check_smoke.outputs.has_smoke_report == 'true'
         uses: peaceiris/actions-gh-pages@v4
@@ -208,6 +240,16 @@ jobs:
           destination_dir: release
           keep_files: true
         continue-on-error: true
+
+      - name: 🔗 Post release report URL to summary
+        if: steps.check_smoke.outputs.has_smoke_report == 'true'
+        run: |
+          OWNER=$(echo "${{ github.repository }}" | cut -d'/' -f1 | tr '[:upper:]' '[:lower:]')
+          REPO=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          PAGES_URL="https://${OWNER}.github.io/${REPO}/release/"
+          echo "## 📊 Allure Report (Release)" >> $GITHUB_STEP_SUMMARY
+          echo "[$PAGES_URL]($PAGES_URL)" >> $GITHUB_STEP_SUMMARY
+          echo "> Artifact: ouvrez \`view-report.bat\` (Windows) ou \`./view-report.sh\`" >> $GITHUB_STEP_SUMMARY
 
   notify-slack:
     name: 📢 Slack Notification

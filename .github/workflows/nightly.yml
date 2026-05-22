@@ -91,6 +91,73 @@ jobs:
             echo "has_results=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: 📝 Add local viewing scripts to report
+        if: always() && steps.allure_generate.outputs.has_results == 'true'
+        run: |
+          OWNER=$(echo "${{ github.repository }}" | cut -d'/' -f1 | tr '[:upper:]' '[:lower:]')
+          REPO=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          PAGES_URL="https://${OWNER}.github.io/${REPO}/nightly/"
+
+          # Windows batch script
+          cat > allure-report/view-report.bat << 'BATCH'
+          @echo off
+          echo =============================================
+          echo  Allure Report - Visualisation locale
+          echo =============================================
+          echo.
+          echo Ce rapport necessite un serveur HTTP.
+          echo Demarrage en cours...
+          echo.
+          echo Ouvrez votre navigateur sur : http://localhost:8080
+          echo Appuyez sur Ctrl+C pour arreter.
+          echo.
+          where python >nul 2>&1 && (python -m http.server 8080) || (npx http-server -p 8080 --cors)
+          BATCH
+
+          # Linux/Mac shell script
+          cat > allure-report/view-report.sh << SHELL
+          #!/bin/bash
+          echo "============================================="
+          echo " Allure Report - Visualisation locale"
+          echo "============================================="
+          echo ""
+          echo "Ouvrez votre navigateur sur : http://localhost:8080"
+          echo "Appuyez sur Ctrl+C pour arreter."
+          echo ""
+          if command -v python3 &>/dev/null; then
+            python3 -m http.server 8080
+          elif command -v python &>/dev/null; then
+            python -m http.server 8080
+          else
+            npx http-server -p 8080 --cors
+          fi
+          SHELL
+          chmod +x allure-report/view-report.sh
+
+          # README
+          cat > allure-report/LISEZ-MOI.txt << README
+          =============================================
+           RAPPORT ALLURE - Comment visualiser
+          =============================================
+
+          Ce rapport NE peut PAS être ouvert directement
+          en double-cliquant sur index.html (erreur 500).
+          Il nécessite un serveur HTTP.
+
+          --- OPTION 1 : GitHub Pages (recommandé) ---
+          Accédez directement à l'URL :
+          ${PAGES_URL}
+
+          --- OPTION 2 : En local (Windows) ---
+          Double-cliquez sur : view-report.bat
+          Puis ouvrez : http://localhost:8080
+
+          --- OPTION 3 : En local (Linux/Mac) ---
+          chmod +x view-report.sh && ./view-report.sh
+          Puis ouvrez : http://localhost:8080
+
+          README
+
       - name: 📊 Upload Allure Report
         if: always() && steps.allure_generate.outputs.has_results == 'true'
         uses: actions/upload-artifact@v4
@@ -100,6 +167,7 @@ jobs:
           retention-days: 7
 
       - name: 🌐 Deploy Allure Report to GitHub Pages
+        id: pages_deploy
         if: always() && steps.allure_generate.outputs.has_results == 'true'
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -109,6 +177,22 @@ jobs:
           destination_dir: nightly
           keep_files: true
         continue-on-error: true
+
+      - name: 🔗 Post GitHub Pages URL to summary
+        if: always() && steps.allure_generate.outputs.has_results == 'true'
+        run: |
+          OWNER=$(echo "${{ github.repository }}" | cut -d'/' -f1 | tr '[:upper:]' '[:lower:]')
+          REPO=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          PAGES_URL="https://${OWNER}.github.io/${REPO}/nightly/"
+          echo "## 📊 Allure Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🌐 Voir en ligne (recommandé)" >> $GITHUB_STEP_SUMMARY
+          echo "[$PAGES_URL]($PAGES_URL)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📥 Rapport téléchargeable" >> $GITHUB_STEP_SUMMARY
+          echo "Artifact: \`allure-report-nightly\`" >> $GITHUB_STEP_SUMMARY
+          echo "> ⚠️ Ouvrir \`index.html\` directement donne une erreur 500." >> $GITHUB_STEP_SUMMARY
+          echo "> Exécutez \`view-report.bat\` (Windows) ou \`./view-report.sh\` (Linux/Mac) inclus dans l'artifact." >> $GITHUB_STEP_SUMMARY
 
       - name: 📊 Upload test reports
         if: always()
