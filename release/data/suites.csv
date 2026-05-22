@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Test the navigation buttons and links on the home page","6127","Verify home page navigation elements","","2026-05-21","passed","2026-05-21","","","",""
+"Test the signup and registration features of VanLog Express","6336","Verify signup page elements","","2026-05-21","passed","2026-05-21","","","",""
+"Test the language toggle between French (FR) and English (EN) on VanLog Express","5693","Default language is French","","2026-05-21","passed","2026-05-21","","","",""
+"Test the order tracking functionality on VanLog Express","6577","Verify tracking page elements","","2026-05-21","passed","2026-05-21","","","",""
