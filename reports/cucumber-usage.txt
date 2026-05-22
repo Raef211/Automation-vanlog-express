@@ -1,430 +1,718 @@
-┌──────────────────────────────────────────────────────────────────────────┬──────────┬──────────────────────────────────────────────────────┐
-│ Pattern / Text                                                           │ Duration │ Location                                             │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le nouvel utilisateur accède à la page d'inscription                     │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:69    │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le nouvel utilisateur sélectionne le type "Client"                       │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:80    │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le nouvel utilisateur remplit tous les champs d'inscription              │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:92    │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le nouvel utilisateur soumet le formulaire d'inscription                 │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:139   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le compte est créé sans erreur de validation                             │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:151   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'admin se connecte pour gérer les comptes                               │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:175   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'admin navigue vers la liste des comptes en attente d'approbation       │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:196   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'admin recherche le nouveau compte par email                            │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:287   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'admin accepte le compte en attente                                     │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:328   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le compte est approuvé avec succès                                       │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:372   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le nouvel utilisateur retourne sur la page de connexion                  │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:396   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le nouvel utilisateur se connecte avec ses identifiants créés            │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:406   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le nouvel utilisateur accède à son tableau de bord                       │ UNUSED   │ e2e\step-definitions\account-workflow-steps.js:424   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le client ouvre VanLog Express                                           │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:91        │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le client se connecte avec ses identifiants valides                      │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:100       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le client est redirigé vers son tableau de bord                          │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:117       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le client navigue vers la liste de ses commandes                         │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:127       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le client crée une nouvelle commande de livraison                        │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:147       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ la commande est créée sans erreur bloquante                              │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:295       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'admin se connecte sur VanLog Express                                   │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:325       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'admin navigue vers la liste des commandes                              │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:334       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'admin récupère le numéro de suivi de la première commande              │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:363       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'admin change le statut de la commande à {string}                       │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:429       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ la commande affiche le statut {string} dans la liste admin               │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:463       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'utilisateur accède à la page de suivi public                           │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:491       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'utilisateur saisit le numéro de suivi et lance la recherche            │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:500       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le suivi public affiche le statut {string}                               │ UNUSED   │ e2e\step-definitions\complete-e2e-steps.js:525       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je suis sur la page signup                                               │ UNUSED   │ step-definitions\admin-account-approval-steps.js:180 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je crée 2 comptes {string} et 2 comptes {string}                         │ UNUSED   │ step-definitions\admin-account-approval-steps.js:184 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ les 4 comptes devraient être créés sans erreur bloquante                 │ UNUSED   │ step-definitions\admin-account-approval-steps.js:209 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je traite les comptes {string} depuis {string}                           │ UNUSED   │ step-definitions\admin-account-approval-steps.js:215 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le traitement admin des 4 comptes devrait être terminé                   │ UNUSED   │ step-definitions\admin-account-approval-steps.js:230 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je crée un nouveau compte {string}                                       │ UNUSED   │ step-definitions\admin-account-approval-steps.js:235 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ la création du compte devrait se terminer sans erreur bloquante          │ UNUSED   │ step-definitions\admin-account-approval-steps.js:241 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir les boutons admin {string} et {string}                   │ UNUSED   │ step-definitions\admin-account-approval-steps.js:251 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je clique sur le premier bouton admin {string}                           │ UNUSED   │ step-definitions\admin-account-approval-steps.js:277 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'action admin devrait se terminer sans erreur bloquante                 │ UNUSED   │ step-definitions\admin-account-approval-steps.js:299 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir le sélecteur utilisateur Factures                        │ UNUSED   │ step-definitions\admin-invoices-steps.js:79          │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir les types utilisateur {string} et {string} dans Factures │ UNUSED   │ step-definitions\admin-invoices-steps.js:88          │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je sélectionne le type utilisateur {string} dans Factures                │ UNUSED   │ step-definitions\admin-invoices-steps.js:104         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je renseigne la période facture du {string} au {string}                  │ UNUSED   │ step-definitions\admin-invoices-steps.js:170         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je génère la facture admin                                               │ UNUSED   │ step-definitions\admin-invoices-steps.js:184         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'action facture devrait se terminer sans erreur bloquante               │ UNUSED   │ step-definitions\admin-invoices-steps.js:195         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je me connecte avec le compte client valide                              │ UNUSED   │ step-definitions\client-profile-orders-steps.js:42   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je vais vers la page profil du client                                    │ UNUSED   │ step-definitions\client-profile-orders-steps.js:70   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je modifie les coordonnées client sans modifier le mot de passe          │ UNUSED   │ step-definitions\client-profile-orders-steps.js:95   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le compte client doit rester actif                                       │ UNUSED   │ step-definitions\client-profile-orders-steps.js:135  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je vais vers la liste des commandes du client                            │ UNUSED   │ step-definitions\client-profile-orders-steps.js:147  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ la liste des commandes client doit être visible                          │ UNUSED   │ step-definitions\client-profile-orders-steps.js:168  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je crée une nouvelle commande client                                     │ UNUSED   │ step-definitions\client-profile-orders-steps.js:176  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ la création de commande client doit se terminer sans erreur bloquante    │ UNUSED   │ step-definitions\client-profile-orders-steps.js:230  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je clique sur le bouton {string}                                         │ UNUSED   │ step-definitions\common-steps.js:8                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je suis sur la page de connexion                                         │ UNUSED   │ step-definitions\dashboard-steps.js:8                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je me connecte avec le compte admin                                      │ UNUSED   │ step-definitions\dashboard-steps.js:15               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je clique sur le menu item {string}                                      │ UNUSED   │ step-definitions\dashboard-steps.js:35               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais être redirigé vers le dashboard                               │ UNUSED   │ step-definitions\dashboard-steps.js:44               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir le menu item {string}                                    │ UNUSED   │ step-definitions\dashboard-steps.js:53               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le menu item {string} devrait être sélectionné                           │ UNUSED   │ step-definitions\dashboard-steps.js:62               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ l'URL devrait contenir {string}                                          │ UNUSED   │ step-definitions\dashboard-steps.js:71               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le titre de la page devrait être {string}                                │ UNUSED   │ step-definitions\dashboard-steps.js:80               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir le titre {string}                                        │ UNUSED   │ step-definitions\dashboard-steps.js:89               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir la carte {string}                                        │ UNUSED   │ step-definitions\dashboard-steps.js:98               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir le profil utilisateur {string}                           │ UNUSED   │ step-definitions\dashboard-steps.js:107              │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir le bouton {string}                                       │ UNUSED   │ step-definitions\dashboard-steps.js:116              │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir le champ de recherche avec placeholder {string}          │ UNUSED   │ step-definitions\dashboard-steps.js:125              │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir un tableau avec les colonnes {string}                    │ UNUSED   │ step-definitions\dashboard-steps.js:134              │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir le champ {string}                                        │ UNUSED   │ step-definitions\dashboard-steps.js:146              │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir le champ avec id {string}                                │ UNUSED   │ step-definitions\dashboard-steps.js:165              │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je récupère le numéro de suivi de la commande créée                      │ UNUSED   │ step-definitions\end-to-end-colis-steps.js:45        │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je me reconnecte en admin pour gérer la commande                         │ UNUSED   │ step-definitions\end-to-end-colis-steps.js:79        │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je vais vers la liste des commandes admin                                │ UNUSED   │ step-definitions\end-to-end-colis-steps.js:96        │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je filtre la commande créée par numéro de suivi                          │ UNUSED   │ step-definitions\end-to-end-colis-steps.js:112       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je passe le statut de la commande filtrée à {string}                     │ UNUSED   │ step-definitions\end-to-end-colis-steps.js:135       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ la commande filtrée doit afficher le statut {string}                     │ UNUSED   │ step-definitions\end-to-end-colis-steps.js:165       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je vais vers la page de suivi public                                     │ UNUSED   │ step-definitions\end-to-end-colis-steps.js:180       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je recherche le numéro de suivi créé                                     │ UNUSED   │ step-definitions\end-to-end-colis-steps.js:185       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le suivi public doit afficher le statut {string}                         │ UNUSED   │ step-definitions\end-to-end-colis-steps.js:208       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ j'attends que le formulaire de commande actif soit prêt                  │ UNUSED   │ step-definitions\form-steps.js:6                     │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je clique sur le bouton soumettre du formulaire actif                    │ UNUSED   │ step-definitions\form-steps.js:18                    │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je remplis le formulaire livraison complet                               │ UNUSED   │ step-definitions\form-steps.js:39                    │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je remplis le formulaire apport complet                                  │ UNUSED   │ step-definitions\form-steps.js:55                    │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je remplis les champs avec des caractères spéciaux non autorisés         │ UNUSED   │ step-definitions\form-steps.js:60                    │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je remplis les champs avec des chaînes très longues du formulaire actif  │ UNUSED   │ step-definitions\form-steps.js:86                    │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir le formulaire de commande actif                          │ UNUSED   │ step-definitions\form-steps.js:105                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir au moins une erreur de validation active                 │ UNUSED   │ step-definitions\form-steps.js:113                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le formulaire actif ne doit pas afficher d'erreur bloquante              │ UNUSED   │ step-definitions\form-steps.js:122                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je ferme le formulaire actif                                             │ UNUSED   │ step-definitions\form-steps.js:131                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le formulaire actif devrait être fermé                                   │ UNUSED   │ step-definitions\form-steps.js:143                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir la liste des gouvernorats du formulaire actif            │ UNUSED   │ step-definitions\form-steps.js:158                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ la liste des gouvernorats devrait contenir au moins une option           │ UNUSED   │ step-definitions\form-steps.js:165                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ la soumission devrait se terminer sans erreur bloquante                  │ UNUSED   │ step-definitions\form-steps.js:176                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I am on VanLog Express home page                                         │ -        │ step-definitions\homepage-steps.js:14                │
-│   I am on VanLog Express home page                                       │ -        │ features\homepage.feature:6                          │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I click on the signup link                                               │ UNUSED   │ step-definitions\homepage-steps.js:21                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I click on the tracking link                                             │ UNUSED   │ step-definitions\homepage-steps.js:26                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I click on forgot password link                                          │ UNUSED   │ step-definitions\homepage-steps.js:31                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I click on the download APK button                                       │ UNUSED   │ step-definitions\homepage-steps.js:36                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I navigate to the signup page from home                                  │ UNUSED   │ step-definitions\homepage-steps.js:47                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I click on the VanLog logo                                               │ UNUSED   │ step-definitions\homepage-steps.js:52                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the VanLog logo on homepage                                 │ -        │ step-definitions\homepage-steps.js:66                │
-│   I should see the VanLog logo on homepage                               │ -        │ features\homepage.feature:10                         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the signup link on homepage                                 │ -        │ step-definitions\homepage-steps.js:71                │
-│   I should see the signup link on homepage                               │ -        │ features\homepage.feature:11                         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the tracking link on homepage                               │ -        │ step-definitions\homepage-steps.js:76                │
-│   I should see the tracking link on homepage                             │ -        │ features\homepage.feature:12                         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the download APK button                                     │ -        │ step-definitions\homepage-steps.js:81                │
-│   I should see the download APK button                                   │ -        │ features\homepage.feature:13                         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should be redirected to the signup page                                │ UNUSED   │ step-definitions\homepage-steps.js:90                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should be redirected to the tracking page                              │ UNUSED   │ step-definitions\homepage-steps.js:96                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the password recovery form                                  │ UNUSED   │ step-definitions\homepage-steps.js:102               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ the APK download should be initiated                                     │ UNUSED   │ step-definitions\homepage-steps.js:116               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should be back on the home page                                        │ UNUSED   │ step-definitions\homepage-steps.js:125               │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I open the language dropdown                                             │ UNUSED   │ step-definitions\language-steps.js:6                 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I select {string} language                                               │ UNUSED   │ step-definitions\language-steps.js:13                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ the language flag should show {string}                                   │ -        │ step-definitions\language-steps.js:22                │
-│   the language flag should show "Français"                               │ -        │ features\language.feature:10                         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ the login button should display {string}                                 │ -        │ step-definitions\language-steps.js:27                │
-│   the login button should display "Se connecter"                         │ -        │ features\language.feature:11                         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ the navigation bar should display {string}                               │ -        │ step-definitions\language-steps.js:32                │
-│   the navigation bar should display "S'inscrire"                         │ -        │ features\language.feature:14                         │
-│   the navigation bar should display "Se Connecter"                       │ -        │ features\language.feature:13                         │
-│   the navigation bar should display "Suivi des commandes"                │ -        │ features\language.feature:12                         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ the form should have a label {string}                                    │ UNUSED   │ step-definitions\language-steps.js:38                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ the {string} option should be disabled in the language dropdown          │ UNUSED   │ step-definitions\language-steps.js:44                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ the {string} option should be enabled in the language dropdown           │ UNUSED   │ step-definitions\language-steps.js:50                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I navigate to VanLog Express site                                        │ UNUSED   │ step-definitions\login-steps.js:12                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I fill the email field with {string}                                     │ UNUSED   │ step-definitions\login-steps.js:19                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I fill the password field with {string}                                  │ UNUSED   │ step-definitions\login-steps.js:23                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I click the login button                                                 │ UNUSED   │ step-definitions\login-steps.js:27                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the VanLog logo                                             │ UNUSED   │ step-definitions\login-steps.js:40                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the email field                                             │ UNUSED   │ step-definitions\login-steps.js:45                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the password field                                          │ UNUSED   │ step-definitions\login-steps.js:50                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the login button                                            │ UNUSED   │ step-definitions\login-steps.js:55                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should be redirected to the dashboard                                  │ UNUSED   │ step-definitions\login-steps.js:60                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see an error message                                            │ UNUSED   │ step-definitions\login-steps.js:75                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see my user profile                                             │ UNUSED   │ step-definitions\login-steps.js:80                   │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I am on the VanLog Express login page                                    │ -        │ step-definitions\navbar-steps.js:11                  │
-│   I am on the VanLog Express login page                                  │ -        │ features\language.feature:6                          │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I click on {string} in the navigation bar                                │ UNUSED   │ step-definitions\navbar-steps.js:19                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the {string} button in the navigation bar                   │ UNUSED   │ step-definitions\navbar-steps.js:27                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ the {string} button should be active in the navigation bar               │ UNUSED   │ step-definitions\navbar-steps.js:33                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should be on the tracking orders page                                  │ UNUSED   │ step-definitions\navbar-steps.js:39                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should be on the signup page                                           │ UNUSED   │ step-definitions\navbar-steps.js:44                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should be on the login page                                            │ UNUSED   │ step-definitions\navbar-steps.js:49                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je remplis le formulaire avec des données partielles                     │ UNUSED   │ step-definitions\negative-scenarios-steps.js:20      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je remplis les champs texte avec {string}                                │ UNUSED   │ step-definitions\negative-scenarios-steps.js:29      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je remplis les champs numérique avec des données invalides               │ UNUSED   │ step-definitions\negative-scenarios-steps.js:39      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je remplis le formulaire avec des caractères spéciaux                    │ UNUSED   │ step-definitions\negative-scenarios-steps.js:58      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je remplis les champs avec des chaînes très longues                      │ UNUSED   │ step-definitions\negative-scenarios-steps.js:69      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ les erreurs de validation doivent contenir les champs obligatoires       │ UNUSED   │ step-definitions\negative-scenarios-steps.js:85      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir une erreur de validation ou de paramètre invalide        │ UNUSED   │ step-definitions\negative-scenarios-steps.js:96      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le formulaire ne doit pas avoir d'erreur de connexion navigateur         │ UNUSED   │ step-definitions\negative-scenarios-steps.js:104     │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais pouvoir continuer à interagir avec le formulaire              │ UNUSED   │ step-definitions\negative-scenarios-steps.js:118     │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le formulaire devrait gérer les longues chaînes correctement             │ UNUSED   │ step-definitions\negative-scenarios-steps.js:127     │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir au moins une erreur de validation                        │ UNUSED   │ step-definitions\negative-scenarios-steps.js:140     │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ un message de succès devrait s'afficher                                  │ UNUSED   │ step-definitions\negative-scenarios-steps.js:148     │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je recherche la commande avec le numéro {string}                         │ UNUSED   │ step-definitions\orders-management-steps.js:6        │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je clique sur le premier bouton {string}                                 │ UNUSED   │ step-definitions\orders-management-steps.js:13       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je clique sur le premier dropdown de statut                              │ UNUSED   │ step-definitions\orders-management-steps.js:35       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir le modal {string}                                        │ UNUSED   │ step-definitions\orders-management-steps.js:43       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir un formulaire de commande                                │ UNUSED   │ step-definitions\orders-management-steps.js:61       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le formulaire devrait contenir des champs obligatoires                   │ UNUSED   │ step-definitions\orders-management-steps.js:78       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ les résultats de recherche devraient afficher {string}                   │ UNUSED   │ step-definitions\orders-management-steps.js:85       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir au moins un bouton {string}                              │ UNUSED   │ step-definitions\orders-management-steps.js:91       │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir au moins un dropdown de statut                           │ UNUSED   │ step-definitions\orders-management-steps.js:109      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir l'option {string}                                        │ UNUSED   │ step-definitions\orders-management-steps.js:115      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le tableau devrait avoir les colonnes {string}                           │ UNUSED   │ step-definitions\orders-management-steps.js:120      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ la pagination devrait être visible                                       │ UNUSED   │ step-definitions\orders-management-steps.js:129      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ la pagination devrait afficher le nombre total de commandes              │ UNUSED   │ step-definitions\orders-management-steps.js:134      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ chaque ligne du tableau devrait avoir des actions                        │ UNUSED   │ step-definitions\orders-management-steps.js:140      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ les actions devraient inclure voir, modifier, supprimer                  │ UNUSED   │ step-definitions\orders-management-steps.js:153      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le tableau devrait afficher au moins une commande                        │ UNUSED   │ step-definitions\orders-management-steps.js:161      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ chaque commande devrait avoir un numéro de suivi                         │ UNUSED   │ step-definitions\orders-management-steps.js:167      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ chaque commande devrait avoir une date de création                       │ UNUSED   │ step-definitions\orders-management-steps.js:174      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ chaque commande devrait avoir un destinataire                            │ UNUSED   │ step-definitions\orders-management-steps.js:181      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ je devrais voir le texte {string}                                        │ UNUSED   │ step-definitions\orders-management-steps.js:188      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ le compteur devrait afficher le nombre de commandes                      │ UNUSED   │ step-definitions\orders-management-steps.js:193      │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I navigate to the signup page                                            │ -        │ step-definitions\signup-steps.js:10                  │
-│   I navigate to the signup page                                          │ -        │ features\signup.feature:6                            │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I fill the first name with {string}                                      │ UNUSED   │ step-definitions\signup-steps.js:17                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I fill the last name with {string}                                       │ UNUSED   │ step-definitions\signup-steps.js:21                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I fill the signup email with {string}                                    │ UNUSED   │ step-definitions\signup-steps.js:25                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I fill the phone with {string}                                           │ UNUSED   │ step-definitions\signup-steps.js:29                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I fill the signup password with {string}                                 │ UNUSED   │ step-definitions\signup-steps.js:33                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I fill the confirm password with {string}                                │ UNUSED   │ step-definitions\signup-steps.js:40                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I accept the terms and conditions                                        │ UNUSED   │ step-definitions\signup-steps.js:44                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I click the signup button                                                │ UNUSED   │ step-definitions\signup-steps.js:53                  │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the first name field                                        │ -        │ step-definitions\signup-steps.js:119                 │
-│   I should see the first name field                                      │ -        │ features\signup.feature:10                           │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the last name field                                         │ -        │ step-definitions\signup-steps.js:124                 │
-│   I should see the last name field                                       │ -        │ features\signup.feature:11                           │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the email field on signup                                   │ -        │ step-definitions\signup-steps.js:129                 │
-│   I should see the email field on signup                                 │ -        │ features\signup.feature:12                           │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the phone field                                             │ -        │ step-definitions\signup-steps.js:134                 │
-│   I should see the phone field                                           │ -        │ features\signup.feature:13                           │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the password field on signup                                │ -        │ step-definitions\signup-steps.js:139                 │
-│   I should see the password field on signup                              │ -        │ features\signup.feature:14                           │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the confirm password field                                  │ -        │ step-definitions\signup-steps.js:144                 │
-│   I should see the confirm password field                                │ -        │ features\signup.feature:15                           │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the terms checkbox                                          │ -        │ step-definitions\signup-steps.js:149                 │
-│   I should see the terms checkbox                                        │ -        │ features\signup.feature:16                           │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the signup button                                           │ -        │ step-definitions\signup-steps.js:156                 │
-│   I should see the signup button                                         │ -        │ features\signup.feature:17                           │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see a success message                                           │ UNUSED   │ step-definitions\signup-steps.js:161                 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see a password mismatch error                                   │ UNUSED   │ step-definitions\signup-steps.js:174                 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see an email exists error                                       │ UNUSED   │ step-definitions\signup-steps.js:181                 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see a weak password indicator                                   │ UNUSED   │ step-definitions\signup-steps.js:220                 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see a strong password indicator                                 │ UNUSED   │ step-definitions\signup-steps.js:228                 │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I am on the tracking orders page                                         │ -        │ step-definitions\tracking-steps.js:11                │
-│   I am on the tracking orders page                                       │ -        │ features\tracking.feature:6                          │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I click the {string} button without entering a tracking number           │ UNUSED   │ step-definitions\tracking-steps.js:19                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I enter the tracking number {string}                                     │ UNUSED   │ step-definitions\tracking-steps.js:25                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I click the {string} button                                              │ UNUSED   │ step-definitions\tracking-steps.js:31                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I clear the tracking number input                                        │ UNUSED   │ step-definitions\tracking-steps.js:38                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the title {string}                                          │ -        │ step-definitions\tracking-steps.js:46                │
-│   I should see the title "Suivez votre commande"                         │ -        │ features\tracking.feature:10                         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the tracking number input field                             │ -        │ step-definitions\tracking-steps.js:52                │
-│   I should see the tracking number input field                           │ -        │ features\tracking.feature:11                         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the label {string}                                          │ -        │ step-definitions\tracking-steps.js:58                │
-│   I should see the label "Numero de suivi de votre commande"             │ -        │ features\tracking.feature:12                         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the {string} submit button                                  │ -        │ step-definitions\tracking-steps.js:64                │
-│   I should see the "Confirmer" submit button                             │ -        │ features\tracking.feature:13                         │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should see the validation error {string}                               │ UNUSED   │ step-definitions\tracking-steps.js:73                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ the tracking form should be submitted                                    │ UNUSED   │ step-definitions\tracking-steps.js:81                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ I should stay on the tracking page                                       │ UNUSED   │ step-definitions\tracking-steps.js:89                │
-├──────────────────────────────────────────────────────────────────────────┼──────────┼──────────────────────────────────────────────────────┤
-│ the tracking number input should contain {string}                        │ UNUSED   │ step-definitions\tracking-steps.js:94                │
-└──────────────────────────────────────────────────────────────────────────┴──────────┴──────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────────────────┬────────────┬──────────────────────────────────────────────────────┐
+│ Pattern / Text                                                                                           │ Duration   │ Location                                             │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I click the signup button                                                                                │ 11332.11ms │ step-definitions\signup-steps.js:53                  │
+│   I click the signup button                                                                              │ 11348.00ms │ features\signup.feature:40                           │
+│   I click the signup button                                                                              │ 11316.23ms │ features\signup.feature:28                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see an email exists error                                                                       │ 10216.83ms │ step-definitions\signup-steps.js:181                 │
+│   I should see an email exists error                                                                     │ 10216.83ms │ features\signup.feature:41                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see an error message                                                                            │ 6528.56ms  │ step-definitions\login-steps.js:75                   │
+│   I should see an error message                                                                          │ 6528.56ms  │ features\valid-login.feature:30                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je crée une nouvelle commande client                                                                     │ 6030.91ms  │ step-definitions\client-profile-orders-steps.js:176  │
+│   je crée une nouvelle commande client                                                                   │ 6041.61ms  │ features\client-create-two-orders.feature:14         │
+│   je crée une nouvelle commande client                                                                   │ 6039.64ms  │ features\client-profile-orders.feature:16            │
+│   je crée une nouvelle commande client                                                                   │ 6011.46ms  │ features\client-create-two-orders.feature:12         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I am on the tracking orders page                                                                         │ 5037.85ms  │ step-definitions\tracking-steps.js:11                │
+│   I am on the tracking orders page                                                                       │ 5427.52ms  │ features\tracking.feature:6                          │
+│   I am on the tracking orders page                                                                       │ 5376.54ms  │ features\tracking.feature:6                          │
+│   I am on the tracking orders page                                                                       │ 5083.67ms  │ features\tracking.feature:6                          │
+│   I am on the tracking orders page                                                                       │ 5080.30ms  │ features\tracking.feature:6                          │
+│   I am on the tracking orders page                                                                       │ 4918.85ms  │ features\tracking.feature:6                          │
+│   2 more                                                                                                 │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should be redirected to the dashboard                                                                  │ 5009.79ms  │ step-definitions\login-steps.js:60                   │
+│   I should be redirected to the dashboard                                                                │ 5013.51ms  │ features\valid-login.feature:13                      │
+│   I should be redirected to the dashboard                                                                │ 5006.07ms  │ features\valid-login.feature:21                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I navigate to VanLog Express site                                                                        │ 4216.49ms  │ step-definitions\login-steps.js:12                   │
+│   I navigate to VanLog Express site                                                                      │ 4808.67ms  │ features\valid-login.feature:6                       │
+│   I navigate to VanLog Express site                                                                      │ 3971.92ms  │ features\valid-login.feature:6                       │
+│   I navigate to VanLog Express site                                                                      │ 3868.88ms  │ features\valid-login.feature:6                       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I navigate to the signup page                                                                            │ 4192.65ms  │ step-definitions\signup-steps.js:10                  │
+│   I navigate to the signup page                                                                          │ 4580.38ms  │ features\signup.feature:6                            │
+│   I navigate to the signup page                                                                          │ 4299.31ms  │ features\signup.feature:6                            │
+│   I navigate to the signup page                                                                          │ 4265.85ms  │ features\signup.feature:6                            │
+│   I navigate to the signup page                                                                          │ 4110.57ms  │ features\signup.feature:6                            │
+│   I navigate to the signup page                                                                          │ 3707.14ms  │ features\signup.feature:6                            │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je suis sur la page de connexion                                                                         │ 4060.42ms  │ step-definitions\dashboard-steps.js:8                │
+│   je suis sur la page de connexion                                                                       │ 6432.25ms  │ features\dashboard.feature:5                         │
+│   je suis sur la page de connexion                                                                       │ 5702.85ms  │ features\add-order-form.feature:6                    │
+│   je suis sur la page de connexion                                                                       │ 5117.03ms  │ features\add-order-form.feature:6                    │
+│   je suis sur la page de connexion                                                                       │ 5020.52ms  │ features\dashboard.feature:5                         │
+│   je suis sur la page de connexion                                                                       │ 5010.83ms  │ features\negative-scenarios.feature:5                │
+│   42 more                                                                                                │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I am on VanLog Express home page                                                                         │ 3866.46ms  │ step-definitions\homepage-steps.js:14                │
+│   I am on VanLog Express home page                                                                       │ 4616.11ms  │ features\homepage.feature:6                          │
+│   I am on VanLog Express home page                                                                       │ 3996.27ms  │ features\homepage.feature:6                          │
+│   I am on VanLog Express home page                                                                       │ 3802.42ms  │ features\homepage.feature:6                          │
+│   I am on VanLog Express home page                                                                       │ 3730.69ms  │ features\homepage.feature:6                          │
+│   I am on VanLog Express home page                                                                       │ 3564.87ms  │ features\homepage.feature:6                          │
+│   1 more                                                                                                 │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I am on the VanLog Express login page                                                                    │ 3768.87ms  │ step-definitions\navbar-steps.js:11                  │
+│   I am on the VanLog Express login page                                                                  │ 4515.65ms  │ features\navbar.feature:6                            │
+│   I am on the VanLog Express login page                                                                  │ 4091.92ms  │ features\navbar.feature:6                            │
+│   I am on the VanLog Express login page                                                                  │ 4071.23ms  │ features\navbar.feature:6                            │
+│   I am on the VanLog Express login page                                                                  │ 4048.77ms  │ features\language.feature:6                          │
+│   I am on the VanLog Express login page                                                                  │ 3963.52ms  │ features\navbar.feature:6                            │
+│   9 more                                                                                                 │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je me connecte avec le compte admin                                                                      │ 2879.45ms  │ step-definitions\dashboard-steps.js:15               │
+│   je me connecte avec le compte admin                                                                    │ 2923.19ms  │ features\negative-scenarios.feature:6                │
+│   je me connecte avec le compte admin                                                                    │ 2920.53ms  │ features\add-order-form.feature:7                    │
+│   je me connecte avec le compte admin                                                                    │ 2892.89ms  │ features\admin-invoices.feature:6                    │
+│   je me connecte avec le compte admin                                                                    │ 2892.61ms  │ features\negative-scenarios.feature:6                │
+│   je me connecte avec le compte admin                                                                    │ 2891.93ms  │ features\negative-scenarios.feature:6                │
+│   40 more                                                                                                │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je me connecte avec le compte client valide                                                              │ 2872.29ms  │ step-definitions\client-profile-orders-steps.js:42   │
+│   je me connecte avec le compte client valide                                                            │ 2879.00ms  │ features\client-create-two-orders.feature:10         │
+│   je me connecte avec le compte client valide                                                            │ 2865.58ms  │ features\client-profile-orders.feature:10            │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I click on the VanLog logo                                                                               │ 2849.35ms  │ step-definitions\homepage-steps.js:52                │
+│   I click on the VanLog logo                                                                             │ 2849.35ms  │ features\homepage.feature:38                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I click on the signup link                                                                               │ 2777.48ms  │ step-definitions\homepage-steps.js:21                │
+│   I click on the signup link                                                                             │ 2777.48ms  │ features\homepage.feature:17                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I click on the tracking link                                                                             │ 2707.97ms  │ step-definitions\homepage-steps.js:26                │
+│   I click on the tracking link                                                                           │ 2707.97ms  │ features\homepage.feature:22                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I click on forgot password link                                                                          │ 2660.33ms  │ step-definitions\homepage-steps.js:31                │
+│   I click on forgot password link                                                                        │ 2660.33ms  │ features\homepage.feature:27                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I click the {string} button                                                                              │ 2641.42ms  │ step-definitions\tracking-steps.js:31                │
+│   I click the "Confirmer" button                                                                         │ 2648.16ms  │ features\tracking.feature:30                         │
+│   I click the "Confirmer" button                                                                         │ 2634.67ms  │ features\tracking.feature:23                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je modifie les coordonnées client sans modifier le mot de passe                                          │ 2407.33ms  │ step-definitions\client-profile-orders-steps.js:95   │
+│   je modifie les coordonnées client sans modifier le mot de passe                                        │ 2407.33ms  │ features\client-profile-orders.feature:12            │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I navigate to the signup page from home                                                                  │ 2402.50ms  │ step-definitions\homepage-steps.js:47                │
+│   I navigate to the signup page from home                                                                │ 2402.50ms  │ features\homepage.feature:37                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je clique sur le menu item {string}                                                                      │ 2206.55ms  │ step-definitions\dashboard-steps.js:35               │
+│   je clique sur le menu item "Liste des commandes"                                                       │ 2234.88ms  │ features\negative-scenarios.feature:7                │
+│   je clique sur le menu item "Liste des commandes"                                                       │ 2230.55ms  │ features\add-order-form.feature:8                    │
+│   je clique sur le menu item "Liste des commandes"                                                       │ 2227.39ms  │ features\negative-scenarios.feature:7                │
+│   je clique sur le menu item "Liste des commandes"                                                       │ 2224.99ms  │ features\add-order-form.feature:8                    │
+│   je clique sur le menu item "Liste des commandes"                                                       │ 2224.71ms  │ features\dashboard.feature:25                        │
+│   36 more                                                                                                │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I select {string} language                                                                               │ 2137.18ms  │ step-definitions\language-steps.js:13                │
+│   I select "English" language                                                                            │ 2141.74ms  │ features\language.feature:19                         │
+│   I select "Français" language                                                                           │ 2136.85ms  │ features\language.feature:32                         │
+│   I select "English" language                                                                            │ 2135.61ms  │ features\language.feature:29                         │
+│   I select "English" language                                                                            │ 2134.52ms  │ features\language.feature:45                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see my user profile                                                                             │ 2024.38ms  │ step-definitions\login-steps.js:82                   │
+│   I should see my user profile                                                                           │ 2029.64ms  │ features\valid-login.feature:14                      │
+│   I should see my user profile                                                                           │ 2019.11ms  │ features\valid-login.feature:22                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir la liste des gouvernorats du formulaire actif                                            │ 2015.44ms  │ step-definitions\form-steps.js:158                   │
+│   je devrais voir la liste des gouvernorats du formulaire actif                                          │ 2015.44ms  │ features\add-order-form.feature:76                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see a password mismatch error                                                                   │ 2009.25ms  │ step-definitions\signup-steps.js:174                 │
+│   I should see a password mismatch error                                                                 │ 2009.25ms  │ features\signup.feature:29                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should be back on the home page                                                                        │ 2005.61ms  │ step-definitions\homepage-steps.js:125               │
+│   I should be back on the home page                                                                      │ 2005.61ms  │ features\homepage.feature:39                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I click the {string} button without entering a tracking number                                           │ 1663.67ms  │ step-definitions\tracking-steps.js:19                │
+│   I click the "Confirmer" button without entering a tracking number                                      │ 1663.67ms  │ features\tracking.feature:17                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je clique sur le premier dropdown de statut                                                              │ 1642.56ms  │ step-definitions\orders-management-steps.js:35       │
+│   je clique sur le premier dropdown de statut                                                            │ 1642.56ms  │ features\orders-management.feature:31                │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ la soumission devrait se terminer sans erreur bloquante                                                  │ 1514.88ms  │ step-definitions\form-steps.js:176                   │
+│   la soumission devrait se terminer sans erreur bloquante                                                │ 1516.84ms  │ features\negative-scenarios.feature:72               │
+│   la soumission devrait se terminer sans erreur bloquante                                                │ 1516.64ms  │ features\negative-scenarios.feature:64               │
+│   la soumission devrait se terminer sans erreur bloquante                                                │ 1513.76ms  │ features\add-order-form.feature:63                   │
+│   la soumission devrait se terminer sans erreur bloquante                                                │ 1512.29ms  │ features\add-order-form.feature:36                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je génère la facture admin                                                                               │ 1328.61ms  │ step-definitions\admin-invoices-steps.js:184         │
+│   je génère la facture admin                                                                             │ 1328.61ms  │ features\admin-invoices.feature:14                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I click on the download APK button                                                                       │ 1245.71ms  │ step-definitions\homepage-steps.js:36                │
+│   I click on the download APK button                                                                     │ 1245.71ms  │ features\homepage.feature:32                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je vais vers la page profil du client                                                                    │ 1212.21ms  │ step-definitions\client-profile-orders-steps.js:70   │
+│   je vais vers la page profil du client                                                                  │ 1212.21ms  │ features\client-profile-orders.feature:11            │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I click on {string} in the navigation bar                                                                │ 1202.10ms  │ step-definitions\navbar-steps.js:19                  │
+│   I click on "S'inscrire" in the navigation bar                                                          │ 1256.32ms  │ features\navbar.feature:51                           │
+│   I click on "S'inscrire" in the navigation bar                                                          │ 1242.51ms  │ features\navbar.feature:22                           │
+│   I click on "S'inscrire" in the navigation bar                                                          │ 1214.76ms  │ features\navbar.feature:37                           │
+│   I click on "Suivi des commandes" in the navigation bar                                                 │ 1212.66ms  │ features\tracking.feature:37                         │
+│   I click on "Suivi des commandes" in the navigation bar                                                 │ 1195.73ms  │ features\navbar.feature:16                           │
+│   5 more                                                                                                 │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je vais vers la liste des commandes du client                                                            │ 1185.82ms  │ step-definitions\client-profile-orders-steps.js:147  │
+│   je vais vers la liste des commandes du client                                                          │ 1186.13ms  │ features\client-create-two-orders.feature:11         │
+│   je vais vers la liste des commandes du client                                                          │ 1185.51ms  │ features\client-profile-orders.feature:14            │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I open the language dropdown                                                                             │ 1166.62ms  │ step-definitions\language-steps.js:6                 │
+│   I open the language dropdown                                                                           │ 1182.58ms  │ features\language.feature:18                         │
+│   I open the language dropdown                                                                           │ 1172.96ms  │ features\language.feature:44                         │
+│   I open the language dropdown                                                                           │ 1171.37ms  │ features\language.feature:28                         │
+│   I open the language dropdown                                                                           │ 1156.98ms  │ features\language.feature:51                         │
+│   I open the language dropdown                                                                           │ 1149.24ms  │ features\language.feature:31                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see a strong password indicator                                                                 │ 1026.17ms  │ step-definitions\signup-steps.js:228                 │
+│   I should see a strong password indicator                                                               │ 1026.17ms  │ features\signup.feature:51                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the password recovery form                                                                  │ 1022.26ms  │ step-definitions\homepage-steps.js:102               │
+│   I should see the password recovery form                                                                │ 1022.26ms  │ features\homepage.feature:28                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je clique sur le bouton {string}                                                                         │ 1018.87ms  │ step-definitions\common-steps.js:8                   │
+│   je clique sur le bouton "Apportez une commande"                                                        │ 1070.18ms  │ features\add-order-form.feature:40                   │
+│   je clique sur le bouton "Livrer une commande"                                                          │ 1066.64ms  │ features\negative-scenarios.feature:12               │
+│   je clique sur le bouton "Livrer une commande"                                                          │ 1065.68ms  │ features\add-order-form.feature:89                   │
+│   je clique sur le bouton "Livrer une commande"                                                          │ 1065.29ms  │ features\negative-scenarios.feature:28               │
+│   je clique sur le bouton "Livrer une commande"                                                          │ 1062.65ms  │ features\negative-scenarios.feature:37               │
+│   36 more                                                                                                │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see a weak password indicator                                                                   │ 1018.18ms  │ step-definitions\signup-steps.js:220                 │
+│   I should see a weak password indicator                                                                 │ 1018.18ms  │ features\signup.feature:46                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should be redirected to the tracking page                                                              │ 1011.93ms  │ step-definitions\homepage-steps.js:96                │
+│   I should be redirected to the tracking page                                                            │ 1011.93ms  │ features\homepage.feature:23                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should be redirected to the signup page                                                                │ 1010.53ms  │ step-definitions\homepage-steps.js:90                │
+│   I should be redirected to the signup page                                                              │ 1010.53ms  │ features\homepage.feature:18                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je sélectionne le type utilisateur {string} dans Factures                                                │ 946.62ms   │ step-definitions\admin-invoices-steps.js:104         │
+│   je sélectionne le type utilisateur "client" dans Factures                                              │ 946.62ms   │ features\admin-invoices.feature:12                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je remplis le formulaire avec des caractères spéciaux                                                    │ 887.33ms   │ step-definitions\negative-scenarios-steps.js:58      │
+│   je remplis le formulaire avec des caractères spéciaux                                                  │ 887.33ms   │ features\negative-scenarios.feature:39               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je remplis les champs avec des chaînes très longues                                                      │ 875.52ms   │ step-definitions\negative-scenarios-steps.js:69      │
+│   je remplis les champs avec des chaînes très longues                                                    │ 875.52ms   │ features\negative-scenarios.feature:54               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir le modal {string}                                                                        │ 847.77ms   │ step-definitions\orders-management-steps.js:43       │
+│   je devrais voir le modal "Sélection d'action de commande"                                              │ 847.77ms   │ features\orders-management.feature:17                │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I fill the signup password with {string}                                                                 │ 749.72ms   │ step-definitions\signup-steps.js:33                  │
+│   I fill the signup password with "123"                                                                  │ 772.72ms   │ features\signup.feature:45                           │
+│   I fill the signup password with "SecurePass123!@#"                                                     │ 750.34ms   │ features\signup.feature:50                           │
+│   I fill the signup password with "Password123!"                                                         │ 744.06ms   │ features\signup.feature:25                           │
+│   I fill the signup password with "Password123!"                                                         │ 731.75ms   │ features\signup.feature:37                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I enter the tracking number {string}                                                                     │ 648.50ms   │ step-definitions\tracking-steps.js:25                │
+│   I enter the tracking number "FIRST123"                                                                 │ 652.62ms   │ features\tracking.feature:48                         │
+│   I enter the tracking number "INVALID123"                                                               │ 652.07ms   │ features\tracking.feature:22                         │
+│   I enter the tracking number "E53VL261486"                                                              │ 650.61ms   │ features\tracking.feature:29                         │
+│   I enter the tracking number "TEST12345"                                                                │ 649.59ms   │ features\tracking.feature:43                         │
+│   I enter the tracking number "SECOND456"                                                                │ 637.62ms   │ features\tracking.feature:50                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I clear the tracking number input                                                                        │ 635.71ms   │ step-definitions\tracking-steps.js:38                │
+│   I clear the tracking number input                                                                      │ 635.71ms   │ features\tracking.feature:49                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I click the login button                                                                                 │ 625.35ms   │ step-definitions\login-steps.js:27                   │
+│   I click the login button                                                                               │ 634.90ms   │ features\valid-login.feature:29                      │
+│   I click the login button                                                                               │ 623.52ms   │ features\valid-login.feature:20                      │
+│   I click the login button                                                                               │ 617.61ms   │ features\valid-login.feature:12                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le formulaire actif devrait être fermé                                                                   │ 295.86ms   │ step-definitions\form-steps.js:143                   │
+│   le formulaire actif devrait être fermé                                                                 │ 295.86ms   │ features\add-order-form.feature:70                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je renseigne la période facture du {string} au {string}                                                  │ 270.48ms   │ step-definitions\admin-invoices-steps.js:170         │
+│   je renseigne la période facture du "2026-03-01" au "2026-03-24"                                        │ 270.48ms   │ features\admin-invoices.feature:13                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je clique sur le bouton soumettre du formulaire actif                                                    │ 149.90ms   │ step-definitions\form-steps.js:18                    │
+│   je clique sur le bouton soumettre du formulaire actif                                                  │ 166.90ms   │ features\negative-scenarios.feature:32               │
+│   je clique sur le bouton soumettre du formulaire actif                                                  │ 157.47ms   │ features\add-order-form.feature:47                   │
+│   je clique sur le bouton soumettre du formulaire actif                                                  │ 155.42ms   │ features\negative-scenarios.feature:40               │
+│   je clique sur le bouton soumettre du formulaire actif                                                  │ 154.55ms   │ features\negative-scenarios.feature:23               │
+│   je clique sur le bouton soumettre du formulaire actif                                                  │ 154.14ms   │ features\add-order-form.feature:20                   │
+│   8 more                                                                                                 │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I fill the first name with {string}                                                                      │ 136.31ms   │ step-definitions\signup-steps.js:17                  │
+│   I fill the first name with "Pierre"                                                                    │ 137.66ms   │ features\signup.feature:33                           │
+│   I fill the first name with "Marie"                                                                     │ 134.96ms   │ features\signup.feature:21                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I fill the email field with {string}                                                                     │ 135.69ms   │ step-definitions\login-steps.js:19                   │
+│   I fill the email field with "support@vanlog-express.com"                                               │ 136.92ms   │ features\valid-login.feature:10                      │
+│   I fill the email field with "support@vanlog-express.com"                                               │ 136.56ms   │ features\valid-login.feature:27                      │
+│   I fill the email field with "raeffatnasi@gmail.com"                                                    │ 133.61ms   │ features\valid-login.feature:18                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je remplis les champs texte avec {string}                                                                │ 120.74ms   │ step-definitions\negative-scenarios-steps.js:29      │
+│   je remplis les champs texte avec "TestUser"                                                            │ 120.74ms   │ features\negative-scenarios.feature:30               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I fill the signup email with {string}                                                                    │ 117.28ms   │ step-definitions\signup-steps.js:25                  │
+│   I fill the signup email with "marie.martin@test.com"                                                   │ 125.44ms   │ features\signup.feature:23                           │
+│   I fill the signup email with "support@vanlog-express.com"                                              │ 109.12ms   │ features\signup.feature:35                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je remplis le formulaire avec des données partielles                                                     │ 116.74ms   │ step-definitions\negative-scenarios-steps.js:20      │
+│   je remplis le formulaire avec des données partielles                                                   │ 116.74ms   │ features\negative-scenarios.feature:22               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I fill the last name with {string}                                                                       │ 116.51ms   │ step-definitions\signup-steps.js:21                  │
+│   I fill the last name with "Martin"                                                                     │ 123.25ms   │ features\signup.feature:22                           │
+│   I fill the last name with "Durand"                                                                     │ 109.77ms   │ features\signup.feature:34                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I fill the phone with {string}                                                                           │ 108.53ms   │ step-definitions\signup-steps.js:29                  │
+│   I fill the phone with "0623456789"                                                                     │ 108.90ms   │ features\signup.feature:24                           │
+│   I fill the phone with "0634567890"                                                                     │ 108.16ms   │ features\signup.feature:36                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I fill the confirm password with {string}                                                                │ 108.18ms   │ step-definitions\signup-steps.js:40                  │
+│   I fill the confirm password with "DifferentPassword!"                                                  │ 108.40ms   │ features\signup.feature:26                           │
+│   I fill the confirm password with "Password123!"                                                        │ 107.97ms   │ features\signup.feature:38                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I fill the password field with {string}                                                                  │ 106.84ms   │ step-definitions\login-steps.js:23                   │
+│   I fill the password field with "WrongPassword123"                                                      │ 108.81ms   │ features\valid-login.feature:28                      │
+│   I fill the password field with "y8JzyLZ5Utcw7Q+n(CnQ"                                                  │ 108.67ms   │ features\valid-login.feature:11                      │
+│   I fill the password field with "raef1234"                                                              │ 103.05ms   │ features\valid-login.feature:19                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je remplis les champs numérique avec des données invalides                                               │ 36.44ms    │ step-definitions\negative-scenarios-steps.js:39      │
+│   je remplis les champs numérique avec des données invalides                                             │ 36.44ms    │ features\negative-scenarios.feature:31               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the first name field                                                                        │ 35.67ms    │ step-definitions\signup-steps.js:119                 │
+│   I should see the first name field                                                                      │ 35.67ms    │ features\signup.feature:10                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le tableau devrait avoir les colonnes {string}                                                           │ 34.84ms    │ step-definitions\orders-management-steps.js:120      │
+│   le tableau devrait avoir les colonnes "Numéro de suivi, Date de création, Nom du destinataire, Statut" │ 34.84ms    │ features\orders-management.feature:40                │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'action facture devrait se terminer sans erreur bloquante                                               │ 20.88ms    │ step-definitions\admin-invoices-steps.js:195         │
+│   l'action facture devrait se terminer sans erreur bloquante                                             │ 20.88ms    │ features\admin-invoices.feature:15                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the VanLog logo on homepage                                                                 │ 20.58ms    │ step-definitions\homepage-steps.js:66                │
+│   I should see the VanLog logo on homepage                                                               │ 20.58ms    │ features\homepage.feature:10                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir le formulaire de commande actif                                                          │ 18.91ms    │ step-definitions\form-steps.js:105                   │
+│   je devrais voir le formulaire de commande actif                                                        │ 19.92ms    │ features\add-order-form.feature:41                   │
+│   je devrais voir le formulaire de commande actif                                                        │ 17.89ms    │ features\add-order-form.feature:14                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir le texte {string}                                                                        │ 18.55ms    │ step-definitions\orders-management-steps.js:188      │
+│   je devrais voir le texte "Nombre total des commandes"                                                  │ 18.55ms    │ features\orders-management.feature:49                │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ la création de commande client doit se terminer sans erreur bloquante                                    │ 17.33ms    │ step-definitions\client-profile-orders-steps.js:230  │
+│   la création de commande client doit se terminer sans erreur bloquante                                  │ 20.93ms    │ features\client-create-two-orders.feature:13         │
+│   la création de commande client doit se terminer sans erreur bloquante                                  │ 15.83ms    │ features\client-profile-orders.feature:17            │
+│   la création de commande client doit se terminer sans erreur bloquante                                  │ 15.23ms    │ features\client-create-two-orders.feature:15         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the validation error {string}                                                               │ 17.15ms    │ step-definitions\tracking-steps.js:73                │
+│   I should see the validation error "Champs requis"                                                      │ 17.15ms    │ features\tracking.feature:18                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je remplis les champs avec des chaînes très longues du formulaire actif                                  │ 17.02ms    │ step-definitions\form-steps.js:86                    │
+│   je remplis les champs avec des chaînes très longues du formulaire actif                                │ 17.02ms    │ features\add-order-form.feature:91                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ la liste des commandes client doit être visible                                                          │ 16.97ms    │ step-definitions\client-profile-orders-steps.js:168  │
+│   la liste des commandes client doit être visible                                                        │ 16.97ms    │ features\client-profile-orders.feature:15            │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je remplis les champs avec des caractères spéciaux non autorisés                                         │ 16.78ms    │ step-definitions\form-steps.js:60                    │
+│   je remplis les champs avec des caractères spéciaux non autorisés                                       │ 16.78ms    │ features\add-order-form.feature:83                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the tracking number input field                                                             │ 16.10ms    │ step-definitions\tracking-steps.js:52                │
+│   I should see the tracking number input field                                                           │ 16.10ms    │ features\tracking.feature:11                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais pouvoir continuer à interagir avec le formulaire                                              │ 15.89ms    │ step-definitions\negative-scenarios-steps.js:118     │
+│   je devrais pouvoir continuer à interagir avec le formulaire                                            │ 15.89ms    │ features\negative-scenarios.feature:48               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le compte client doit rester actif                                                                       │ 14.34ms    │ step-definitions\client-profile-orders-steps.js:135  │
+│   le compte client doit rester actif                                                                     │ 14.34ms    │ features\client-profile-orders.feature:13            │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ the language flag should show {string}                                                                   │ 14.00ms    │ step-definitions\language-steps.js:22                │
+│   the language flag should show "Français"                                                               │ 27.36ms    │ features\language.feature:10                         │
+│   the language flag should show "English"                                                                │ 9.80ms     │ features\language.feature:20                         │
+│   the language flag should show "Français"                                                               │ 4.85ms     │ features\language.feature:33                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le formulaire devrait gérer les longues chaînes correctement                                             │ 13.94ms    │ step-definitions\negative-scenarios-steps.js:127     │
+│   le formulaire devrait gérer les longues chaînes correctement                                           │ 13.94ms    │ features\negative-scenarios.feature:56               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je ferme le formulaire actif                                                                             │ 13.90ms    │ step-definitions\form-steps.js:131                   │
+│   je ferme le formulaire actif                                                                           │ 13.90ms    │ features\add-order-form.feature:69                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je remplis le formulaire livraison complet                                                               │ 13.39ms    │ step-definitions\form-steps.js:39                    │
+│   je remplis le formulaire livraison complet                                                             │ 13.71ms    │ features\negative-scenarios.feature:62               │
+│   je remplis le formulaire livraison complet                                                             │ 13.45ms    │ features\add-order-form.feature:27                   │
+│   je remplis le formulaire livraison complet                                                             │ 13.01ms    │ features\add-order-form.feature:34                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ j'attends que le formulaire de commande actif soit prêt                                                  │ 13.37ms    │ step-definitions\form-steps.js:6                     │
+│   j'attends que le formulaire de commande actif soit prêt                                                │ 19.01ms    │ features\add-order-form.feature:60                   │
+│   j'attends que le formulaire de commande actif soit prêt                                                │ 18.86ms    │ features\negative-scenarios.feature:29               │
+│   j'attends que le formulaire de commande actif soit prêt                                                │ 18.08ms    │ features\negative-scenarios.feature:13               │
+│   j'attends que le formulaire de commande actif soit prêt                                                │ 16.08ms    │ features\add-order-form.feature:53                   │
+│   j'attends que le formulaire de commande actif soit prêt                                                │ 15.84ms    │ features\add-order-form.feature:19                   │
+│   13 more                                                                                                │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je remplis le formulaire apport complet                                                                  │ 13.08ms    │ step-definitions\form-steps.js:55                    │
+│   je remplis le formulaire apport complet                                                                │ 14.39ms    │ features\negative-scenarios.feature:70               │
+│   je remplis le formulaire apport complet                                                                │ 13.28ms    │ features\add-order-form.feature:54                   │
+│   je remplis le formulaire apport complet                                                                │ 11.56ms    │ features\add-order-form.feature:61                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir le titre {string}                                                                        │ 13.07ms    │ step-definitions\dashboard-steps.js:89               │
+│   je devrais voir le titre "Page - Tableau de bord"                                                      │ 23.10ms    │ features\dashboard.feature:67                        │
+│   je devrais voir le titre "Générer des factures de  l'entreprise"                                       │ 10.75ms    │ features\dashboard.feature:94                        │
+│   je devrais voir le titre "Suivez votre commande"                                                       │ 5.36ms     │ features\dashboard.feature:107                       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the title {string}                                                                          │ 12.90ms    │ step-definitions\tracking-steps.js:46                │
+│   I should see the title "Suivez votre commande"                                                         │ 21.28ms    │ features\tracking.feature:10                         │
+│   I should see the title "Suivez votre commande"                                                         │ 4.52ms     │ features\tracking.feature:39                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ les erreurs de validation doivent contenir les champs obligatoires                                       │ 12.81ms    │ step-definitions\negative-scenarios-steps.js:85      │
+│   les erreurs de validation doivent contenir les champs obligatoires                                     │ 12.81ms    │ features\negative-scenarios.feature:16               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir une erreur de validation ou de paramètre invalide                                        │ 12.04ms    │ step-definitions\negative-scenarios-steps.js:96      │
+│   je devrais voir une erreur de validation ou de paramètre invalide                                      │ 12.04ms    │ features\negative-scenarios.feature:41               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir au moins une erreur de validation active                                                 │ 11.70ms    │ step-definitions\form-steps.js:113                   │
+│   je devrais voir au moins une erreur de validation active                                               │ 16.16ms    │ features\add-order-form.feature:21                   │
+│   je devrais voir au moins une erreur de validation active                                               │ 11.56ms    │ features\negative-scenarios.feature:15               │
+│   je devrais voir au moins une erreur de validation active                                               │ 11.41ms    │ features\add-order-form.feature:85                   │
+│   je devrais voir au moins une erreur de validation active                                               │ 9.90ms     │ features\negative-scenarios.feature:24               │
+│   je devrais voir au moins une erreur de validation active                                               │ 9.48ms     │ features\add-order-form.feature:48                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir au moins une erreur de validation                                                        │ 11.22ms    │ step-definitions\negative-scenarios-steps.js:140     │
+│   je devrais voir au moins une erreur de validation                                                      │ 11.22ms    │ features\negative-scenarios.feature:33               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ la pagination devrait afficher le nombre total de commandes                                              │ 10.53ms    │ step-definitions\orders-management-steps.js:134      │
+│   la pagination devrait afficher le nombre total de commandes                                            │ 10.53ms    │ features\orders-management.feature:45                │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir le champ de recherche avec placeholder {string}                                          │ 10.11ms    │ step-definitions\dashboard-steps.js:125              │
+│   je devrais voir le champ de recherche avec placeholder "Chercher avec numéro de suivi"                 │ 14.35ms    │ features\orders-management.feature:23                │
+│   je devrais voir le champ de recherche avec placeholder "Chercher avec numéro de suivi"                 │ 14.12ms    │ features\dashboard.feature:76                        │
+│   je devrais voir le champ de recherche avec placeholder "Chercher avec email"                           │ 9.34ms     │ features\dashboard.feature:82                        │
+│   je devrais voir le champ de recherche avec placeholder "Chercher avec email"                           │ 7.21ms     │ features\dashboard.feature:88                        │
+│   je devrais voir le champ de recherche avec placeholder "Rechercher par sujet"                          │ 5.54ms     │ features\dashboard.feature:102                       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir au moins un dropdown de statut                                                           │ 10.10ms    │ step-definitions\orders-management-steps.js:109      │
+│   je devrais voir au moins un dropdown de statut                                                         │ 10.10ms    │ features\orders-management.feature:27                │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ la pagination devrait être visible                                                                       │ 10.03ms    │ step-definitions\orders-management-steps.js:129      │
+│   la pagination devrait être visible                                                                     │ 10.03ms    │ features\orders-management.feature:44                │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ the form should have a label {string}                                                                    │ 9.57ms     │ step-definitions\language-steps.js:38                │
+│   the form should have a label "Email"                                                                   │ 21.36ms    │ features\language.feature:39                         │
+│   the form should have a label "Email"                                                                   │ 8.68ms     │ features\language.feature:46                         │
+│   the form should have a label "Password"                                                                │ 6.32ms     │ features\language.feature:47                         │
+│   the form should have a label "Mot de passe"                                                            │ 1.91ms     │ features\language.feature:40                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir un tableau avec les colonnes {string}                                                    │ 9.50ms     │ step-definitions\dashboard-steps.js:134              │
+│   je devrais voir un tableau avec les colonnes "Nom du client, Date d'inscription, Actions"              │ 11.98ms    │ features\dashboard.feature:89                        │
+│   je devrais voir un tableau avec les colonnes "Numéro de suivi, Date de création, Statut"               │ 10.61ms    │ features\dashboard.feature:77                        │
+│   je devrais voir un tableau avec les colonnes "Nom de livreur, Date d'inscription, Action"              │ 5.92ms     │ features\dashboard.feature:83                        │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ la liste des gouvernorats devrait contenir au moins une option                                           │ 9.46ms     │ step-definitions\form-steps.js:165                   │
+│   la liste des gouvernorats devrait contenir au moins une option                                         │ 9.46ms     │ features\add-order-form.feature:77                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the {string} submit button                                                                  │ 8.08ms     │ step-definitions\tracking-steps.js:64                │
+│   I should see the "Confirmer" submit button                                                             │ 8.08ms     │ features\tracking.feature:13                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the {string} button in the navigation bar                                                   │ 7.93ms     │ step-definitions\navbar-steps.js:27                  │
+│   I should see the "Suivi des commandes" button in the navigation bar                                    │ 39.38ms    │ features\navbar.feature:10                           │
+│   I should see the "Suivi des commandes" button in the navigation bar                                    │ 6.22ms     │ features\navbar.feature:45                           │
+│   I should see the "Se Connecter" button in the navigation bar                                           │ 5.84ms     │ features\navbar.feature:46                           │
+│   I should see the "Suivi des commandes" button in the navigation bar                                    │ 5.01ms     │ features\navbar.feature:52                           │
+│   I should see the "S'inscrire" button in the navigation bar                                             │ 4.02ms     │ features\navbar.feature:47                           │
+│   4 more                                                                                                 │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le titre de la page devrait être {string}                                                                │ 6.77ms     │ step-definitions\dashboard-steps.js:80               │
+│   le titre de la page devrait être "Page - Factures"                                                     │ 9.38ms     │ features\dashboard.feature:48                        │
+│   le titre de la page devrait être "Page - Réclamations"                                                 │ 8.71ms     │ features\dashboard.feature:55                        │
+│   le titre de la page devrait être "Page - Liste des transporteurs"                                      │ 7.83ms     │ features\dashboard.feature:34                        │
+│   le titre de la page devrait être "Page - Liste des commandes"                                          │ 7.00ms     │ features\dashboard.feature:27                        │
+│   le titre de la page devrait être "Page - Suivi des commandes"                                          │ 4.44ms     │ features\dashboard.feature:62                        │
+│   1 more                                                                                                 │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ the tracking form should be submitted                                                                    │ 6.51ms     │ step-definitions\tracking-steps.js:81                │
+│   the tracking form should be submitted                                                                  │ 6.60ms     │ features\tracking.feature:24                         │
+│   the tracking form should be submitted                                                                  │ 6.42ms     │ features\tracking.feature:31                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ the {string} button should be active in the navigation bar                                               │ 6.42ms     │ step-definitions\navbar-steps.js:33                  │
+│   the "Suivi des commandes" button should be active in the navigation bar                                │ 6.64ms     │ features\navbar.feature:18                           │
+│   the "Se Connecter" button should be active in the navigation bar                                       │ 6.41ms     │ features\navbar.feature:31                           │
+│   the "S'inscrire" button should be active in the navigation bar                                         │ 6.20ms     │ features\navbar.feature:24                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir le bouton {string}                                                                       │ 6.15ms     │ step-definitions\dashboard-steps.js:116              │
+│   je devrais voir le bouton "Ajouter une commande"                                                       │ 11.20ms    │ features\dashboard.feature:75                        │
+│   je devrais voir le bouton "Déconnexion"                                                                │ 8.39ms     │ features\dashboard.feature:113                       │
+│   je devrais voir le bouton "Livrer une commande"                                                        │ 7.52ms     │ features\orders-management.feature:18                │
+│   je devrais voir le bouton "Apportez une commande"                                                      │ 6.94ms     │ features\orders-management.feature:19                │
+│   je devrais voir le bouton "Ajouter une commande"                                                       │ 5.28ms     │ features\orders-management.feature:12                │
+│   2 more                                                                                                 │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le compteur devrait afficher le nombre de commandes                                                      │ 5.87ms     │ step-definitions\orders-management-steps.js:193      │
+│   le compteur devrait afficher le nombre de commandes                                                    │ 5.87ms     │ features\orders-management.feature:50                │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ the tracking number input should contain {string}                                                        │ 5.82ms     │ step-definitions\tracking-steps.js:94                │
+│   the tracking number input should contain "TEST12345"                                                   │ 5.92ms     │ features\tracking.feature:44                         │
+│   the tracking number input should contain "SECOND456"                                                   │ 5.72ms     │ features\tracking.feature:51                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the label {string}                                                                          │ 5.67ms     │ step-definitions\tracking-steps.js:58                │
+│   I should see the label "Numero de suivi de votre commande"                                             │ 5.67ms     │ features\tracking.feature:12                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir l'option {string}                                                                        │ 5.64ms     │ step-definitions\orders-management-steps.js:115      │
+│   je devrais voir l'option "En attente"                                                                  │ 7.05ms     │ features\orders-management.feature:33                │
+│   je devrais voir l'option "En transit"                                                                  │ 6.46ms     │ features\orders-management.feature:34                │
+│   je devrais voir l'option "Non suivi"                                                                   │ 6.08ms     │ features\orders-management.feature:32                │
+│   je devrais voir l'option "Annulé"                                                                      │ 5.10ms     │ features\orders-management.feature:36                │
+│   je devrais voir l'option "Livré"                                                                       │ 3.50ms     │ features\orders-management.feature:35                │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir le profil utilisateur {string}                                                           │ 5.50ms     │ step-definitions\dashboard-steps.js:107              │
+│   je devrais voir le profil utilisateur "Vanlog Express"                                                 │ 5.50ms     │ features\dashboard.feature:70                        │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le menu item {string} devrait être sélectionné                                                           │ 5.29ms     │ step-definitions\dashboard-steps.js:62               │
+│   le menu item "Tableau de bord" devrait être sélectionné                                                │ 7.65ms     │ features\dashboard.feature:21                        │
+│   le menu item "Liste des transporteurs" devrait être sélectionné                                        │ 5.90ms     │ features\dashboard.feature:35                        │
+│   le menu item "Factures" devrait être sélectionné                                                       │ 5.80ms     │ features\dashboard.feature:49                        │
+│   le menu item "Réclamations" devrait être sélectionné                                                   │ 5.54ms     │ features\dashboard.feature:56                        │
+│   le menu item "Liste des commandes" devrait être sélectionné                                            │ 4.66ms     │ features\dashboard.feature:28                        │
+│   2 more                                                                                                 │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ the login button should display {string}                                                                 │ 4.98ms     │ step-definitions\language-steps.js:27                │
+│   the login button should display "Log in"                                                               │ 8.40ms     │ features\language.feature:30                         │
+│   the login button should display "Log in"                                                               │ 5.59ms     │ features\language.feature:21                         │
+│   the login button should display "Se connecter"                                                         │ 3.37ms     │ features\language.feature:34                         │
+│   the login button should display "Se connecter"                                                         │ 2.56ms     │ features\language.feature:11                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I accept the terms and conditions                                                                        │ 4.65ms     │ step-definitions\signup-steps.js:44                  │
+│   I accept the terms and conditions                                                                      │ 6.69ms     │ features\signup.feature:27                           │
+│   I accept the terms and conditions                                                                      │ 2.61ms     │ features\signup.feature:39                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir la carte {string}                                                                        │ 4.60ms     │ step-definitions\dashboard-steps.js:98               │
+│   je devrais voir la carte "Statistiques des commandes"                                                  │ 5.35ms     │ features\dashboard.feature:68                        │
+│   je devrais voir la carte "Statistiques des utilisateurs"                                               │ 3.85ms     │ features\dashboard.feature:69                        │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ the {string} option should be disabled in the language dropdown                                          │ 4.53ms     │ step-definitions\language-steps.js:44                │
+│   the "Français" option should be disabled in the language dropdown                                      │ 4.53ms     │ features\language.feature:52                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the last name field                                                                         │ 3.90ms     │ step-definitions\signup-steps.js:124                 │
+│   I should see the last name field                                                                       │ 3.90ms     │ features\signup.feature:11                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir le champ {string}                                                                        │ 3.21ms     │ step-definitions\dashboard-steps.js:146              │
+│   je devrais voir le champ "Date de fin"                                                                 │ 4.11ms     │ features\dashboard.feature:97                        │
+│   je devrais voir le champ "Date de début"                                                               │ 2.32ms     │ features\dashboard.feature:96                        │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir le menu item {string}                                                                    │ 3.09ms     │ step-definitions\dashboard-steps.js:53               │
+│   je devrais voir le menu item "Tableau de bord"                                                         │ 7.54ms     │ features\dashboard.feature:11                        │
+│   je devrais voir le menu item "Liste des commandes"                                                     │ 4.58ms     │ features\dashboard.feature:12                        │
+│   je devrais voir le menu item "Liste des clients"                                                       │ 2.64ms     │ features\dashboard.feature:14                        │
+│   je devrais voir le menu item "Réclamations"                                                            │ 1.88ms     │ features\dashboard.feature:16                        │
+│   je devrais voir le menu item "Liste des transporteurs"                                                 │ 1.77ms     │ features\dashboard.feature:13                        │
+│   2 more                                                                                                 │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ the {string} option should be enabled in the language dropdown                                           │ 2.74ms     │ step-definitions\language-steps.js:50                │
+│   the "English" option should be enabled in the language dropdown                                        │ 2.74ms     │ features\language.feature:53                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ the navigation bar should display {string}                                                               │ 2.68ms     │ step-definitions\language-steps.js:32                │
+│   the navigation bar should display "Suivi des commandes"                                                │ 4.47ms     │ features\language.feature:35                         │
+│   the navigation bar should display "Tracking Orders"                                                    │ 4.30ms     │ features\language.feature:22                         │
+│   the navigation bar should display "Login"                                                              │ 3.00ms     │ features\language.feature:23                         │
+│   the navigation bar should display "Suivi des commandes"                                                │ 2.39ms     │ features\language.feature:12                         │
+│   the navigation bar should display "Signup"                                                             │ 1.76ms     │ features\language.feature:24                         │
+│   2 more                                                                                                 │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the terms checkbox                                                                          │ 2.56ms     │ step-definitions\signup-steps.js:149                 │
+│   I should see the terms checkbox                                                                        │ 2.56ms     │ features\signup.feature:16                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the signup link on homepage                                                                 │ 2.47ms     │ step-definitions\homepage-steps.js:71                │
+│   I should see the signup link on homepage                                                               │ 2.47ms     │ features\homepage.feature:11                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le formulaire ne doit pas avoir d'erreur de connexion navigateur                                         │ 2.38ms     │ step-definitions\negative-scenarios-steps.js:104     │
+│   le formulaire ne doit pas avoir d'erreur de connexion navigateur                                       │ 2.38ms     │ features\negative-scenarios.feature:47               │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le formulaire actif ne doit pas afficher d'erreur bloquante                                              │ 2.32ms     │ step-definitions\form-steps.js:122                   │
+│   le formulaire actif ne doit pas afficher d'erreur bloquante                                            │ 2.93ms     │ features\add-order-form.feature:93                   │
+│   le formulaire actif ne doit pas afficher d'erreur bloquante                                            │ 2.32ms     │ features\add-order-form.feature:55                   │
+│   le formulaire actif ne doit pas afficher d'erreur bloquante                                            │ 1.72ms     │ features\add-order-form.feature:28                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the tracking link on homepage                                                               │ 2.24ms     │ step-definitions\homepage-steps.js:76                │
+│   I should see the tracking link on homepage                                                             │ 2.24ms     │ features\homepage.feature:12                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir le champ avec id {string}                                                                │ 1.97ms     │ step-definitions\dashboard-steps.js:165              │
+│   je devrais voir le champ avec id "trackingNumber"                                                      │ 1.97ms     │ features\dashboard.feature:108                       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the download APK button                                                                     │ 1.97ms     │ step-definitions\homepage-steps.js:81                │
+│   I should see the download APK button                                                                   │ 1.97ms     │ features\homepage.feature:13                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ the APK download should be initiated                                                                     │ 1.75ms     │ step-definitions\homepage-steps.js:116               │
+│   the APK download should be initiated                                                                   │ 1.75ms     │ features\homepage.feature:33                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the phone field                                                                             │ 1.43ms     │ step-definitions\signup-steps.js:134                 │
+│   I should see the phone field                                                                           │ 1.43ms     │ features\signup.feature:13                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the password field on signup                                                                │ 1.39ms     │ step-definitions\signup-steps.js:139                 │
+│   I should see the password field on signup                                                              │ 1.39ms     │ features\signup.feature:14                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should be on the login page                                                                            │ 1.39ms     │ step-definitions\navbar-steps.js:49                  │
+│   I should be on the login page                                                                          │ 1.62ms     │ features\navbar.feature:30                           │
+│   I should be on the login page                                                                          │ 1.16ms     │ features\navbar.feature:40                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the email field on signup                                                                   │ 1.34ms     │ step-definitions\signup-steps.js:129                 │
+│   I should see the email field on signup                                                                 │ 1.34ms     │ features\signup.feature:12                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should be on the signup page                                                                           │ 1.34ms     │ step-definitions\navbar-steps.js:44                  │
+│   I should be on the signup page                                                                         │ 1.78ms     │ features\navbar.feature:23                           │
+│   I should be on the signup page                                                                         │ 0.90ms     │ features\navbar.feature:38                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the confirm password field                                                                  │ 1.29ms     │ step-definitions\signup-steps.js:144                 │
+│   I should see the confirm password field                                                                │ 1.29ms     │ features\signup.feature:15                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'URL devrait contenir {string}                                                                          │ 1.13ms     │ step-definitions\dashboard-steps.js:71               │
+│   l'URL devrait contenir "/admin/invoices"                                                               │ 2.35ms     │ features\admin-invoices.feature:8                    │
+│   l'URL devrait contenir "/admin/orders"                                                                 │ 1.47ms     │ features\orders-management.feature:8                 │
+│   l'URL devrait contenir "/admin/orders"                                                                 │ 1.37ms     │ features\orders-management.feature:8                 │
+│   l'URL devrait contenir "/admin/orders"                                                                 │ 1.32ms     │ features\orders-management.feature:8                 │
+│   l'URL devrait contenir "/admin/orders"                                                                 │ 1.16ms     │ features\orders-management.feature:8                 │
+│   10 more                                                                                                │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the signup button                                                                           │ 1.11ms     │ step-definitions\signup-steps.js:156                 │
+│   I should see the signup button                                                                         │ 1.11ms     │ features\signup.feature:17                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais être redirigé vers le dashboard                                                               │ 1.00ms     │ step-definitions\dashboard-steps.js:44               │
+│   je devrais être redirigé vers le dashboard                                                             │ 1.62ms     │ features\dashboard.feature:7                         │
+│   je devrais être redirigé vers le dashboard                                                             │ 1.30ms     │ features\dashboard.feature:7                         │
+│   je devrais être redirigé vers le dashboard                                                             │ 1.21ms     │ features\dashboard.feature:7                         │
+│   je devrais être redirigé vers le dashboard                                                             │ 1.17ms     │ features\dashboard.feature:7                         │
+│   je devrais être redirigé vers le dashboard                                                             │ 1.13ms     │ features\dashboard.feature:7                         │
+│   11 more                                                                                                │            │                                                      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should be on the tracking orders page                                                                  │ 0.76ms     │ step-definitions\navbar-steps.js:39                  │
+│   I should be on the tracking orders page                                                                │ 1.02ms     │ features\navbar.feature:17                           │
+│   I should be on the tracking orders page                                                                │ 0.90ms     │ features\tracking.feature:38                         │
+│   I should be on the tracking orders page                                                                │ 0.36ms     │ features\navbar.feature:36                           │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should stay on the tracking page                                                                       │ 0.74ms     │ step-definitions\tracking-steps.js:89                │
+│   I should stay on the tracking page                                                                     │ 0.86ms     │ features\tracking.feature:25                         │
+│   I should stay on the tracking page                                                                     │ 0.62ms     │ features\tracking.feature:32                         │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le nouvel utilisateur accède à la page d'inscription                                                     │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:69    │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le nouvel utilisateur sélectionne le type "Client"                                                       │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:80    │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le nouvel utilisateur remplit tous les champs d'inscription                                              │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:92    │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le nouvel utilisateur soumet le formulaire d'inscription                                                 │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:139   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le compte est créé sans erreur de validation                                                             │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:151   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'admin se connecte pour gérer les comptes                                                               │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:175   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'admin navigue vers la liste des comptes en attente d'approbation                                       │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:196   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'admin recherche le nouveau compte par email                                                            │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:287   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'admin accepte le compte en attente                                                                     │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:328   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le compte est approuvé avec succès                                                                       │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:372   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le nouvel utilisateur retourne sur la page de connexion                                                  │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:396   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le nouvel utilisateur se connecte avec ses identifiants créés                                            │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:406   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le nouvel utilisateur accède à son tableau de bord                                                       │ UNUSED     │ e2e\step-definitions\account-workflow-steps.js:424   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le client ouvre VanLog Express                                                                           │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:91        │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le client se connecte avec ses identifiants valides                                                      │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:100       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le client est redirigé vers son tableau de bord                                                          │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:117       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le client navigue vers la liste de ses commandes                                                         │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:127       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le client crée une nouvelle commande de livraison                                                        │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:147       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ la commande est créée sans erreur bloquante                                                              │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:295       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'admin se connecte sur VanLog Express                                                                   │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:325       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'admin navigue vers la liste des commandes                                                              │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:334       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'admin récupère le numéro de suivi de la première commande                                              │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:363       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'admin change le statut de la commande à {string}                                                       │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:429       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ la commande affiche le statut {string} dans la liste admin                                               │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:463       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'utilisateur accède à la page de suivi public                                                           │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:491       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'utilisateur saisit le numéro de suivi et lance la recherche                                            │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:500       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le suivi public affiche le statut {string}                                                               │ UNUSED     │ e2e\step-definitions\complete-e2e-steps.js:525       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je suis sur la page signup                                                                               │ UNUSED     │ step-definitions\admin-account-approval-steps.js:180 │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je crée 2 comptes {string} et 2 comptes {string}                                                         │ UNUSED     │ step-definitions\admin-account-approval-steps.js:184 │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ les 4 comptes devraient être créés sans erreur bloquante                                                 │ UNUSED     │ step-definitions\admin-account-approval-steps.js:209 │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je traite les comptes {string} depuis {string}                                                           │ UNUSED     │ step-definitions\admin-account-approval-steps.js:215 │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le traitement admin des 4 comptes devrait être terminé                                                   │ UNUSED     │ step-definitions\admin-account-approval-steps.js:230 │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je crée un nouveau compte {string}                                                                       │ UNUSED     │ step-definitions\admin-account-approval-steps.js:235 │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ la création du compte devrait se terminer sans erreur bloquante                                          │ UNUSED     │ step-definitions\admin-account-approval-steps.js:241 │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir les boutons admin {string} et {string}                                                   │ UNUSED     │ step-definitions\admin-account-approval-steps.js:251 │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je clique sur le premier bouton admin {string}                                                           │ UNUSED     │ step-definitions\admin-account-approval-steps.js:277 │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ l'action admin devrait se terminer sans erreur bloquante                                                 │ UNUSED     │ step-definitions\admin-account-approval-steps.js:299 │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir le sélecteur utilisateur Factures                                                        │ UNUSED     │ step-definitions\admin-invoices-steps.js:79          │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir les types utilisateur {string} et {string} dans Factures                                 │ UNUSED     │ step-definitions\admin-invoices-steps.js:88          │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je récupère le numéro de suivi de la commande créée                                                      │ UNUSED     │ step-definitions\end-to-end-colis-steps.js:45        │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je me reconnecte en admin pour gérer la commande                                                         │ UNUSED     │ step-definitions\end-to-end-colis-steps.js:79        │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je vais vers la liste des commandes admin                                                                │ UNUSED     │ step-definitions\end-to-end-colis-steps.js:96        │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je filtre la commande créée par numéro de suivi                                                          │ UNUSED     │ step-definitions\end-to-end-colis-steps.js:112       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je passe le statut de la commande filtrée à {string}                                                     │ UNUSED     │ step-definitions\end-to-end-colis-steps.js:135       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ la commande filtrée doit afficher le statut {string}                                                     │ UNUSED     │ step-definitions\end-to-end-colis-steps.js:165       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je vais vers la page de suivi public                                                                     │ UNUSED     │ step-definitions\end-to-end-colis-steps.js:180       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je recherche le numéro de suivi créé                                                                     │ UNUSED     │ step-definitions\end-to-end-colis-steps.js:185       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le suivi public doit afficher le statut {string}                                                         │ UNUSED     │ step-definitions\end-to-end-colis-steps.js:208       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the VanLog logo                                                                             │ UNUSED     │ step-definitions\login-steps.js:40                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the email field                                                                             │ UNUSED     │ step-definitions\login-steps.js:45                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the password field                                                                          │ UNUSED     │ step-definitions\login-steps.js:50                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see the login button                                                                            │ UNUSED     │ step-definitions\login-steps.js:55                   │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ un message de succès devrait s'afficher                                                                  │ UNUSED     │ step-definitions\negative-scenarios-steps.js:148     │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je recherche la commande avec le numéro {string}                                                         │ UNUSED     │ step-definitions\orders-management-steps.js:6        │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je clique sur le premier bouton {string}                                                                 │ UNUSED     │ step-definitions\orders-management-steps.js:13       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir un formulaire de commande                                                                │ UNUSED     │ step-definitions\orders-management-steps.js:61       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le formulaire devrait contenir des champs obligatoires                                                   │ UNUSED     │ step-definitions\orders-management-steps.js:78       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ les résultats de recherche devraient afficher {string}                                                   │ UNUSED     │ step-definitions\orders-management-steps.js:85       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ je devrais voir au moins un bouton {string}                                                              │ UNUSED     │ step-definitions\orders-management-steps.js:91       │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ chaque ligne du tableau devrait avoir des actions                                                        │ UNUSED     │ step-definitions\orders-management-steps.js:140      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ les actions devraient inclure voir, modifier, supprimer                                                  │ UNUSED     │ step-definitions\orders-management-steps.js:153      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ le tableau devrait afficher au moins une commande                                                        │ UNUSED     │ step-definitions\orders-management-steps.js:161      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ chaque commande devrait avoir un numéro de suivi                                                         │ UNUSED     │ step-definitions\orders-management-steps.js:167      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ chaque commande devrait avoir une date de création                                                       │ UNUSED     │ step-definitions\orders-management-steps.js:174      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ chaque commande devrait avoir un destinataire                                                            │ UNUSED     │ step-definitions\orders-management-steps.js:181      │
+├──────────────────────────────────────────────────────────────────────────────────────────────────────────┼────────────┼──────────────────────────────────────────────────────┤
+│ I should see a success message                                                                           │ UNUSED     │ step-definitions\signup-steps.js:161                 │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────┴────────────┴──────────────────────────────────────────────────────┘
