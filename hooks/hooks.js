@@ -2,6 +2,7 @@ const { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout, Attachmen
 const { chromium } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
+const { execSync, spawn } = require('child_process');
 
 // ============================================
 // CONFIGURATION
@@ -58,6 +59,21 @@ AfterAll(async function () {
   if (browser && browser.isConnected()) {
     await browser.close();
     console.log('🛑 Navigateur principal fermé.');
+  }
+
+  try {
+    console.log('\n📊 Génération du rapport Allure...');
+    execSync('npx allure generate allure-results --clean -o allure-report', { stdio: 'inherit' });
+    console.log('✅ Rapport Allure généré dans allure-report/');
+    console.log('🌐 Ouverture du rapport Allure dans le navigateur...');
+    spawn('npx', ['allure', 'open', 'allure-report'], {
+      detached: true,
+      stdio: 'ignore',
+      shell: true,
+    }).unref();
+  } catch (error) {
+    console.log(`⚠️  Rapport Allure non généré: ${error.message}`);
+    console.log('💡 Lancez manuellement: npm run allure:generate && npm run allure:open');
   }
 });
 

@@ -35,7 +35,10 @@
     "test:reports:open": "node scripts/open-reports.js",
     "allure:generate": "allure generate allure-results --clean -o allure-report",
     "allure:open": "allure open allure-report",
-    "allure:serve": "allure serve allure-results"
+    "allure:serve": "allure serve allure-results",
+    "test:allure": "cucumber-js --config cucumber.js",
+    "test:allure:headed": "cross-env HEADLESS=false SLOWMO_MS=100 cucumber-js --config cucumber.js",
+    "test:allure:scenario": "cucumber-js --config cucumber.js"
   },
   "keywords": [],
   "author": "",
