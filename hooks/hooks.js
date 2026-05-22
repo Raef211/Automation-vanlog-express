@@ -61,19 +61,21 @@ AfterAll(async function () {
     console.log('🛑 Navigateur principal fermé.');
   }
 
-  try {
-    console.log('\n📊 Génération du rapport Allure...');
-    execSync('npx allure generate allure-results --clean -o allure-report', { stdio: 'inherit' });
-    console.log('✅ Rapport Allure généré dans allure-report/');
-    console.log('🌐 Ouverture du rapport Allure dans le navigateur...');
-    spawn('npx allure open allure-report', {
-      detached: true,
-      stdio: 'ignore',
-      shell: true,
-    }).unref();
-  } catch (error) {
-    console.log(`⚠️  Rapport Allure non généré: ${error.message}`);
-    console.log('💡 Lancez manuellement: npm run allure:generate && npm run allure:open');
+  if (process.env.CI !== 'true') {
+    try {
+      console.log('\n📊 Génération du rapport Allure...');
+      execSync('npx allure generate allure-results --clean -o allure-report', { stdio: 'inherit' });
+      console.log('✅ Rapport Allure généré dans allure-report/');
+      console.log('🌐 Ouverture du rapport Allure dans le navigateur...');
+      spawn('npx allure open allure-report', {
+        detached: true,
+        stdio: 'ignore',
+        shell: true,
+      }).unref();
+    } catch (error) {
+      console.log(`⚠️  Rapport Allure non généré: ${error.message}`);
+      console.log('💡 Lancez manuellement: npm run allure:generate && npm run allure:open');
+    }
   }
 });
 
