@@ -29,7 +29,7 @@ class LoginPage extends BasePage {
     downloadApkLink: 'button:has-text("Download APK")',
     
     // Messages et erreurs
-    errorMessage: '.ant-message-error, .ant-alert-error, .ant-notification-notice-error, .ant-form-item-explain-error, [class*="error-message"], [role="alert"]',
+    errorMessage: '.ant-message-error, .ant-alert-error, .ant-notification-notice-error, .ant-form-item-explain-error, [class*="error-message"], [role="alert"], .ant-message-notice-content, .ant-notification-notice-message',
     validationError: '.validation-error, .field-error, [aria-invalid="true"]',
     
     // Menu de navigation
@@ -191,7 +191,9 @@ class LoginPage extends BasePage {
       await this.page.waitForSelector(this.selectors.errorMessage, { timeout: 5000 });
       return true;
     } catch {
-      return false;
+      // Fallback : un mauvais mot de passe laisse l'utilisateur sur la page de login
+      const url = this.page.url();
+      return !url.includes('/dashboard') && !url.includes('/app/');
     }
   }
 

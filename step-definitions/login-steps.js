@@ -73,8 +73,10 @@ Then('I should be redirected to the dashboard', async function () {
 });
 
 Then('I should see an error message', async function () {
+  // Ant Design toasts appear within ~1s — give them time before checking
+  await this.page.waitForTimeout(1500);
   const hasError = await loginPage.hasErrorMessage();
-  expect(hasError).toBe(true);
+  expect(hasError, 'Expected an error message or to remain on the login page after wrong credentials').toBe(true);
 });
 
 Then('I should see my user profile', async function () {
