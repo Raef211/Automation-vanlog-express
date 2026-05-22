@@ -1,0 +1,20 @@
+=============================================
+ RAPPORT ALLURE - Comment visualiser
+=============================================
+
+Ce rapport NE peut PAS être ouvert directement
+en double-cliquant sur index.html (erreur 500).
+Il nécessite un serveur HTTP.
+
+--- OPTION 1 : GitHub Pages (recommandé) ---
+Accédez directement à l'URL :
+https://raef211.github.io/Automation-vanlog-express/nightly/
+
+--- OPTION 2 : En local (Windows) ---
+Double-cliquez sur : view-report.bat
+Puis ouvrez : http://localhost:8080
+
+--- OPTION 3 : En local (Linux/Mac) ---
+chmod +x view-report.sh && ./view-report.sh
+Puis ouvrez : http://localhost:8080
+
