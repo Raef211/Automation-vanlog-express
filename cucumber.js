@@ -2,8 +2,6 @@ module.exports = {
   default: {
     require: [
       'hooks/**/*.js',
-      'e2e/hooks/**/*.js',
-      'e2e/step-definitions/**/*-steps.js',
       'step-definitions/**/*-steps.js',
       '!step-definitions/cucumber.js'
     ],
@@ -21,6 +19,7 @@ module.exports = {
       snippetInterface: 'async-await'
     },
     timeout: 120000,
+    exit: true,
     publishQuiet: true,
     dryRun: false,
     failFast: false,
