@@ -21,23 +21,19 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: write
+    container:
+      image: ${{ vars.DOCKERHUB_USERNAME }}/automatisation-pom:latest
+      credentials:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     steps:
       - name: ✅ Checkout code
         uses: actions/checkout@v4
 
-      - name: 🔧 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-
       - name: 📦 Install dependencies
         timeout-minutes: 5
         run: npm install --legacy-peer-deps
-
-      - name: 🎭 Install Playwright browsers
-        timeout-minutes: 10
-        run: npx playwright install --with-deps chromium
 
       - name: 🌐 Wait for app to be ready (optional)
         timeout-minutes: 2
