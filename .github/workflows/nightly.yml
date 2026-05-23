@@ -23,9 +23,6 @@ jobs:
       contents: write
     container:
       image: ${{ vars.DOCKERHUB_USERNAME }}/automatisation-pom:latest
-      credentials:
-        username: ${{ vars.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     steps:
       - name: ✅ Checkout code
