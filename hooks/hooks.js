@@ -61,6 +61,11 @@ AfterAll(async function () {
     console.log('🛑 Navigateur principal fermé.');
   }
 
+  // Playwright leaves open handles that prevent Node from exiting naturally.
+  // unref() means the timer won't block exit if Node finishes on its own first;
+  // if it's still alive after 5s (hanging), this forces a clean exit.
+  setTimeout(() => process.exit(0), 5000).unref();
+
   if (process.env.CI !== 'true') {
     try {
       console.log('\n📊 Génération du rapport Allure...');

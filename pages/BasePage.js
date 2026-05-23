@@ -75,8 +75,8 @@ class BasePage {
    * @param {string} selector 
    * @returns {Promise<string>}
    */
-  async getText(selector) {
-    return await this.page.textContent(selector);
+  async getText(selector, timeout = 10000) {
+    return await this.page.textContent(selector, { timeout });
   }
 
   /**
