@@ -22,7 +22,7 @@ jobs:
     permissions:
       contents: write
     container:
-      image: ${{ vars.DOCKERHUB_USERNAME }}/automatisation-pom:latest
+      image: mcr.microsoft.com/playwright:v1.58.0-jammy
 
     steps:
       - name: ✅ Checkout code
@@ -31,6 +31,10 @@ jobs:
       - name: 📦 Install dependencies
         timeout-minutes: 5
         run: npm install --legacy-peer-deps
+
+      - name: 🎭 Install Playwright browsers
+        timeout-minutes: 5
+        run: npx playwright install chromium
 
       - name: 🌐 Wait for app to be ready (optional)
         timeout-minutes: 2
