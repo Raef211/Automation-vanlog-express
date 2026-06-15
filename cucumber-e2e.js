@@ -11,6 +11,7 @@ module.exports = {
       'progress',
       'json:reports/cucumber-e2e-report.json',
       'html:reports/cucumber-e2e-report.html',
+      'allure-cucumberjs/reporter',
     ],
     timeout: 60000,
     publishQuiet: true

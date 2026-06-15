@@ -250,25 +250,34 @@ jobs:
     runs-on: ubuntu-latest
     needs: [full-test-suite, consolidate-results]
     if: always() && needs.full-test-suite.result != 'cancelled'
+    env:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
     steps:
       - name: ✅ Checkout code
         uses: actions/checkout@v4
 
+      - name: ⚠️ Skip Docker publish when secrets are missing
+        if: env.DOCKERHUB_USERNAME == '' || env.DOCKERHUB_TOKEN == ''
+        run: echo "Docker Hub credentials are not configured; skipping image login and publish."
+
       - name: 🔐 Login to Docker Hub
+        if: env.DOCKERHUB_USERNAME != '' && env.DOCKERHUB_TOKEN != ''
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ env.DOCKERHUB_USERNAME }}
+          password: ${{ env.DOCKERHUB_TOKEN }}
 
       - name: 🐳 Build and push Docker image
+        if: env.DOCKERHUB_USERNAME != '' && env.DOCKERHUB_TOKEN != ''
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/automatisation-pom:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/automatisation-pom:${{ github.sha }}
+            ${{ env.DOCKERHUB_USERNAME }}/automatisation-pom:latest
+            ${{ env.DOCKERHUB_USERNAME }}/automatisation-pom:${{ github.sha }}
 
   notify-slack:
     name: 📢 Slack Notification
