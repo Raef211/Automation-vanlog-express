@@ -4,6 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const { execSync, spawn } = require('child_process');
 
+setDefaultTimeout(120000);
+
 // ============================================
 // CONFIGURATION
 // ============================================
@@ -13,13 +15,16 @@ const browserConfig = {
   slowMo: process.env.SLOWMO_MS ? Number(process.env.SLOWMO_MS) : 100,
   args: [
     '--start-maximized',
+    '--window-size=1920,1080',
     // Linux/CI only: GitHub Actions sets CI=true, local Windows does not need these
     ...(process.env.CI === 'true' ? ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'] : []),
   ],
 };
 
+const baseUrl = process.env.BASE_URL || 'https://vanlog-express.com';
+
 const contextConfig = {
-  viewport: { width: 1920, height: 1080 },
+  viewport: null,
   locale: 'fr-FR',
   timezoneId: 'Europe/Paris',
   acceptDownloads: true,
@@ -27,6 +32,8 @@ const contextConfig = {
 };
 
 let browser;
+let context;
+let sharedPage;
 let scenarioCount = 0;
 
 function isApiScenario(scenario) {
@@ -50,23 +57,67 @@ async function ensureBrowser() {
   }
 }
 
+async function ensureSharedPage() {
+  await ensureBrowser();
+
+  if (!context || context._closed) {
+    context = await browser.newContext(contextConfig);
+  }
+
+  if (!sharedPage || sharedPage.isClosed()) {
+    sharedPage = await context.newPage();
+
+    sharedPage.on('console', msg => {
+      if (msg.type() === 'error') {
+        console.log('❌ Console Error:', msg.text());
+      }
+    });
+
+    sharedPage.on('pageerror', error => {
+      console.log('❌ Page Error:', error.message);
+    });
+  }
+
+  if (sharedPage.viewportSize() === null) {
+    await sharedPage.bringToFront().catch(() => {});
+  }
+
+  return sharedPage;
+}
+
+async function resetSharedPage() {
+  if (!context || !sharedPage || sharedPage.isClosed()) {
+    return;
+  }
+
+  await context.clearCookies().catch(() => {});
+  await sharedPage.goto(baseUrl, { waitUntil: 'domcontentloaded' }).catch(() => {});
+  await sharedPage.evaluate(() => {
+    localStorage.clear();
+    sessionStorage.clear();
+  }).catch(() => {});
+}
+
 BeforeAll(async function () {
   console.log('🚀 Lancement du navigateur Chromium...');
+  await ensureSharedPage();
   console.log('✅ Préparation des dossiers terminée');
 });
 
 AfterAll(async function () {
+  if (context) {
+    await context.close().catch(() => {});
+  }
+
   if (browser && browser.isConnected()) {
     await browser.close();
     console.log('🛑 Navigateur principal fermé.');
   }
 
-  // Playwright leaves open handles that prevent Node from exiting naturally.
-  // unref() means the timer won't block exit if Node finishes on its own first;
-  // if it's still alive after 5s (hanging), this forces a clean exit.
-  setTimeout(() => process.exit(0), 5000).unref();
-
   if (process.env.CI !== 'true') {
+    // Playwright can leave open handles locally; keep the forced exit only for non-CI runs.
+    setTimeout(() => process.exit(0), 5000).unref();
+
     try {
       console.log('\n📊 Génération du rapport Allure...');
       execSync('npx allure generate allure-results --clean -o allure-report', { stdio: 'inherit' });
@@ -92,49 +143,17 @@ Before(async function (scenario) {
   console.log(apiOnly ? '🔄 Mode API (sans navigateur)' : '🔄 Création du contexte et de la page...');
 
   this.isApiScenario = apiOnly;
-  this.context = undefined;
-  this.page = undefined;
 
   if (apiOnly) {
     return;
   }
 
-  // S'assurer que le navigateur est toujours actif
-  await ensureBrowser();
-  
-  // Créer un nouveau contexte avec isolation complète
-  try {
-    this.context = await browser.newContext(contextConfig);
-  } catch (error) {
-    const browserClosedError = error.message.includes('browser has been closed') ||
-                               error.message.includes('Target page, context or browser has been closed');
-
-    if (!browserClosedError) {
-      throw error;
-    }
-
-    console.log('⚠️  Navigateur fermé détecté, relancement...');
-    await ensureBrowser();
-    this.context = await browser.newContext(contextConfig);
-  }
-  
-  // Créer une nouvelle page
-  this.page = await this.context.newPage();
+  this.context = context || (await ensureSharedPage()).context();
+  this.page = await ensureSharedPage();
+  await resetSharedPage();
   
   // Stocker le nom du scénario pour les captures d'écran
   this.scenarioName = scenarioName.replace(/[^a-z0-9]/gi, '_');
-  
-  // Configurer les logs de console du navigateur
-  this.page.on('console', msg => {
-    if (msg.type() === 'error') {
-      console.log('❌ Console Error:', msg.text());
-    }
-  });
-  
-  // Configurer les logs d'erreurs de page
-  this.page.on('pageerror', error => {
-    console.log('❌ Page Error:', error.message);
-  });
   
   console.log('✅ Contexte et page créés');
 });
@@ -190,17 +209,7 @@ After(async function (scenario) {
   }
   
   if (!apiOnly && this.page && !this.page.isClosed()) {
-    try {
-      await this.page.close();
-      console.log('🗑️  Page fermée');
-    } catch (error) {}
-  }
-  
-  if (!apiOnly && this.context) {
-    try {
-      await this.context.close();
-      console.log('🗑️  Contexte fermé');
-    } catch (error) {}
+    await this.page.bringToFront().catch(() => {});
   }
 });
 

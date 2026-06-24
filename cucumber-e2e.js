@@ -13,6 +13,9 @@ module.exports = {
       'html:reports/cucumber-e2e-report.html',
       'allure-cucumberjs/reporter',
     ],
+    formatOptions: {
+      resultsDir: process.env.ALLURE_RESULTS_DIR || 'allure-results'
+    },
     timeout: 60000,
     publishQuiet: true
   }

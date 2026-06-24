@@ -10,19 +10,22 @@ const browserConfig = {
   slowMo: process.env.SLOWMO_MS ? Number(process.env.SLOWMO_MS) : 80,
   args: [
     '--start-maximized',
+    '--window-size=1920,1080',
     // Linux/CI only: GitHub Actions sets CI=true, local Windows does not need these
     ...(process.env.CI === 'true' ? ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'] : []),
   ],
 };
 
 const contextConfig = {
-  viewport: { width: 1920, height: 1080 },
+  viewport: null,
   locale: 'fr-FR',
   timezoneId: 'Europe/Paris',
   acceptDownloads: true,
 };
 
 let browser;
+let context;
+let sharedPage;
 
 async function ensureBrowser() {
   if (!browser || !browser.isConnected()) {
@@ -30,12 +33,31 @@ async function ensureBrowser() {
   }
 }
 
+async function ensureSharedPage() {
+  await ensureBrowser();
+
+  if (!context || context._closed) {
+    context = await browser.newContext(contextConfig);
+  }
+
+  if (!sharedPage || sharedPage.isClosed()) {
+    sharedPage = await context.newPage();
+  }
+
+  await sharedPage.bringToFront().catch(() => {});
+  return sharedPage;
+}
+
 BeforeAll(async function () {
   console.log('\n🚀 Démarrage du navigateur pour les tests E2E...');
-  await ensureBrowser();
+  await ensureSharedPage();
 });
 
 AfterAll(async function () {
+  if (context) {
+    await context.close().catch(() => {});
+  }
+
   if (browser && browser.isConnected()) {
     await browser.close();
     console.log('\n🛑 Navigateur fermé.');
@@ -46,14 +68,15 @@ Before(async function (scenario) {
   const name = scenario.pickle.name;
   console.log(`\n📋 Scénario: ${name}`);
 
-  await ensureBrowser();
-  this.context = await browser.newContext(contextConfig);
-  this.page = await this.context.newPage();
+  this.context = context || (await ensureSharedPage()).context();
+  this.page = await ensureSharedPage();
+  await this.context.clearCookies().catch(() => {});
+  await this.page.goto('about:blank').catch(() => {});
+  await this.page.evaluate(() => {
+    localStorage.clear();
+    sessionStorage.clear();
+  }).catch(() => {});
   this.scenarioName = name.replace(/[^a-z0-9]/gi, '_');
-
-  this.page.on('console', msg => {
-    if (msg.type() === 'error') console.log('❌ Console:', msg.text());
-  });
 });
 
 After(async function (scenario) {
@@ -74,8 +97,9 @@ After(async function (scenario) {
     } catch (_) {}
   }
 
-  if (this.page && !this.page.isClosed()) await this.page.close().catch(() => {});
-  if (this.context) await this.context.close().catch(() => {});
+  if (this.page && !this.page.isClosed()) {
+    await this.page.bringToFront().catch(() => {});
+  }
 
   console.log(status === Status.PASSED ? '✅ Scénario réussi' : `❌ Scénario ${status}`);
 });

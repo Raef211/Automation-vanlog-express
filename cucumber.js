@@ -16,7 +16,8 @@ module.exports = {
       'allure-cucumberjs/reporter',
     ],
     formatOptions: {
-      snippetInterface: 'async-await'
+      snippetInterface: 'async-await',
+      resultsDir: process.env.ALLURE_RESULTS_DIR || 'allure-results'
     },
     timeout: 120000,
     exit: true,

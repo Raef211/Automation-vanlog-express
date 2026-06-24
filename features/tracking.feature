@@ -26,7 +26,7 @@ Feature: Suivez votre commande - Track Your Order
 
   @tracking @validation
   Scenario: Submit tracking form with a valid tracking number
-    When I enter the tracking number "E53VL261486"
+    When I enter the tracking number "E2VL2617648"
     And I click the "Confirmer" button
     Then the tracking form should be submitted
     And I should stay on the tracking page
